@@ -10,12 +10,14 @@ public class Player : MonoBehaviour
     PlayerMovement playerMovement;
     public bool isDead;
 
-    Rigidbody playerBody;
+    public Rigidbody playerBody;
+    public Animator anim;
 
     // Start is called before the first frame update
     void Awake()
     {
         playerBody = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
         Initialize();
     }
 
@@ -32,7 +34,7 @@ public class Player : MonoBehaviour
 
     public void Run()
     {
-        print("Running");
+        //print("Running");
         playerHealth.Run();
         playerAttack.Run();
         playerMovement.Run();        

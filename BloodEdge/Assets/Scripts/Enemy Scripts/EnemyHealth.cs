@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttack
+public class EnemyHealth
 {
+    Enemy enemyRef;
 
-    Player playerRef;
-
-    public PlayerAttack(Player p)
+    public EnemyHealth(Enemy e)
     {
-        playerRef = p;
+        enemyRef = e;
     }
 
-    //
     public void Run()
     {
 

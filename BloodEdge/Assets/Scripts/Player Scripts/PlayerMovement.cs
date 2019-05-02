@@ -37,6 +37,7 @@ public class PlayerMovement
         } else {
             isMoving = false;
         }
+        playerRef.anim.SetBool("IsWalking", isMoving);
         xValue = h;
         zValue = v;
         movement.Set(h, 0f, v);
