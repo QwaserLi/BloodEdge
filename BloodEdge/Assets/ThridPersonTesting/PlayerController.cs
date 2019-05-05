@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Animator anim;
     public int speed;
-    public Camera cam;
-    public CharacterController controller;
+    public float jumpHeight;
+    public float rollDistance;
+    public Vector3 Drag;
 
+    private Animator anim;
+    private Camera cam;
+    private CharacterController controller;
+    private float gravity;
     private Vector3 velocity;
 
     //private Quaternion previousRotation;
@@ -17,8 +21,8 @@ public class PlayerController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         cam = Camera.main;
-        controller = this.GetComponent<CharacterController>();
-        // previousRotation = transform.rotation;
+        controller = GetComponent<CharacterController>();
+        gravity = Physics.gravity.y;
     }
 
     // Update is called once per frame
@@ -39,19 +43,40 @@ public class PlayerController : MonoBehaviour
         if (desiredMoveDirection != Vector3.zero)
             transform.forward = desiredMoveDirection;
 
-        controller.Move(desiredMoveDirection * Time.deltaTime * 3.0f);
+        controller.Move(desiredMoveDirection * Time.deltaTime * speed);
 
-
-        velocity.y += Physics.gravity.y * Time.deltaTime;
-  
+        //Gravity
+        velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
         if (controller.isGrounded && velocity.y < 0)
         {
             velocity.y = 0;
         }
 
+        //Jumping
+        if (Input.GetButtonDown("Jump") && controller.isGrounded)
+        {
+            velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+        //Rolling
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Vector3 rollDirection;
+            if (desiredMoveDirection == Vector3.zero) {
+                rollDirection = transform.forward;
+            }
+            else {
+                rollDirection = desiredMoveDirection;
+            }
 
+            velocity += Vector3.Scale(rollDirection,
+                                       rollDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * Drag.x + 1)) / -Time.deltaTime),
+                                                                  0,
+                                                                  (Mathf.Log(1f / (Time.deltaTime * Drag.z + 1)) / -Time.deltaTime)));
+        }
 
-
+        velocity.x /= 1 + Drag.x * Time.deltaTime;
+        velocity.y /= 1 + Drag.y * Time.deltaTime;
+        velocity.z /= 1 + Drag.z * Time.deltaTime;
     }
 }
