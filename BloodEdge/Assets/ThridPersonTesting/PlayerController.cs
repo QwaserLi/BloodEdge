@@ -6,12 +6,19 @@ public class PlayerController : MonoBehaviour
 {
     public Animator anim;
     public int speed;
-    private Quaternion previousRotation;
+    public Camera cam;
+    public CharacterController controller;
+
+    private Vector3 velocity;
+
+    //private Quaternion previousRotation;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-        previousRotation = transform.rotation;
+        cam = Camera.main;
+        controller = this.GetComponent<CharacterController>();
+        // previousRotation = transform.rotation;
     }
 
     // Update is called once per frame
@@ -21,13 +28,27 @@ public class PlayerController : MonoBehaviour
 
         float xMovement = Input.GetAxis("Horizontal");
         float zMovement = Input.GetAxis("Vertical");
+        Vector3 forward = cam.transform.forward;
+        Vector3 right = cam.transform.right;
 
-        Vector3 moveDirection = new Vector3(xMovement, 0, zMovement) ;
-        if (xMovement + zMovement != 0) { 
-           // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDirection), speed);
-            transform.rotation = Quaternion.LookRotation(moveDirection);
+        forward.y = 0f;
+        right.y = 0f;
+
+        Vector3 desiredMoveDirection = forward * zMovement + right * xMovement;
+
+        if (desiredMoveDirection != Vector3.zero)
+            transform.forward = desiredMoveDirection;
+
+        controller.Move(desiredMoveDirection * Time.deltaTime * 3.0f);
+
+
+        velocity.y += Physics.gravity.y * Time.deltaTime;
+  
+        controller.Move(velocity * Time.deltaTime);
+        if (controller.isGrounded && velocity.y < 0)
+        {
+            velocity.y = 0;
         }
-        transform.Translate(moveDirection * Time.deltaTime * speed, Space.World);
 
 
 
