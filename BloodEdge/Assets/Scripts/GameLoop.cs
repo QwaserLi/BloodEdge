@@ -5,14 +5,11 @@ using UnityEngine.UI;
 
 public class GameLoop : MonoBehaviour
 {
-
     public static bool isInBattle;
     public static bool isGamePaused = false;
     public Player playerRef;
     public GameObject pausePanel;
     float pauseTimer;
-    List<Enemy> currentEnemies;
-
 
     // Start is called before the first frame update
     void Start()
@@ -34,14 +31,6 @@ public class GameLoop : MonoBehaviour
                 playerRef.anim.enabled = true;
             }
         }
-        pauseTimer += Time.deltaTime;
-        // Update Characters
-        if (!isGamePaused) {
-            playerRef.Run();
-        } else {
-           
-        }
-
-        
+        pauseTimer += Time.deltaTime;       
     }
 }

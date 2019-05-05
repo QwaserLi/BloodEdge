@@ -32,11 +32,13 @@ public class Player : MonoBehaviour
         playerMovement = new PlayerMovement(this, playerBody);
     }
 
-    public void Run()
+    public void Update()
     {
-        //print("Running");
-        playerHealth.Run();
-        playerAttack.Run();
-        playerMovement.Run();        
+        if (!GameLoop.isGamePaused) {
+            //print("Running");
+            playerHealth.Run();
+            playerAttack.Run();
+            playerMovement.Run();             
+        } 
     }
 }
