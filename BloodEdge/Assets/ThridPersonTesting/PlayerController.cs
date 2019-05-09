@@ -15,6 +15,12 @@ public class PlayerController : MonoBehaviour
     private float gravity;
     private Vector3 velocity;
 
+    // Animation variables
+    bool isRunning = false;
+    bool wasInAir = false;
+    bool inAir = false;
+    public float idleTimer;
+
     //private Quaternion previousRotation;
     // Start is called before the first frame update
     void Start()
@@ -40,27 +46,44 @@ public class PlayerController : MonoBehaviour
 
         Vector3 desiredMoveDirection = forward * zMovement + right * xMovement;
 
-        if (desiredMoveDirection != Vector3.zero)
+        if (desiredMoveDirection != Vector3.zero) {
+            isRunning = true;
             transform.forward = desiredMoveDirection;
+        } else {
+            isRunning = false;
+        }
+
+        anim.SetBool("isRunning", isRunning);
 
         controller.Move(desiredMoveDirection * Time.deltaTime * speed);
 
         //Gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
         if (controller.isGrounded && velocity.y < 0)
         {
+            inAir = false;
             velocity.y = 0;
+        } else {
+            InAir();
+        }
+
+        if (wasInAir == true && inAir == false) { // No longer in the air
+            anim.SetBool("InAir", false);
+            wasInAir = false;
         }
 
         //Jumping
         if (Input.GetButtonDown("Jump") && controller.isGrounded)
         {
+            anim.SetTrigger("Jump");
             velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
         //Rolling
         if (Input.GetKeyDown(KeyCode.E))
         {
+            anim.SetTrigger("Roll");
             Vector3 rollDirection;
             if (desiredMoveDirection == Vector3.zero) {
                 rollDirection = transform.forward;
@@ -79,4 +102,16 @@ public class PlayerController : MonoBehaviour
         velocity.y /= 1 + Drag.y * Time.deltaTime;
         velocity.z /= 1 + Drag.z * Time.deltaTime;
     }
+
+    /**
+     * Used to tell object when it is in the air
+     * */
+    public void InAir()
+    {
+        inAir = true;
+        wasInAir = true;
+        anim.SetBool("InAir", inAir);
+    }
+
+
 }

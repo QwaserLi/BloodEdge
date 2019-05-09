@@ -2,36 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttack
+public class PlayerAttack: MonoBehaviour
 {
 
-    Player playerRef;
     bool canAttack = true;
     float attackTimer = 0;
+    Animator anim;
 
-    public PlayerAttack(Player p)
-    {
-        playerRef = p;
+
+    void Start() {
+        anim = GetComponent<Animator>();
     }
 
     // Main Loop
-    public void Run()
+    public void Update()
     {
-        attackTimer += Time.deltaTime;
-        if (attackTimer > 1f) {
-            canAttack = true;
-        }
 
         if (Input.GetAxisRaw("Fire1") > 0 && canAttack) {
-            playerRef.anim.SetTrigger("Weapon1_BasicAttack");
-            attackTimer = 0;
             canAttack = false;
+            anim.ResetTrigger("SlashAttack");
+            anim.SetTrigger("SlashAttack");
+            //attackTimer = 0;
         }
 
         if (Input.GetAxisRaw("Fire2") > 0 && canAttack) {
-            playerRef.anim.SetTrigger("Weapon1_StrongAttack");
-            attackTimer = 0;
             canAttack = false;
+            anim.ResetTrigger("StrongAttack");
+            anim.SetTrigger("StrongAttack");
+            //attackTimer = 0;
         }
+    }
+    
+    public void ResetAttack()
+    {
+        canAttack = true;        
     }
 }

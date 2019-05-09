@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     {
         print("Creating Player");
         playerHealth = new PlayerHealth(this);
-        playerAttack = new PlayerAttack(this);
+        //playerAttack = new PlayerAttack(this);
         playerMovement = new PlayerMovement(this, playerBody);
     }
 
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
         if (!GameLoop.isGamePaused) {
             //print("Running");
             playerHealth.Run();
-            playerAttack.Run();
+            //playerAttack.Run();
             playerMovement.Run();             
         } 
     }
