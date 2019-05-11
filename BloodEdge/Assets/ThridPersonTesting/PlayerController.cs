@@ -69,7 +69,11 @@ public class PlayerController : MonoBehaviour
         //Jumping
         if (Input.GetButtonDown("Jump"))
         {
-            anim.SetTrigger("Jump");
+            if (controller.isGrounded) {
+                anim.SetTrigger("Jump");
+
+            }
+
             Jump();
         }
         //Rolling
@@ -80,6 +84,7 @@ public class PlayerController : MonoBehaviour
         }
         //Drag Force
         ApplyDrag();
+        Debug.Log(velocity.y);
     }
 
     void Movement() {
@@ -103,12 +108,19 @@ public class PlayerController : MonoBehaviour
 
     void ApplyGravity() {
         velocity.y += gravity * Time.deltaTime;
+        //if (velocity.y < -20f ) {
+        //    velocity.y = -20f;
+        //}
+
         controller.Move(velocity * Time.deltaTime);
         if (controller.isGrounded && velocity.y < 0)
         {
+            //Reset gravity
             gravity = Physics.gravity.y * 100;
-
             velocity.y = 0;
+        }
+        else {
+            gravity = Physics.gravity.y;
         }
     }
 
