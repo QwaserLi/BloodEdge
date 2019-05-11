@@ -22,14 +22,6 @@ public class PlayerController : MonoBehaviour
     bool inAir = false;
     public float idleTimer;
 
-    enum State {
-        Idle,
-        Running,
-        Falling,
-
-    }
-
-
     // Start is called before the first frame update
     void Start()
     {
