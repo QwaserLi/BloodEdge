@@ -28,12 +28,13 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         cam = Camera.main;
         controller = GetComponent<CharacterController>();
-        gravity = Physics.gravity.y;
+        gravity = Physics.gravity.y*100;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+
 
         //Movement
         Movement();
@@ -105,12 +106,15 @@ public class PlayerController : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
         if (controller.isGrounded && velocity.y < 0)
         {
+            gravity = Physics.gravity.y * 100;
+
             velocity.y = 0;
         }
     }
 
     void Jump() {
         if (controller.isGrounded) {
+            gravity = Physics.gravity.y;
             velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
     }
