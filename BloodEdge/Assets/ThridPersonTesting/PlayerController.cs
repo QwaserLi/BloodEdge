@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Jumping
-        if (Input.GetButtonDown("Jump") && controller.isGrounded)
+        if (Input.GetButtonDown("Jump"))
         {
             anim.SetTrigger("Jump");
             Jump();
@@ -109,8 +109,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Jump() {  
+    void Jump() {
+        if (controller.isGrounded) {
             velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
     }
 
     void Roll() {
