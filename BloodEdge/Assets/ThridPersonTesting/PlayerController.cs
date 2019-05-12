@@ -120,15 +120,16 @@ public class PlayerController : MonoBehaviour
             velocity.y = 0;
         }
         else {
-            gravity = Physics.gravity.y;
+            gravity = -20f;
         }
     }
 
     void Jump() {
         if (controller.isGrounded) {
-            gravity = Physics.gravity.y;
-            velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
-        }
+            gravity = -20f;
+			//velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
+			velocity.y += Time.deltaTime * jumpHeight * -2f * gravity;
+		}
     }
 
     void Roll() {
