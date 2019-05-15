@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private float gravity;
     private Vector3 velocity;
-    private Vector3 desiredMoveDirection;
+	private Vector3 previousVelocity;
+	private Vector3 desiredMoveDirection;
 
     // Animation variables
     bool isRunning = false;
@@ -107,12 +108,13 @@ public class PlayerController : MonoBehaviour
     }
 
     void ApplyGravity() {
+		previousVelocity = velocity;
         velocity.y += gravity * Time.deltaTime;
-        //if (velocity.y < -20f ) {
-        //    velocity.y = -20f;
-        //}
+		//if (velocity.y < -20f ) {
+		//    velocity.y = -20f;
+		//}
 
-        controller.Move(velocity * Time.deltaTime);
+		controller.Move(velocity * Time.deltaTime);
         if (controller.isGrounded && velocity.y < 0)
         {
             //Reset gravity
@@ -122,6 +124,10 @@ public class PlayerController : MonoBehaviour
         else {
             gravity = -20f;
         }
+
+		if (!controller.isGrounded && previousVelocity.y >= 0 && velocity.y < 0) {
+			velocity.y = -5;
+		}
     }
 
     void Jump() {
