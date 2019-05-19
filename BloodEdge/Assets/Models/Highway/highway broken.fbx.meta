@@ -1,0 +1,966 @@
+fileFormatVersion: 2
+guid: 3a5caa636ed0a8b4ea42f5cd142c50ed
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Road_base
+    100004: Road_base1
+    100006: pCylinder1
+    100008: pCylinder2
+    100010: Road_base2
+    100012: pCylinder3
+    100014: Road_base3
+    100016: Barrier
+    100018: Barrier1
+    100020: Barrier2
+    100022: pCube1
+    100024: pCube2
+    100026: transform1
+    100028: transform2
+    100030: transform3
+    100032: transform4
+    100034: Barrier10
+    100036: Barrier11
+    100038: Barrier12
+    100040: Barrier13
+    100042: Barrier14
+    100044: Barrier15
+    100046: Barrier16
+    100048: Barrier17
+    100050: Barrier18
+    100052: Barrier19
+    100054: Barrier20
+    100056: Barrier21
+    100058: Barrier22
+    100060: Barrier23
+    100062: Barrier24
+    100064: Barrier25
+    100066: Barrier28
+    100068: Barrier29
+    100070: Barrier3
+    100072: Barrier4
+    100074: Barrier5
+    100076: Barrier6
+    100078: Barrier7
+    100080: Barrier8
+    100082: Barrier9
+    100084: Barrier10 1
+    100086: Barrier10 2
+    100088: Barrier11 1
+    100090: Barrier11 2
+    100092: Barrier12 1
+    100094: Barrier12 2
+    100096: Barrier13 1
+    100098: Barrier13 2
+    100100: Barrier14 1
+    100102: Barrier14 2
+    100104: Barrier15 1
+    100106: Barrier15 2
+    100108: Barrier16 1
+    100110: Barrier16 2
+    100112: Barrier17 1
+    100114: Barrier17 2
+    100116: Barrier18 1
+    100118: Barrier18 2
+    100120: Barrier19 1
+    100122: Barrier19 2
+    100124: Barrier20 1
+    100126: Barrier20 2
+    100128: Barrier21 1
+    100130: Barrier21 2
+    100132: Barrier22 1
+    100134: Barrier22 2
+    100136: Barrier23 1
+    100138: Barrier23 2
+    100140: Barrier3 1
+    100142: Barrier3 2
+    100144: Barrier4 1
+    100146: Barrier4 2
+    100148: Barrier5 1
+    100150: Barrier5 2
+    100152: Barrier6 1
+    100154: Barrier6 2
+    100156: Barrier7 1
+    100158: Barrier7 2
+    100160: Barrier8 1
+    100162: Barrier8 2
+    100164: Barrier9 1
+    100166: Barrier9 2
+    100168: barrier_left
+    100170: barrier_left1
+    100172: barrier_middle
+    100174: Barrier_middle
+    100176: Barrier_middle1
+    100178: Barrier_left
+    100180: Barrier_left1
+    100182: pCylinder4
+    100184: fence_post
+    100186: fence_post1
+    100188: fence_post10
+    100190: fence_post11
+    100192: fence_post12
+    100194: fence_post13
+    100196: fence_post14
+    100198: fence_post15
+    100200: fence_post16
+    100202: fence_post17
+    100204: fence_post18
+    100206: fence_post19
+    100208: fence_post2
+    100210: fence_post20
+    100212: fence_post3
+    100214: fence_post4
+    100216: fence_post5
+    100218: fence_post6
+    100220: fence_post7
+    100222: fence_post8
+    100224: fence_post9
+    100226: fence
+    100228: fence1
+    100230: fence_post 1
+    100232: fence_post1 1
+    100234: fence_post10 1
+    100236: fence_post11 1
+    100238: fence_post12 1
+    100240: fence_post13 1
+    100242: fence_post14 1
+    100244: fence_post15 1
+    100246: fence_post16 1
+    100248: fence_post17 1
+    100250: fence_post18 1
+    100252: fence_post19 1
+    100254: fence_post2 1
+    100256: fence_post20 1
+    100258: fence_post21
+    100260: fence_post21 1
+    100262: fence_post3 1
+    100264: fence_post4 1
+    100266: fence_post5 1
+    100268: fence_post6 1
+    100270: fence_post7 1
+    100272: fence_post8 1
+    100274: fence_post9 1
+    100276: fence_post22
+    100278: pPlane1
+    100280: pPlane2
+    100282: pPlane3
+    100284: pPlane4
+    100286: pPlane5
+    100288: pPlane6
+    100290: pPlane7
+    100292: pPlane8
+    100294: Barrier_middle2
+    100296: Road_base4
+    100298: Road_base5
+    100300: fence_post23
+    100302: fence_post24
+    100304: fence_post25
+    100306: fence_post26
+    100308: fence_post27
+    100310: fence_post28
+    100312: fence_post29
+    100314: fence_post30
+    100316: fence_post31
+    100318: fence_post32
+    100320: fence_post33
+    100322: fence_post34
+    100324: fence_post35
+    100326: fence_post36
+    100328: fence_post37
+    100330: fence_post38
+    100332: fence_post39
+    100334: fence_post40
+    100336: fence_post41
+    100338: fence_post42
+    100340: fence_post43
+    100342: Barrier_left2
+    100344: Barrier_left3
+    100346: Barrier_left4
+    100348: Barrier_left5
+    100350: fence_post44
+    100352: fence_post45
+    100354: fence_post46
+    100356: fence_post47
+    100358: fence_post48
+    100360: fence_post49
+    400000: //RootNode
+    400002: Road_base
+    400004: Road_base1
+    400006: pCylinder1
+    400008: pCylinder2
+    400010: Road_base2
+    400012: pCylinder3
+    400014: Road_base3
+    400016: Barrier
+    400018: Barrier1
+    400020: Barrier2
+    400022: pCube1
+    400024: pCube2
+    400026: transform1
+    400028: transform2
+    400030: transform3
+    400032: transform4
+    400034: Barrier10
+    400036: Barrier11
+    400038: Barrier12
+    400040: Barrier13
+    400042: Barrier14
+    400044: Barrier15
+    400046: Barrier16
+    400048: Barrier17
+    400050: Barrier18
+    400052: Barrier19
+    400054: Barrier20
+    400056: Barrier21
+    400058: Barrier22
+    400060: Barrier23
+    400062: Barrier24
+    400064: Barrier25
+    400066: Barrier28
+    400068: Barrier29
+    400070: Barrier3
+    400072: Barrier4
+    400074: Barrier5
+    400076: Barrier6
+    400078: Barrier7
+    400080: Barrier8
+    400082: Barrier9
+    400084: Barrier10 1
+    400086: Barrier10 2
+    400088: Barrier11 1
+    400090: Barrier11 2
+    400092: Barrier12 1
+    400094: Barrier12 2
+    400096: Barrier13 1
+    400098: Barrier13 2
+    400100: Barrier14 1
+    400102: Barrier14 2
+    400104: Barrier15 1
+    400106: Barrier15 2
+    400108: Barrier16 1
+    400110: Barrier16 2
+    400112: Barrier17 1
+    400114: Barrier17 2
+    400116: Barrier18 1
+    400118: Barrier18 2
+    400120: Barrier19 1
+    400122: Barrier19 2
+    400124: Barrier20 1
+    400126: Barrier20 2
+    400128: Barrier21 1
+    400130: Barrier21 2
+    400132: Barrier22 1
+    400134: Barrier22 2
+    400136: Barrier23 1
+    400138: Barrier23 2
+    400140: Barrier3 1
+    400142: Barrier3 2
+    400144: Barrier4 1
+    400146: Barrier4 2
+    400148: Barrier5 1
+    400150: Barrier5 2
+    400152: Barrier6 1
+    400154: Barrier6 2
+    400156: Barrier7 1
+    400158: Barrier7 2
+    400160: Barrier8 1
+    400162: Barrier8 2
+    400164: Barrier9 1
+    400166: Barrier9 2
+    400168: barrier_left
+    400170: barrier_left1
+    400172: barrier_middle
+    400174: Barrier_middle
+    400176: Barrier_middle1
+    400178: Barrier_left
+    400180: Barrier_left1
+    400182: pCylinder4
+    400184: fence_post
+    400186: fence_post1
+    400188: fence_post10
+    400190: fence_post11
+    400192: fence_post12
+    400194: fence_post13
+    400196: fence_post14
+    400198: fence_post15
+    400200: fence_post16
+    400202: fence_post17
+    400204: fence_post18
+    400206: fence_post19
+    400208: fence_post2
+    400210: fence_post20
+    400212: fence_post3
+    400214: fence_post4
+    400216: fence_post5
+    400218: fence_post6
+    400220: fence_post7
+    400222: fence_post8
+    400224: fence_post9
+    400226: fence
+    400228: fence1
+    400230: fence_post 1
+    400232: fence_post1 1
+    400234: fence_post10 1
+    400236: fence_post11 1
+    400238: fence_post12 1
+    400240: fence_post13 1
+    400242: fence_post14 1
+    400244: fence_post15 1
+    400246: fence_post16 1
+    400248: fence_post17 1
+    400250: fence_post18 1
+    400252: fence_post19 1
+    400254: fence_post2 1
+    400256: fence_post20 1
+    400258: fence_post21
+    400260: fence_post21 1
+    400262: fence_post3 1
+    400264: fence_post4 1
+    400266: fence_post5 1
+    400268: fence_post6 1
+    400270: fence_post7 1
+    400272: fence_post8 1
+    400274: fence_post9 1
+    400276: fence_post22
+    400278: pPlane1
+    400280: pPlane2
+    400282: pPlane3
+    400284: pPlane4
+    400286: pPlane5
+    400288: pPlane6
+    400290: pPlane7
+    400292: pPlane8
+    400294: Barrier_middle2
+    400296: Road_base4
+    400298: Road_base5
+    400300: fence_post23
+    400302: fence_post24
+    400304: fence_post25
+    400306: fence_post26
+    400308: fence_post27
+    400310: fence_post28
+    400312: fence_post29
+    400314: fence_post30
+    400316: fence_post31
+    400318: fence_post32
+    400320: fence_post33
+    400322: fence_post34
+    400324: fence_post35
+    400326: fence_post36
+    400328: fence_post37
+    400330: fence_post38
+    400332: fence_post39
+    400334: fence_post40
+    400336: fence_post41
+    400338: fence_post42
+    400340: fence_post43
+    400342: Barrier_left2
+    400344: Barrier_left3
+    400346: Barrier_left4
+    400348: Barrier_left5
+    400350: fence_post44
+    400352: fence_post45
+    400354: fence_post46
+    400356: fence_post47
+    400358: fence_post48
+    400360: fence_post49
+    2100000: lambert1
+    2300000: //RootNode
+    2300002: Road_base
+    2300004: Road_base1
+    2300006: pCylinder1
+    2300008: pCylinder2
+    2300010: Road_base2
+    2300012: pCylinder3
+    2300014: Road_base3
+    2300016: Barrier
+    2300018: Barrier2
+    2300020: Barrier10
+    2300022: Barrier11
+    2300024: Barrier12
+    2300026: Barrier13
+    2300028: Barrier14
+    2300030: Barrier15
+    2300032: Barrier16
+    2300034: Barrier17
+    2300036: Barrier18
+    2300038: Barrier19
+    2300040: Barrier20
+    2300042: Barrier21
+    2300044: Barrier22
+    2300046: Barrier23
+    2300048: Barrier24
+    2300050: Barrier25
+    2300052: Barrier28
+    2300054: Barrier29
+    2300056: Barrier3
+    2300058: Barrier4
+    2300060: Barrier5
+    2300062: Barrier6
+    2300064: Barrier7
+    2300066: Barrier8
+    2300068: Barrier9
+    2300070: Barrier10 1
+    2300072: Barrier10 2
+    2300074: Barrier11 1
+    2300076: Barrier11 2
+    2300078: Barrier12 1
+    2300080: Barrier12 2
+    2300082: Barrier13 1
+    2300084: Barrier13 2
+    2300086: Barrier14 1
+    2300088: Barrier14 2
+    2300090: Barrier15 1
+    2300092: Barrier15 2
+    2300094: Barrier16 1
+    2300096: Barrier16 2
+    2300098: Barrier17 1
+    2300100: Barrier17 2
+    2300102: Barrier18 1
+    2300104: Barrier18 2
+    2300106: Barrier19 1
+    2300108: Barrier19 2
+    2300110: Barrier20 1
+    2300112: Barrier20 2
+    2300114: Barrier21 1
+    2300116: Barrier21 2
+    2300118: Barrier22 1
+    2300120: Barrier22 2
+    2300122: Barrier23 1
+    2300124: Barrier23 2
+    2300126: Barrier3 1
+    2300128: Barrier3 2
+    2300130: Barrier4 1
+    2300132: Barrier4 2
+    2300134: Barrier5 1
+    2300136: Barrier5 2
+    2300138: Barrier6 1
+    2300140: Barrier6 2
+    2300142: Barrier7 1
+    2300144: Barrier7 2
+    2300146: Barrier8 1
+    2300148: Barrier8 2
+    2300150: Barrier9 1
+    2300152: Barrier9 2
+    2300154: Barrier_middle
+    2300156: Barrier_middle1
+    2300158: Barrier_left
+    2300160: Barrier_left1
+    2300162: pCylinder4
+    2300164: fence_post
+    2300166: fence_post1
+    2300168: fence_post10
+    2300170: fence_post11
+    2300172: fence_post12
+    2300174: fence_post13
+    2300176: fence_post14
+    2300178: fence_post15
+    2300180: fence_post16
+    2300182: fence_post17
+    2300184: fence_post18
+    2300186: fence_post19
+    2300188: fence_post2
+    2300190: fence_post20
+    2300192: fence_post3
+    2300194: fence_post4
+    2300196: fence_post5
+    2300198: fence_post6
+    2300200: fence_post7
+    2300202: fence_post8
+    2300204: fence_post9
+    2300206: fence_post 1
+    2300208: fence_post1 1
+    2300210: fence_post10 1
+    2300212: fence_post11 1
+    2300214: fence_post12 1
+    2300216: fence_post13 1
+    2300218: fence_post14 1
+    2300220: fence_post15 1
+    2300222: fence_post16 1
+    2300224: fence_post17 1
+    2300226: fence_post18 1
+    2300228: fence_post19 1
+    2300230: fence_post2 1
+    2300232: fence_post20 1
+    2300234: fence_post21
+    2300236: fence_post21 1
+    2300238: fence_post3 1
+    2300240: fence_post4 1
+    2300242: fence_post5 1
+    2300244: fence_post6 1
+    2300246: fence_post7 1
+    2300248: fence_post8 1
+    2300250: fence_post9 1
+    2300252: fence_post22
+    2300254: pCube1
+    2300256: pCube2
+    2300258: pPlane1
+    2300260: pPlane2
+    2300262: pPlane3
+    2300264: pPlane4
+    2300266: pPlane5
+    2300268: pPlane6
+    2300270: pPlane7
+    2300272: pPlane8
+    2300274: Barrier_middle2
+    2300276: Road_base4
+    2300278: Road_base5
+    2300280: fence_post23
+    2300282: fence_post24
+    2300284: fence_post25
+    2300286: fence_post26
+    2300288: fence_post27
+    2300290: fence_post28
+    2300292: fence_post29
+    2300294: fence_post30
+    2300296: fence_post31
+    2300298: fence_post32
+    2300300: fence_post33
+    2300302: fence_post34
+    2300304: fence_post35
+    2300306: fence_post36
+    2300308: fence_post37
+    2300310: fence_post38
+    2300312: fence_post39
+    2300314: fence_post40
+    2300316: fence_post41
+    2300318: fence_post42
+    2300320: fence_post43
+    2300322: Barrier_left2
+    2300324: Barrier_left3
+    2300326: Barrier_left4
+    2300328: Barrier_left5
+    2300330: fence_post44
+    2300332: fence_post45
+    2300334: fence_post46
+    2300336: fence_post47
+    2300338: fence_post48
+    2300340: fence_post49
+    3300000: //RootNode
+    3300002: Road_base
+    3300004: Road_base1
+    3300006: pCylinder1
+    3300008: pCylinder2
+    3300010: Road_base2
+    3300012: pCylinder3
+    3300014: Road_base3
+    3300016: Barrier
+    3300018: Barrier2
+    3300020: Barrier10
+    3300022: Barrier11
+    3300024: Barrier12
+    3300026: Barrier13
+    3300028: Barrier14
+    3300030: Barrier15
+    3300032: Barrier16
+    3300034: Barrier17
+    3300036: Barrier18
+    3300038: Barrier19
+    3300040: Barrier20
+    3300042: Barrier21
+    3300044: Barrier22
+    3300046: Barrier23
+    3300048: Barrier24
+    3300050: Barrier25
+    3300052: Barrier28
+    3300054: Barrier29
+    3300056: Barrier3
+    3300058: Barrier4
+    3300060: Barrier5
+    3300062: Barrier6
+    3300064: Barrier7
+    3300066: Barrier8
+    3300068: Barrier9
+    3300070: Barrier10 1
+    3300072: Barrier10 2
+    3300074: Barrier11 1
+    3300076: Barrier11 2
+    3300078: Barrier12 1
+    3300080: Barrier12 2
+    3300082: Barrier13 1
+    3300084: Barrier13 2
+    3300086: Barrier14 1
+    3300088: Barrier14 2
+    3300090: Barrier15 1
+    3300092: Barrier15 2
+    3300094: Barrier16 1
+    3300096: Barrier16 2
+    3300098: Barrier17 1
+    3300100: Barrier17 2
+    3300102: Barrier18 1
+    3300104: Barrier18 2
+    3300106: Barrier19 1
+    3300108: Barrier19 2
+    3300110: Barrier20 1
+    3300112: Barrier20 2
+    3300114: Barrier21 1
+    3300116: Barrier21 2
+    3300118: Barrier22 1
+    3300120: Barrier22 2
+    3300122: Barrier23 1
+    3300124: Barrier23 2
+    3300126: Barrier3 1
+    3300128: Barrier3 2
+    3300130: Barrier4 1
+    3300132: Barrier4 2
+    3300134: Barrier5 1
+    3300136: Barrier5 2
+    3300138: Barrier6 1
+    3300140: Barrier6 2
+    3300142: Barrier7 1
+    3300144: Barrier7 2
+    3300146: Barrier8 1
+    3300148: Barrier8 2
+    3300150: Barrier9 1
+    3300152: Barrier9 2
+    3300154: Barrier_middle
+    3300156: Barrier_middle1
+    3300158: Barrier_left
+    3300160: Barrier_left1
+    3300162: pCylinder4
+    3300164: fence_post
+    3300166: fence_post1
+    3300168: fence_post10
+    3300170: fence_post11
+    3300172: fence_post12
+    3300174: fence_post13
+    3300176: fence_post14
+    3300178: fence_post15
+    3300180: fence_post16
+    3300182: fence_post17
+    3300184: fence_post18
+    3300186: fence_post19
+    3300188: fence_post2
+    3300190: fence_post20
+    3300192: fence_post3
+    3300194: fence_post4
+    3300196: fence_post5
+    3300198: fence_post6
+    3300200: fence_post7
+    3300202: fence_post8
+    3300204: fence_post9
+    3300206: fence_post 1
+    3300208: fence_post1 1
+    3300210: fence_post10 1
+    3300212: fence_post11 1
+    3300214: fence_post12 1
+    3300216: fence_post13 1
+    3300218: fence_post14 1
+    3300220: fence_post15 1
+    3300222: fence_post16 1
+    3300224: fence_post17 1
+    3300226: fence_post18 1
+    3300228: fence_post19 1
+    3300230: fence_post2 1
+    3300232: fence_post20 1
+    3300234: fence_post21
+    3300236: fence_post21 1
+    3300238: fence_post3 1
+    3300240: fence_post4 1
+    3300242: fence_post5 1
+    3300244: fence_post6 1
+    3300246: fence_post7 1
+    3300248: fence_post8 1
+    3300250: fence_post9 1
+    3300252: fence_post22
+    3300254: pCube1
+    3300256: pCube2
+    3300258: pPlane1
+    3300260: pPlane2
+    3300262: pPlane3
+    3300264: pPlane4
+    3300266: pPlane5
+    3300268: pPlane6
+    3300270: pPlane7
+    3300272: pPlane8
+    3300274: Barrier_middle2
+    3300276: Road_base4
+    3300278: Road_base5
+    3300280: fence_post23
+    3300282: fence_post24
+    3300284: fence_post25
+    3300286: fence_post26
+    3300288: fence_post27
+    3300290: fence_post28
+    3300292: fence_post29
+    3300294: fence_post30
+    3300296: fence_post31
+    3300298: fence_post32
+    3300300: fence_post33
+    3300302: fence_post34
+    3300304: fence_post35
+    3300306: fence_post36
+    3300308: fence_post37
+    3300310: fence_post38
+    3300312: fence_post39
+    3300314: fence_post40
+    3300316: fence_post41
+    3300318: fence_post42
+    3300320: fence_post43
+    3300322: Barrier_left2
+    3300324: Barrier_left3
+    3300326: Barrier_left4
+    3300328: Barrier_left5
+    3300330: fence_post44
+    3300332: fence_post45
+    3300334: fence_post46
+    3300336: fence_post47
+    3300338: fence_post48
+    3300340: fence_post49
+    4300000: pCube1
+    4300002: Road_base
+    4300004: Road_base1
+    4300006: pCylinder1
+    4300008: pCylinder2
+    4300010: Road_base2
+    4300012: Road_base3
+    4300014: pCylinder3
+    4300016: Barrier
+    4300018: Barrier2
+    4300020: Barrier3
+    4300022: Barrier4
+    4300024: Barrier5
+    4300026: Barrier6
+    4300028: Barrier7
+    4300030: Barrier8
+    4300032: Barrier9
+    4300034: Barrier10
+    4300036: Barrier11
+    4300038: Barrier12
+    4300040: Barrier13
+    4300042: Barrier14
+    4300044: Barrier15
+    4300046: Barrier16
+    4300048: Barrier17
+    4300050: Barrier18
+    4300052: Barrier19
+    4300054: Barrier20
+    4300056: Barrier21
+    4300058: Barrier22
+    4300060: Barrier23
+    4300062: Barrier24
+    4300064: Barrier25
+    4300066: Barrier28
+    4300068: Barrier29
+    4300070: Barrier23
+    4300072: Barrier22
+    4300074: Barrier21
+    4300076: Barrier20
+    4300078: Barrier19
+    4300080: Barrier18
+    4300082: Barrier17
+    4300084: Barrier16
+    4300086: Barrier15
+    4300088: Barrier14
+    4300090: Barrier13
+    4300092: Barrier12
+    4300094: Barrier11
+    4300096: Barrier10
+    4300098: Barrier9
+    4300100: Barrier8
+    4300102: Barrier7
+    4300104: Barrier6
+    4300106: Barrier5
+    4300108: Barrier4
+    4300110: Barrier3
+    4300112: Barrier23
+    4300114: Barrier22
+    4300116: Barrier21
+    4300118: Barrier20
+    4300120: Barrier19
+    4300122: Barrier18
+    4300124: Barrier17
+    4300126: Barrier16
+    4300128: Barrier15
+    4300130: Barrier14
+    4300132: Barrier13
+    4300134: Barrier12
+    4300136: Barrier11
+    4300138: Barrier10
+    4300140: Barrier9
+    4300142: Barrier8
+    4300144: Barrier7
+    4300146: Barrier6
+    4300148: Barrier5
+    4300150: Barrier4
+    4300152: Barrier3
+    4300154: Barrier_middle
+    4300156: Barrier_middle1
+    4300158: Barrier_left
+    4300160: Barrier_left1
+    4300162: pCylinder4
+    4300164: fence_post
+    4300166: fence_post1
+    4300168: fence_post2
+    4300170: fence_post3
+    4300172: fence_post4
+    4300174: fence_post5
+    4300176: fence_post6
+    4300178: fence_post7
+    4300180: fence_post8
+    4300182: fence_post9
+    4300184: fence_post10
+    4300186: fence_post11
+    4300188: fence_post12
+    4300190: fence_post13
+    4300192: fence_post14
+    4300194: fence_post15
+    4300196: fence_post16
+    4300198: fence_post17
+    4300200: fence_post18
+    4300202: fence_post19
+    4300204: fence_post20
+    4300206: fence_post21
+    4300208: fence_post
+    4300210: fence_post1
+    4300212: fence_post2
+    4300214: fence_post3
+    4300216: fence_post4
+    4300218: fence_post5
+    4300220: fence_post6
+    4300222: fence_post7
+    4300224: fence_post8
+    4300226: fence_post9
+    4300228: fence_post10
+    4300230: fence_post11
+    4300232: fence_post12
+    4300234: fence_post13
+    4300236: fence_post14
+    4300238: fence_post15
+    4300240: fence_post16
+    4300242: fence_post17
+    4300244: fence_post18
+    4300246: fence_post19
+    4300248: fence_post20
+    4300250: fence_post21
+    4300252: fence_post22
+    4300254: pCube2
+    4300256: pPlane1
+    4300258: pPlane2
+    4300260: pPlane3
+    4300262: pPlane4
+    4300264: pPlane5
+    4300266: pPlane6
+    4300268: pPlane7
+    4300270: pPlane8
+    4300272: Road_base4
+    4300274: Road_base5
+    4300276: Barrier_middle2
+    4300278: fence_post29
+    4300280: fence_post28
+    4300282: fence_post27
+    4300284: fence_post23
+    4300286: fence_post24
+    4300288: fence_post25
+    4300290: fence_post26
+    4300292: fence_post30
+    4300294: fence_post31
+    4300296: fence_post32
+    4300298: fence_post33
+    4300300: fence_post34
+    4300302: fence_post35
+    4300304: fence_post36
+    4300306: fence_post37
+    4300308: fence_post38
+    4300310: fence_post39
+    4300312: fence_post40
+    4300314: fence_post41
+    4300316: fence_post42
+    4300318: fence_post43
+    4300320: Barrier_left2
+    4300322: Barrier_left3
+    4300324: Barrier_left4
+    4300326: Barrier_left5
+    4300328: fence_post44
+    4300330: fence_post45
+    4300332: fence_post46
+    4300334: fence_post47
+    4300336: fence_post48
+    4300338: fence_post49
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

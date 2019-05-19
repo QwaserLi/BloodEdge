@@ -1,0 +1,373 @@
+fileFormatVersion: 2
+guid: d99802c5f3458974d959a9d6c4a0187c
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Barrier_left
+    100002: Barrier_left1
+    100004: Barrier_middle
+    100006: fence
+    100008: fence1
+    100010: fence_post
+    100012: fence_post 1
+    100014: fence_post1
+    100016: fence_post1 1
+    100018: fence_post10
+    100020: fence_post10 1
+    100022: fence_post11
+    100024: fence_post11 1
+    100026: fence_post12
+    100028: fence_post12 1
+    100030: fence_post13
+    100032: fence_post13 1
+    100034: fence_post14
+    100036: fence_post14 1
+    100038: fence_post15
+    100040: fence_post15 1
+    100042: fence_post16
+    100044: fence_post16 1
+    100046: fence_post17
+    100048: fence_post17 1
+    100050: fence_post18
+    100052: fence_post18 1
+    100054: fence_post19
+    100056: fence_post19 1
+    100058: fence_post2
+    100060: fence_post2 1
+    100062: fence_post20
+    100064: fence_post20 1
+    100066: fence_post21
+    100068: fence_post21 1
+    100070: fence_post3
+    100072: fence_post3 1
+    100074: fence_post4
+    100076: fence_post4 1
+    100078: fence_post5
+    100080: fence_post5 1
+    100082: fence_post6
+    100084: fence_post6 1
+    100086: fence_post7
+    100088: fence_post7 1
+    100090: fence_post8
+    100092: fence_post8 1
+    100094: fence_post9
+    100096: fence_post9 1
+    100098: //RootNode
+    100100: pCube1
+    100102: pCube2
+    100104: pCylinder2
+    100106: pCylinder3
+    100108: Road_base
+    100110: Road_base1
+    100112: Road_base2
+    100114: Road_base3
+    400000: Barrier_left
+    400002: Barrier_left1
+    400004: Barrier_middle
+    400006: fence
+    400008: fence1
+    400010: fence_post
+    400012: fence_post 1
+    400014: fence_post1
+    400016: fence_post1 1
+    400018: fence_post10
+    400020: fence_post10 1
+    400022: fence_post11
+    400024: fence_post11 1
+    400026: fence_post12
+    400028: fence_post12 1
+    400030: fence_post13
+    400032: fence_post13 1
+    400034: fence_post14
+    400036: fence_post14 1
+    400038: fence_post15
+    400040: fence_post15 1
+    400042: fence_post16
+    400044: fence_post16 1
+    400046: fence_post17
+    400048: fence_post17 1
+    400050: fence_post18
+    400052: fence_post18 1
+    400054: fence_post19
+    400056: fence_post19 1
+    400058: fence_post2
+    400060: fence_post2 1
+    400062: fence_post20
+    400064: fence_post20 1
+    400066: fence_post21
+    400068: fence_post21 1
+    400070: fence_post3
+    400072: fence_post3 1
+    400074: fence_post4
+    400076: fence_post4 1
+    400078: fence_post5
+    400080: fence_post5 1
+    400082: fence_post6
+    400084: fence_post6 1
+    400086: fence_post7
+    400088: fence_post7 1
+    400090: fence_post8
+    400092: fence_post8 1
+    400094: fence_post9
+    400096: fence_post9 1
+    400098: //RootNode
+    400100: pCube1
+    400102: pCube2
+    400104: pCylinder2
+    400106: pCylinder3
+    400108: Road_base
+    400110: Road_base1
+    400112: Road_base2
+    400114: Road_base3
+    2100000: lambert1
+    2300000: Barrier_left
+    2300002: Barrier_left1
+    2300004: Barrier_middle
+    2300006: fence_post
+    2300008: fence_post 1
+    2300010: fence_post1
+    2300012: fence_post1 1
+    2300014: fence_post10
+    2300016: fence_post10 1
+    2300018: fence_post11
+    2300020: fence_post11 1
+    2300022: fence_post12
+    2300024: fence_post12 1
+    2300026: fence_post13
+    2300028: fence_post13 1
+    2300030: fence_post14
+    2300032: fence_post14 1
+    2300034: fence_post15
+    2300036: fence_post15 1
+    2300038: fence_post16
+    2300040: fence_post16 1
+    2300042: fence_post17
+    2300044: fence_post17 1
+    2300046: fence_post18
+    2300048: fence_post18 1
+    2300050: fence_post19
+    2300052: fence_post19 1
+    2300054: fence_post2
+    2300056: fence_post2 1
+    2300058: fence_post20
+    2300060: fence_post20 1
+    2300062: fence_post21
+    2300064: fence_post21 1
+    2300066: fence_post3
+    2300068: fence_post3 1
+    2300070: fence_post4
+    2300072: fence_post4 1
+    2300074: fence_post5
+    2300076: fence_post5 1
+    2300078: fence_post6
+    2300080: fence_post6 1
+    2300082: fence_post7
+    2300084: fence_post7 1
+    2300086: fence_post8
+    2300088: fence_post8 1
+    2300090: fence_post9
+    2300092: fence_post9 1
+    2300094: pCube1
+    2300096: pCube2
+    2300098: pCylinder2
+    2300100: pCylinder3
+    2300102: Road_base
+    2300104: Road_base1
+    2300106: Road_base2
+    2300108: Road_base3
+    3300000: Barrier_left
+    3300002: Barrier_left1
+    3300004: Barrier_middle
+    3300006: fence_post
+    3300008: fence_post 1
+    3300010: fence_post1
+    3300012: fence_post1 1
+    3300014: fence_post10
+    3300016: fence_post10 1
+    3300018: fence_post11
+    3300020: fence_post11 1
+    3300022: fence_post12
+    3300024: fence_post12 1
+    3300026: fence_post13
+    3300028: fence_post13 1
+    3300030: fence_post14
+    3300032: fence_post14 1
+    3300034: fence_post15
+    3300036: fence_post15 1
+    3300038: fence_post16
+    3300040: fence_post16 1
+    3300042: fence_post17
+    3300044: fence_post17 1
+    3300046: fence_post18
+    3300048: fence_post18 1
+    3300050: fence_post19
+    3300052: fence_post19 1
+    3300054: fence_post2
+    3300056: fence_post2 1
+    3300058: fence_post20
+    3300060: fence_post20 1
+    3300062: fence_post21
+    3300064: fence_post21 1
+    3300066: fence_post3
+    3300068: fence_post3 1
+    3300070: fence_post4
+    3300072: fence_post4 1
+    3300074: fence_post5
+    3300076: fence_post5 1
+    3300078: fence_post6
+    3300080: fence_post6 1
+    3300082: fence_post7
+    3300084: fence_post7 1
+    3300086: fence_post8
+    3300088: fence_post8 1
+    3300090: fence_post9
+    3300092: fence_post9 1
+    3300094: pCube1
+    3300096: pCube2
+    3300098: pCylinder2
+    3300100: pCylinder3
+    3300102: Road_base
+    3300104: Road_base1
+    3300106: Road_base2
+    3300108: Road_base3
+    4300000: Road_base
+    4300002: Road_base1
+    4300004: pCylinder2
+    4300006: Road_base2
+    4300008: Road_base3
+    4300010: pCylinder3
+    4300012: Barrier_middle
+    4300014: Barrier_left
+    4300016: Barrier_left1
+    4300018: fence_post
+    4300020: fence_post1
+    4300022: fence_post2
+    4300024: fence_post3
+    4300026: fence_post4
+    4300028: fence_post5
+    4300030: fence_post6
+    4300032: fence_post7
+    4300034: fence_post8
+    4300036: fence_post9
+    4300038: fence_post10
+    4300040: fence_post11
+    4300042: fence_post12
+    4300044: fence_post13
+    4300046: fence_post14
+    4300048: fence_post15
+    4300050: fence_post16
+    4300052: fence_post17
+    4300054: fence_post18
+    4300056: fence_post19
+    4300058: fence_post20
+    4300060: fence_post21
+    4300062: pCube1
+    4300064: pCube2
+    4300066: fence_post
+    4300068: fence_post1
+    4300070: fence_post2
+    4300072: fence_post3
+    4300074: fence_post4
+    4300076: fence_post5
+    4300078: fence_post6
+    4300080: fence_post7
+    4300082: fence_post8
+    4300084: fence_post9
+    4300086: fence_post10
+    4300088: fence_post11
+    4300090: fence_post12
+    4300092: fence_post13
+    4300094: fence_post14
+    4300096: fence_post15
+    4300098: fence_post16
+    4300100: fence_post17
+    4300102: fence_post18
+    4300104: fence_post19
+    4300106: fence_post20
+    4300108: fence_post21
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
