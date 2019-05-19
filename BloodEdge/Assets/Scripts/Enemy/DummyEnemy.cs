@@ -3,29 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
+
 
 namespace Enemy
 {
 	//[RequireComponent(typeof(Rigidbody))] //doesn't look like this will be necessary, depends on game physics.
 	[RequireComponent(typeof(NavMeshAgent))]
-	public class StandardEnemy : Enemy, IHittable
+	public class DummyEnemy : Enemy, IHittable
 	{
-		private List<HealthPip> pips;
+		private List<HealthPip> _pips;
 		[SerializeField] private int startingHealthPips = 5;
 
 		private NavMeshAgent _nmAgent;
 		private Vector3? _currentDestination;
 		private AIStrategy _currentStrategy;
 		[SerializeField] private AIStrategy currentStrategy;
-		[SerializeField] private float _timeInCurrentStrategy;
+		[SerializeField] private float timeInCurrentStrategy;
 
 
-		void Start()
-		{
-			pips = new List<HealthPip>();
+		void Start() {
+			player = GameObject.Find("Player");
+			_pips = new List<HealthPip>();
 			for (int i = 0; i < startingHealthPips; i++)
 			{
-				pips.Add(
+				_pips.Add(
 					new HealthPip
 					( //TODO: break these out into inspector fields instead. Possibly stick to percentages though?
 						hp: 	100f / startingHealthPips,
@@ -37,24 +39,25 @@ namespace Enemy
 
 			_nmAgent         = GetComponent<NavMeshAgent>();
 			_currentStrategy = AIStrategy.Approach;
+			timeInCurrentStrategy = Random.Range(0, 6f);
 			//_nmAgent.destination = player.transform.position;
 		}
 
 		// Update is called once per frame
 		void Update()
 		{
-			if (pips[0].destroyed())
+			if (_pips[0].destroyed())
 			{
-				pips.Remove(pips[0]);
+				_pips.Remove(_pips[0]);
 			}
-			if (pips.Count == 0)
+			if (_pips.Count == 0)
 			{
 				//Enemy's dead!
 				gameObject.SetActive(false); //todo: actual death code.
 				return;
 			}
-			pips[0].updateHealth();
-			_timeInCurrentStrategy += Time.deltaTime;
+			_pips[0].updateHealth();
+			timeInCurrentStrategy += Time.deltaTime;
 			if (_currentStrategy != currentStrategy)
 			{
 				ChangeStrategy(currentStrategy);
@@ -70,7 +73,7 @@ namespace Enemy
 				case AIStrategy.Approach:
 				{
 					_currentDestination = player.transform.position;
-					if (DistanceToDestination() < 3 || _timeInCurrentStrategy > 6)
+					if (DistanceToDestination() < 3 || timeInCurrentStrategy > 6)
 					{
 						ChangeStrategy(AIStrategy.Retreat);
 						break;
@@ -92,7 +95,7 @@ namespace Enemy
 						_currentDestination = transform.position + -GetDirectionToPlayer() * 10;
 					}
 
-					if (DistanceToDestination() < 5 || _timeInCurrentStrategy > 5)
+					if (DistanceToDestination() < 5 || timeInCurrentStrategy > 4)
 					{
 						ChangeStrategy(AIStrategy.Approach);
 						break;
@@ -110,7 +113,7 @@ namespace Enemy
 //                    break;
 //                } 
 
-				//NB: likely best way to do these behaviours esp. the non-direct ones will be raycasting
+				//nb: likely best way to do these behaviours esp. the non-direct ones will be raycasting
 				//from the player or better yet, from their _camera_, so that they're behaving
 				//according to what the player is doing and we can exert more control over the gameplay flow.
 			}
@@ -125,7 +128,7 @@ namespace Enemy
 			_currentStrategy    = newStrategy;
 			currentStrategy     = newStrategy;
 			//_nmAgent.isStopped = true;
-			_timeInCurrentStrategy = 0;
+			timeInCurrentStrategy = 0;
 		}
 
 		bool ReachedDestination()
@@ -145,7 +148,11 @@ namespace Enemy
 		public void Hit(float damageAmount)
 		{
 			//throw new System.NotImplementedException();
-			pips[0].damage(damageAmount);
+			_pips[0].damage(damageAmount);
+		}
+
+		public void Hit(float damageAmount, Vector3 force) {
+			Hit(damageAmount);
 		}
 
 		private void OnDrawGizmos()
