@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         }
         //Drag Force
         ApplyDrag();
-        Debug.Log(velocity.y);
+       // Debug.Log(velocity.y);
     }
 
     void Movement() {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Enemy;
 
 public class Scythe : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class Scythe : MonoBehaviour
         if (collision.collider.tag == "Attackable") {
             print("Scythe Hit");
             paRef.UpdateComboCount();
+			collision.collider.GetComponent<IHittable>().Hit(100f);
         }
     }
 }
