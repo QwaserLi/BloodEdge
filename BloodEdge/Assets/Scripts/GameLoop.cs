@@ -7,7 +7,6 @@ public class GameLoop : MonoBehaviour
 {
     public static bool isInBattle;
     public static bool isGamePaused = false;
-    public Player playerRef;
     public GameObject pausePanel;
     float pauseTimer;
 
@@ -25,10 +24,8 @@ public class GameLoop : MonoBehaviour
             isGamePaused = !isGamePaused;
             if (isGamePaused) {
                 pausePanel.SetActive(true);
-                playerRef.anim.enabled = false;
             } else {
                 pausePanel.SetActive(false);
-                playerRef.anim.enabled = true;
             }
         }
         pauseTimer += Time.deltaTime;       

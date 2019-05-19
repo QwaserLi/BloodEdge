@@ -4,20 +4,29 @@ using UnityEngine;
 
 public class Scythe : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    PlayerAttack paRef;
+
+    private void Start()
     {
-        
+        paRef = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
     }
 
-    // Update is called once per frame
-    void Update()
+    /*
+    public void OnTriggerEnter(Collider collider)
     {
-        
+        if (collider.tag == "Attackable") {
+            print("Scythe Hit");
+            paRef.UpdateComboCount();
+        }
     }
+    */
 
-    private void OnTriggerEnter(Collider other)
+    public void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.collider.tag == "Attackable") {
+            print("Scythe Hit");
+            paRef.UpdateComboCount();
+        }
     }
 }

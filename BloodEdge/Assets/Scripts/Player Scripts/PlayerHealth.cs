@@ -1,31 +1,38 @@
-﻿using System.Collections;
+﻿using Enemy;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth
+public class PlayerHealth: MonoBehaviour, IHittable
 {
-    int health = 100;
-    Player playerRef;
-
-    public PlayerHealth(Player p)
-    {
-        playerRef = p;
-    }
+    public float currentHealth = 100;
+    public float maxHealth = 100;
+    public static bool isDead = false;
 
     //
-    public void Run()
+    public void Update()
     {
-        if (!playerRef.isDead) {
+        
+    }
 
+    /**
+     *  Heal the player 
+     **/
+    public void Heal(float amt)
+    {
+        if (currentHealth + amt > maxHealth) {
+            currentHealth = maxHealth;
+        } else {
+            currentHealth += amt;
         }
     }
 
     // Method to call if player is hit
-    public void Hit(int damage)
+    public void Hit(float damage)
     {
-        health -= damage;
-        if (health <= 0) {
-            playerRef.isDead = true;
+        currentHealth -= (damage / maxHealth)*100;
+        if (currentHealth <= 0) {
+            isDead = true;
         }
     }
 }
