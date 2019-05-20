@@ -144,15 +144,9 @@ namespace Enemy
 				: Vector3.Distance(transform.position, (Vector3) _currentDestination);
 		}
 
-
-		public void Hit(float damageAmount)
-		{
-			//throw new System.NotImplementedException();
-			_pips[0].damage(damageAmount);
-		}
-
 		public void Hit(float damageAmount, Vector3 force) {
-			Hit(damageAmount);
+			_pips[0].damage(damageAmount);
+			//todo: integrate the force application
 		}
 
 		private void OnDrawGizmos()
