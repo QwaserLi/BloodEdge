@@ -28,12 +28,15 @@ public class PlayerAttack: MonoBehaviour
 
     BoxCollider sbc;
 
+    List<string> comboInputs;
+
     /*
      *  Sort out references
      **/
     void Start() {
         anim = GetComponent<Animator>();
         sbc = Scythe.GetComponent<BoxCollider>();
+        comboInputs = new List<string>();
     }
 
     // Main Loop
@@ -134,6 +137,7 @@ public class PlayerAttack: MonoBehaviour
         UpdateComboMeter.UpdateComboTimer(5.0f);
         UpdateComboMeter.UpdateComboNumber(comboCount);
         DeactivateScytheCollider();
+        comboInputs.Clear();
     }
 
     /**

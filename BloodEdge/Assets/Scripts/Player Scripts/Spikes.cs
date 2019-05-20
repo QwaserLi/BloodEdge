@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Enemy;
 
 public class Spikes : MonoBehaviour
 {
@@ -16,15 +17,16 @@ public class Spikes : MonoBehaviour
         shakeSource.GenerateImpulse();
         StartCoroutine(DestroySpikes());
     }
-    /*
+    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Attackable") {
+        if (other.tag == "Attackable") {
             print("hit");
+            other.GetComponent<IHittable>().Hit(20, new Vector3(1,1,1));
             paRef.UpdateComboCount();
         }
     }
-    */
+    /*
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.tag == "Attackable") {
@@ -32,7 +34,7 @@ public class Spikes : MonoBehaviour
             paRef.UpdateComboCount();
         }
     }
-
+    */
     private IEnumerator DestroySpikes()
     {
         while (gameObject.transform.localScale.y < 2.0f) {

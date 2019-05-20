@@ -28,7 +28,7 @@ public class PlayerHealth: MonoBehaviour, IHittable
     }
 
     // Method to call if player is hit
-    public void Hit(float damage)
+    public void Hit(float damage, Vector3 force)
     {
         currentHealth -= (damage / maxHealth)*100;
         if (currentHealth <= 0) {

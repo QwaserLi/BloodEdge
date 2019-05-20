@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using Enemy;
 
 public class BloodBall : MonoBehaviour
 {
@@ -14,14 +15,14 @@ public class BloodBall : MonoBehaviour
         paRef = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
         shakeSource = GetComponent<CinemachineImpulseSource>();
         shakeSource.GenerateImpulse();
-        StartCoroutine(DestroyBloodBall());        
-        
+        StartCoroutine(DestroyBloodBall());                
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Attackable") {            
             print("hit");
+            other.GetComponent<IHittable>().Hit(5, new Vector3(1, 1, 1));
             paRef.UpdateComboCount();
         }
     }
