@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //REMOVE LATER Because Dylan complains too much
+        Cursor.visible = false;
+
         anim = GetComponent<Animator>();
         cam = Camera.main;
         controller = GetComponent<CharacterController>();
