@@ -184,6 +184,8 @@ ModelImporter:
     100356: fence_post47
     100358: fence_post48
     100360: fence_post49
+    100362: hgihway_kinda_broken:pCube2
+    100364: pCube5
     400000: //RootNode
     400002: Road_base
     400004: Road_base1
@@ -365,7 +367,10 @@ ModelImporter:
     400356: fence_post47
     400358: fence_post48
     400360: fence_post49
+    400362: hgihway_kinda_broken:pCube2
+    400364: pCube5
     2100000: lambert1
+    2100002: hgihway_kinda_broken_aiStandardSurface1
     2300000: //RootNode
     2300002: Road_base
     2300004: Road_base1
@@ -537,6 +542,8 @@ ModelImporter:
     2300336: fence_post47
     2300338: fence_post48
     2300340: fence_post49
+    2300342: hgihway_kinda_broken:pCube2
+    2300344: pCube5
     3300000: //RootNode
     3300002: Road_base
     3300004: Road_base1
@@ -708,6 +715,8 @@ ModelImporter:
     3300336: fence_post47
     3300338: fence_post48
     3300340: fence_post49
+    3300342: hgihway_kinda_broken:pCube2
+    3300344: pCube5
     4300000: pCube1
     4300002: Road_base
     4300004: Road_base1
@@ -878,6 +887,8 @@ ModelImporter:
     4300334: fence_post47
     4300336: fence_post48
     4300338: fence_post49
+    4300340: hgihway_kinda_broken:pCube2
+    4300342: pCube5
   externalObjects: {}
   materials:
     importMaterials: 1

@@ -61,6 +61,7 @@ ModelImporter:
     100110: Road_base1
     100112: Road_base2
     100114: Road_base3
+    100116: pCube3
     400000: Barrier_left
     400002: Barrier_left1
     400004: Barrier_middle
@@ -119,7 +120,9 @@ ModelImporter:
     400110: Road_base1
     400112: Road_base2
     400114: Road_base3
+    400116: pCube3
     2100000: lambert1
+    2100002: aiStandardSurface1
     2300000: Barrier_left
     2300002: Barrier_left1
     2300004: Barrier_middle
@@ -175,6 +178,7 @@ ModelImporter:
     2300104: Road_base1
     2300106: Road_base2
     2300108: Road_base3
+    2300110: pCube3
     3300000: Barrier_left
     3300002: Barrier_left1
     3300004: Barrier_middle
@@ -230,6 +234,7 @@ ModelImporter:
     3300104: Road_base1
     3300106: Road_base2
     3300108: Road_base3
+    3300110: pCube3
     4300000: Road_base
     4300002: Road_base1
     4300004: pCylinder2
@@ -285,6 +290,7 @@ ModelImporter:
     4300104: fence_post19
     4300106: fence_post20
     4300108: fence_post21
+    4300110: pCube3
   externalObjects: {}
   materials:
     importMaterials: 1
