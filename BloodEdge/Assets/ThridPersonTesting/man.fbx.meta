@@ -1,0 +1,184 @@
+fileFormatVersion: 2
+guid: 947eeb70b88896049b031bc4cebd4b8c
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Belt
+    100002: HAnds
+    100004: HAnds1
+    100006: HAnds2
+    100008: HAnds3
+    100010: HAnds4
+    100012: Male
+    100014: Male_copy000
+    100016: Male_copy001
+    100018: Male_copy002
+    100020: Male_copy003
+    100022: Male_copy005
+    100024: //RootNode
+    100026: Pants
+    100028: scarf
+    100030: shoulders
+    100032: UnderPiece
+    100034: Volume121
+    400000: Belt
+    400002: HAnds
+    400004: HAnds1
+    400006: HAnds2
+    400008: HAnds3
+    400010: HAnds4
+    400012: Male
+    400014: Male_copy000
+    400016: Male_copy001
+    400018: Male_copy002
+    400020: Male_copy003
+    400022: Male_copy005
+    400024: //RootNode
+    400026: Pants
+    400028: scarf
+    400030: shoulders
+    400032: UnderPiece
+    400034: Volume121
+    2100000: Default
+    2100002: Default1
+    2100004: Default2
+    2100006: Default3
+    2100008: Default4
+    2300000: Belt
+    2300002: HAnds
+    2300004: HAnds1
+    2300006: HAnds2
+    2300008: HAnds3
+    2300010: HAnds4
+    2300012: Male
+    2300014: Male_copy000
+    2300016: Male_copy001
+    2300018: Male_copy002
+    2300020: Male_copy003
+    2300022: Male_copy005
+    2300024: Pants
+    2300026: scarf
+    2300028: shoulders
+    2300030: UnderPiece
+    2300032: Volume121
+    3300000: Belt
+    3300002: HAnds
+    3300004: HAnds1
+    3300006: HAnds2
+    3300008: HAnds3
+    3300010: HAnds4
+    3300012: Male
+    3300014: Male_copy000
+    3300016: Male_copy001
+    3300018: Male_copy002
+    3300020: Male_copy003
+    3300022: Male_copy005
+    3300024: Pants
+    3300026: scarf
+    3300028: shoulders
+    3300030: UnderPiece
+    3300032: Volume121
+    4300000: HAnds
+    4300002: HAnds1
+    4300004: HAnds2
+    4300006: HAnds3
+    4300008: UnderPiece
+    4300010: HAnds4
+    4300012: scarf
+    4300014: shoulders
+    4300016: Volume121
+    4300018: Male_copy000
+    4300020: Male_copy002
+    4300022: Male
+    4300024: Belt
+    4300026: Pants
+    4300028: Male_copy003
+    4300030: Male_copy001
+    4300032: Male_copy005
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
