@@ -121,12 +121,13 @@ public class PlayerAttack: MonoBehaviour
 
     public void DoWeakAttack()
     {
-        ActivateScytheCollider();
-        if (currentComboNum == 3) {
-            currentComboNum = 0;
+        if (currentComboNum == 3 || comboString.Contains("1")) {
+			BackToPlayerIdle();
+			currentComboNum = 0;
             comboString = "";
         }
 
+        ActivateScytheCollider();
         if (currentComboNum == 0) {
             anim.SetInteger("CurrentCombo", 0);
         } else if (currentComboNum == 1) {
@@ -163,11 +164,12 @@ public class PlayerAttack: MonoBehaviour
 
     public void DoStrongAttack()
     {
-        ActivateScytheCollider();
-        if (currentComboNum == 3) {
-            currentComboNum = 0;
+        if (currentComboNum == 3 || comboString.Contains("0")) {
+			BackToPlayerIdle();
+			currentComboNum = 0;
             comboString = "";
         }
+        ActivateScytheCollider();
         if (currentComboNum == 0) {
             anim.SetInteger("CurrentCombo", 1);
         } else if (currentComboNum == 1) {
