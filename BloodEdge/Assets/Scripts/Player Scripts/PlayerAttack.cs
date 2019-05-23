@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAttack: MonoBehaviour
 {
     bool canAttack = true;
+    public static bool isAttacking = false;
     float specialMagicAttackCharge = 0;
     float specialScytheAttackCharge = 0;
 
@@ -80,6 +81,7 @@ public class PlayerAttack: MonoBehaviour
 
         // Do special attack
         if (Input.GetButtonDown("Special") && canAttack) {
+            isAttacking = true;
             if (currentWeapon == 0 && specialScytheAttackCharge >= 100) {
                 canAttack = false;
                 SpecialScytheAttack();
@@ -91,6 +93,7 @@ public class PlayerAttack: MonoBehaviour
                 specialMagicAttackCharge = 0;
             }
         } else if (Input.GetAxisRaw("Fire1") > 0 && canAttack && (comboString == "" || comboString.Contains("0"))) {  // Basic Attack
+            isAttacking = true;
             if (courComboRef != null) {
                 StopCoroutine(courComboRef);
             }
@@ -102,6 +105,7 @@ public class PlayerAttack: MonoBehaviour
                 anim.SetTrigger("BasicMagic");
             }
         } else if (Input.GetAxisRaw("Fire2") > 0 && canAttack && (comboString == "" || comboString.Contains("1"))) { // Strong Attack
+            isAttacking = true;
             if (courComboRef != null) {
                 StopCoroutine(courComboRef);
             }
@@ -213,6 +217,7 @@ public class PlayerAttack: MonoBehaviour
 
     public void BackToPlayerIdle()
     {
+        isAttacking = false;
         DeactivateScytheCollider();
         currentComboNum = 0;
         comboString = "";

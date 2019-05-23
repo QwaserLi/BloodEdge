@@ -112,8 +112,9 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection),0.5f);
 
         }
-
-        controller.Move(desiredMoveDirection * Time.deltaTime * speed);
+        if (!PlayerAttack.isAttacking) {
+            controller.Move(desiredMoveDirection * Time.deltaTime * speed);
+        }
     }
 
     void ApplyGravity()
