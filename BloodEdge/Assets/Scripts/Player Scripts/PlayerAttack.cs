@@ -10,7 +10,7 @@ public class PlayerAttack: MonoBehaviour
 
     float weaponChangeTimer = 0;
     float specialChargeTimer = 0;
-    Animator anim;
+    static Animator anim;
     public int currentWeapon = 0; // 0 Scythe, 1 Magic
     public float attackTimer = 0;
 
@@ -19,16 +19,18 @@ public class PlayerAttack: MonoBehaviour
 
     float comboCount = 0;
     float comboTimer = 5.0f;
+    Coroutine courComboRef;
 
     // Weapons
     public GameObject BloodBall;
     public GameObject Scythe;
     public GameObject HandEffect;
     public GameObject Spikes;
-
     BoxCollider sbc;
-
-    List<string> comboInputs;
+    List<int> comboInputs;
+    string comboString = "";
+    Dictionary<string, Combos> allCombos;
+    int currentComboNum;
 
     /*
      *  Sort out references
@@ -36,7 +38,16 @@ public class PlayerAttack: MonoBehaviour
     void Start() {
         anim = GetComponent<Animator>();
         sbc = Scythe.GetComponent<BoxCollider>();
-        comboInputs = new List<string>();
+        comboInputs = new List<int>();
+        allCombos = new Dictionary<string, Combos>();
+        allCombos.Add("0", new Slash());
+        allCombos.Add("00", new OtherSlash());
+        allCombos.Add("000", new BackHand());
+        allCombos.Add("1", new BackHand());
+        allCombos.Add("11", new OtherSlash());
+        allCombos.Add("111", new BackHand());
+        allCombos.Add("01", new BackHand());
+        allCombos.Add("10", new BackHand());
     }
 
     // Main Loop
@@ -49,7 +60,7 @@ public class PlayerAttack: MonoBehaviour
         weaponChangeTimer += Time.deltaTime;
         comboTimer += Time.deltaTime;
         specialChargeTimer += Time.deltaTime;
-
+        
         // Charge up Special Weapon
         if (specialChargeTimer > 1.0f) {
             UpdateRedBar(1);
@@ -81,49 +92,122 @@ public class PlayerAttack: MonoBehaviour
         // Do special attack
         if (Input.GetButtonDown("Special") && canAttack) {
             if (currentWeapon == 0 && specialScytheAttackCharge >= 100) {
-                anim.speed = 3.0f;
                 canAttack = false;
                 SpecialScytheAttack();
                 specialScytheAttackCharge = 0;
             } else if(currentWeapon == 1 && specialMagicAttackCharge >= 100) {
-                anim.speed = 3.0f;
                 canAttack = false;
                 anim.ResetTrigger("SpecialMagic");
                 anim.SetTrigger("SpecialMagic");
                 specialMagicAttackCharge = 0;
             }
-        }
-
-        // Basic Attack
-        if (Input.GetAxisRaw("Fire1") > 0 && canAttack) {
+        } else if (Input.GetAxisRaw("Fire1") > 0 && canAttack) {  // Basic Attack
+            if (courComboRef != null) {
+                StopCoroutine(courComboRef);
+            }
             canAttack = false;
             if (currentWeapon == 0) {
-                BasicScytheAttack();
+                DoWeakAttack();
             } else {
                 anim.ResetTrigger("BasicMagic");
                 anim.SetTrigger("BasicMagic");
             }
-        }
-
-        // Strong Attack
-        if (Input.GetAxisRaw("Fire2") > 0 && canAttack) {
-            anim.speed = 2.0f;
+        } else if (Input.GetAxisRaw("Fire2") > 0 && canAttack) { // Strong Attack
+            if (courComboRef != null) {
+                StopCoroutine(courComboRef);
+            }
             canAttack = false;
             if (currentWeapon == 0) {
-                StrongScytheAttack();
+                DoStrongAttack();
             } else {
                 anim.ResetTrigger("StrongMagic");
                 anim.SetTrigger("StrongMagic");
             }
         }
+        print(anim.GetInteger("CurrentCombo"));
+    }
+
+    public void DoWeakAttack()
+    {
+        if (currentComboNum == 3) {
+            currentComboNum = 0;
+            comboString = "";
+        }
+
+        if (currentComboNum == 0) {
+            anim.SetInteger("CurrentCombo", 0);
+        } else if (currentComboNum == 1) {
+            if (comboString == "0") {
+                anim.SetInteger("CurrentCombo", 100);
+            } else if (comboString == "1") {
+                anim.SetInteger("CurrentCombo", 101);
+            }
+        }else if (currentComboNum == 2) {
+            if (comboString == "00") {
+                anim.SetInteger("CurrentCombo", 102);
+            } else if (comboString == "11") {
+                anim.SetInteger("CurrentCombo", 103);
+            } else if (comboString == "01") {
+                anim.SetInteger("CurrentCombo", 104);
+            } else if (comboString == "10") {
+                anim.SetInteger("CurrentCombo", 105);
+            }
+        }
+        comboString += 0;
+        currentComboNum++;
+    }
+
+    public void DoStrongAttack()
+    {
+        if (currentComboNum == 3) {
+            currentComboNum = 0;
+            comboString = "";
+        }
+
+        if (currentComboNum == 0) {            
+            anim.SetInteger("CurrentCombo", 1);
+        } else if (currentComboNum == 1) {
+            if (comboString == "0") {
+                anim.SetInteger("CurrentCombo", 2);
+            } else if (comboString == "1") {
+                anim.SetInteger("CurrentCombo", 3);            
+            } 
+        } else if (currentComboNum == 2) {
+            if (comboString == "00") {
+                anim.SetInteger("CurrentCombo", 4);
+            } else if (comboString == "11") {
+                anim.SetInteger("CurrentCombo", 5);
+            } else if (comboString == "01") {
+                anim.SetInteger("CurrentCombo", 6);
+            } else if (comboString == "10") {
+                anim.SetInteger("CurrentCombo", 7);
+            }
+        }
+        comboString += 1;
+        currentComboNum++;
     }
     
     // Allows the player to attack again
     public void ResetAttack()
     {
+        print("Reset");
+        //anim.SetInteger("CurrentCombo", -1);
         canAttack = true;
-        anim.speed = 1.0f;
-        leftSwipe = !leftSwipe;
+        courComboRef = StartCoroutine(StartComboCoolDown());
+    }
+
+    IEnumerator StartComboCoolDown()
+    {
+        yield return new WaitForSeconds(0.75f);
+        //comboInputs = new List<int>();
+        BackToPlayerIdle();
+    }
+
+    public void BackToPlayerIdle()
+    {
+        currentComboNum = 0;
+        comboString = "";
+        anim.SetInteger("CurrentCombo", -1);
     }
 
     /**
@@ -134,10 +218,10 @@ public class PlayerAttack: MonoBehaviour
         inCombo = false;
         //leftSwipe = true;
         comboCount = 0;
+        //currentComboNum = 0;
         UpdateComboMeter.UpdateComboTimer(5.0f);
         UpdateComboMeter.UpdateComboNumber(comboCount);
         DeactivateScytheCollider();
-        comboInputs.Clear();
     }
 
     /**
@@ -154,28 +238,7 @@ public class PlayerAttack: MonoBehaviour
     void DeactivateScytheCollider()
     {
         //sbc.enabled = false;
-    }
-
-    /**
-     * Basic Scythe attacks. Activates the collider on the scythe and plays the animation to hit enemies
-     **/
-    void BasicScytheAttack()
-    {
-        ActivateScytheCollider();
-        if (inCombo) {
-            if (!leftSwipe) {
-                anim.speed = 1.5f;
-                anim.SetTrigger("SlashAttack");                
-            } else {
-                anim.speed = 1.5f;
-                anim.SetTrigger("OtherSlash");
-            }
-        } else {
-            anim.speed = 1.5f;
-            anim.SetTrigger("SlashAttack");
-            
-        }
-    }
+    } 
 
     /**
      * Basic Magic Attack. Creates a bloodball which attracts enemies like a black hole, and damaged them. Called \
@@ -185,16 +248,7 @@ public class PlayerAttack: MonoBehaviour
     {        
         Instantiate(BloodBall, transform.position + (transform.up*1.5f) + (transform.forward * 4.0f), transform.localRotation);
     }
-
-    /**
-     * Basic Magic Attack. Creates a bloodball which attracts enemies like a black hole, and damaged them. Called \
-     * during the animation
-     * */
-    void StrongScytheAttack()
-    {
-        ActivateScytheCollider();
-        anim.SetTrigger("StrongAttack");
-    }
+    
 
     /**
      * Strong Scythe Attack
@@ -210,9 +264,7 @@ public class PlayerAttack: MonoBehaviour
         anim.ResetTrigger("ScytheSpecial");
         anim.SetTrigger("ScytheSpecial");
         StartCoroutine(ChangeBoxSize());
-    }
-
-    
+    }    
 
     IEnumerator ChangeBoxSize()
     {
