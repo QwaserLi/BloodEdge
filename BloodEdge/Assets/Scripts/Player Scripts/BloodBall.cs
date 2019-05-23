@@ -21,7 +21,6 @@ public class BloodBall : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Attackable") {            
-            print("hit");
             other.GetComponent<IHittable>().Hit(5, new Vector3(1, 1, 1));
             paRef.UpdateComboCount();
         }
@@ -34,7 +33,7 @@ public class BloodBall : MonoBehaviour
             gameObject.transform.localScale = asd*=0.95f;
             yield return new WaitForSeconds(0.1f);
         }
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.0f);
         Destroy(gameObject);
     }
 }
