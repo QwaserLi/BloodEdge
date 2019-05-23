@@ -7,6 +7,7 @@ public class PlayerHealth: MonoBehaviour, IHittable
 {
     public float currentHealth = 100;
     public float maxHealth = 100;
+    public bool invincible = false;
     public GameObject panel;
     public static bool isDead = false;
     Animator anim;
@@ -23,7 +24,6 @@ public class PlayerHealth: MonoBehaviour, IHittable
         if (isDead) {
             return;
         }
-        //Hit(1, new Vector3());
     }
 
     /**
@@ -41,13 +41,23 @@ public class PlayerHealth: MonoBehaviour, IHittable
     // Method to call if player is hit
     public void Hit(float damage, Vector3 force)
     {
+        if (invincible) { // Prevents the player from being 1 shot
+            return;
+        }
         currentHealth -= (damage / maxHealth)*100;
-        print(currentHealth);
+        StartCoroutine(MakePlayerInvincible());
         if (currentHealth <= 0) {
             isDead = true;
             anim.CrossFade("Dying", 0.2F, 0, 0.2f);
             panel.SetActive(true);
             Cursor.visible = true;
         }
+    }
+
+    IEnumerator MakePlayerInvincible()
+    {
+        invincible = true;
+        yield return new WaitForSeconds(1.0f);
+        invincible = false;
     }
 }
