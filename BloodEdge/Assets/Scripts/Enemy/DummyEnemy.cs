@@ -88,7 +88,16 @@ namespace Enemy
 				case AIStrategyEnum.Approach:
 				{
 					_currentDestination = _player.transform.position;
-					if (DistanceToDestination() < 3 || timeInCurrentStrategy > _timeToSpendInStrategy)
+					//Debug.Log(Vector3.Distance(transform.position, _player.transform.position));
+					if (Vector3.Distance(transform.position, _player.transform.position) < 2f)
+					{
+						_player.GetComponent<PlayerHealth>().Hit(2f, Vector3.zero);
+						//Debug.Log("attempting to Hit() player!");
+						ChangeStrategy(AIStrategyEnum.Retreat);
+						_timeToSpendInStrategy = Random.Range(3f, 5f);
+						break;
+					}
+					if (DistanceToDestination() < 2f || timeInCurrentStrategy > _timeToSpendInStrategy)
 					{
 						ChangeStrategy(AIStrategyEnum.Retreat);
 						_timeToSpendInStrategy = Random.Range(3f, 5f);
@@ -127,7 +136,7 @@ namespace Enemy
 
 		void ChangeStrategy(AIStrategyEnum newStrategy)
 		{
-			Debug.Log(name + " changing strategy from " + _currentStrategy + " to " + newStrategy);
+			//Debug.Log(name + " changing strategy from " + _currentStrategy + " to " + newStrategy);
 			_currentDestination = null;
 			_currentStrategy    = newStrategy;
 			currentStrategy     = newStrategy;
