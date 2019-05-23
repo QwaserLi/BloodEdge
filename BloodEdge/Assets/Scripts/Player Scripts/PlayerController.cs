@@ -14,14 +14,13 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private float gravity;
     private Vector3 velocity;
-	private Vector3 previousVelocity;
-	private Vector3 desiredMoveDirection;
+    private Vector3 previousVelocity;
+    private Vector3 desiredMoveDirection;
 
     // Animation variables
     bool isRunning = false;
     bool wasInAir = false;
     bool inAir = false;
-    public float idleTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +31,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         cam = Camera.main;
         controller = GetComponent<CharacterController>();
-        gravity = Physics.gravity.y*100;
+        gravity = Physics.gravity.y * 100;
     }
 
     // Update is called once per frame
@@ -65,7 +64,8 @@ public class PlayerController : MonoBehaviour
             InAir();
         }
 
-        if (wasInAir == true && inAir == false) { // No longer in the air
+        if (wasInAir == true && inAir == false)
+        { // No longer in the air
             anim.SetBool("InAir", false);
             wasInAir = false;
         }
@@ -73,7 +73,8 @@ public class PlayerController : MonoBehaviour
         //Jumping
         if (Input.GetButtonDown("Jump"))
         {
-            if (controller.isGrounded) {
+            if (controller.isGrounded)
+            {
                 anim.SetTrigger("Jump");
 
             }
@@ -83,15 +84,24 @@ public class PlayerController : MonoBehaviour
         //Rolling
         if (Input.GetButtonDown("Roll"))
         {
-            anim.SetTrigger("Roll");
+
+            if (!(velocity.x > 0.7 || velocity.x < -0.7 || velocity.z > 0.7 || velocity.z < -0.7))
+            {
+                
+
+                    anim.SetTrigger("Roll");
+            }
+
             Roll();
         }
         //Drag Force
         ApplyDrag();
-       // Debug.Log(velocity.y);
+
+        Debug.Log(velocity);
     }
 
-    void Movement() {
+    void Movement()
+    {
         float xMovement = Input.GetAxis("Horizontal");
         float zMovement = Input.GetAxis("Vertical");
         Vector3 forward = cam.transform.forward;
@@ -104,44 +114,56 @@ public class PlayerController : MonoBehaviour
 
         if (desiredMoveDirection != Vector3.zero)
         {
-            transform.forward = desiredMoveDirection;
+           // transform.forward = desiredMoveDirection;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection),0.5f);
+
         }
 
         controller.Move(desiredMoveDirection * Time.deltaTime * speed);
     }
 
-    void ApplyGravity() {
-		previousVelocity = velocity;
+    void ApplyGravity()
+    {
+        previousVelocity = velocity;
         velocity.y += gravity * Time.deltaTime;
-		//if (velocity.y < -20f ) {
-		//    velocity.y = -20f;
-		//}
+        //if (velocity.y < -20f ) {
+        //    velocity.y = -20f;
+        //}
 
-		controller.Move(velocity * Time.deltaTime);
+        controller.Move(velocity * Time.deltaTime);
         if (controller.isGrounded && velocity.y < 0)
         {
             //Reset gravity
             gravity = Physics.gravity.y * 100;
             velocity.y = 0;
         }
-        else {
+        else
+        {
             gravity = -20f;
         }
 
-		if (!controller.isGrounded && previousVelocity.y >= 0 && velocity.y < 0) {
-			velocity.y = -5;
-		}
+        if (!controller.isGrounded && previousVelocity.y >= 0 && velocity.y < 0)
+        {
+            velocity.y = -5;
+        }
     }
 
-    void Jump() {
-        if (controller.isGrounded) {
+    void Jump()
+    {
+        if (controller.isGrounded)
+        {
             gravity = -20f;
-			//velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
-			velocity.y += Time.deltaTime * jumpHeight * -2f * gravity;
-		}
+            velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
+            //velocity.y += Time.deltaTime * jumpHeight * -2f * gravity;
+        }
     }
 
-    void Roll() {
+    void Roll()
+    {
+        if ((velocity.x > 0.7 || velocity.x < -0.7 || velocity.z > 0.7 || velocity.z < -0.7)) {
+            return;
+        }
+
             Vector3 rollDirection;
             if (desiredMoveDirection == Vector3.zero)
             {
@@ -152,18 +174,20 @@ public class PlayerController : MonoBehaviour
                 rollDirection = desiredMoveDirection;
             }
 
-            velocity += Vector3.Scale(rollDirection,
+            velocity += Vector3.Scale(rollDirection.normalized,
                                        rollDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * Drag.x + 1)) / -Time.deltaTime),
                                                                   0,
                                                                   (Mathf.Log(1f / (Time.deltaTime * Drag.z + 1)) / -Time.deltaTime)));
+        
     }
 
-    void ApplyDrag() {
+    void ApplyDrag()
+    {
         velocity.x /= 1 + Drag.x * Time.deltaTime;
         velocity.y /= 1 + Drag.y * Time.deltaTime;
         velocity.z /= 1 + Drag.z * Time.deltaTime;
     }
-    
+
     /**
      * Used to tell object when it is in the air
      * */
