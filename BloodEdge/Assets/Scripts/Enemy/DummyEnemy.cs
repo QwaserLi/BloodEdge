@@ -10,20 +10,27 @@ namespace Enemy
 {
 	//[RequireComponent(typeof(Rigidbody))] //doesn't look like this will be necessary, depends on game physics.
 	[RequireComponent(typeof(NavMeshAgent))]
-	public class DummyEnemy : Enemy, IHittable
-	{
+	public class DummyEnemy : MonoBehaviour, IHittable {
+		private GameObject _player;
 		private List<HealthPip> _pips;
 		[SerializeField] private int startingHealthPips = 5;
 
 		private NavMeshAgent _nmAgent;
 		private Vector3? _currentDestination;
-		private AIStrategy _currentStrategy;
-		[SerializeField] private AIStrategy currentStrategy;
+		private AIStrategyEnum _currentStrategy;
+		[SerializeField] private AIStrategyEnum currentStrategy;
 		[SerializeField] private float timeInCurrentStrategy;
+
+		private bool _awareOfPlayer = false;
+
+		private float _timeSinceHit;
+		private bool _iFramesActive;
+
+		private float _timeToSpendInStrategy;
 
 
 		void Start() {
-			player = GameObject.Find("Player");
+			_player = GameObject.FindWithTag("Player");
 			_pips = new List<HealthPip>();
 			for (int i = 0; i < startingHealthPips; i++)
 			{
@@ -38,14 +45,21 @@ namespace Enemy
 			}
 
 			_nmAgent         = GetComponent<NavMeshAgent>();
-			_currentStrategy = AIStrategy.Approach;
+			_currentStrategy = AIStrategyEnum.Approach;
 			timeInCurrentStrategy = Random.Range(0, 6f);
+			_timeToSpendInStrategy = 6f;
 			//_nmAgent.destination = player.transform.position;
 		}
 
 		// Update is called once per frame
 		void Update()
 		{
+			if (_iFramesActive) {
+				_timeSinceHit += Time.deltaTime;
+				if (_timeSinceHit > 0.5f) {
+					_iFramesActive = false;
+				}
+			}
 			if (_pips[0].destroyed())
 			{
 				_pips.Remove(_pips[0]);
@@ -57,25 +71,27 @@ namespace Enemy
 				return;
 			}
 			_pips[0].updateHealth();
-			timeInCurrentStrategy += Time.deltaTime;
-			if (_currentStrategy != currentStrategy)
-			{
-				ChangeStrategy(currentStrategy);
-			}
+			if (_awareOfPlayer) {
+				timeInCurrentStrategy += Time.deltaTime;
+				if (_currentStrategy != currentStrategy) {
+					ChangeStrategy(currentStrategy);
+				}
 
-			RunCurrentStrategy();
+				RunCurrentStrategy();
+			}
 		}
 
 		void RunCurrentStrategy()
 		{
 			switch (_currentStrategy)
 			{
-				case AIStrategy.Approach:
+				case AIStrategyEnum.Approach:
 				{
-					_currentDestination = player.transform.position;
-					if (DistanceToDestination() < 3 || timeInCurrentStrategy > 6)
+					_currentDestination = _player.transform.position;
+					if (DistanceToDestination() < 3 || timeInCurrentStrategy > _timeToSpendInStrategy)
 					{
-						ChangeStrategy(AIStrategy.Retreat);
+						ChangeStrategy(AIStrategyEnum.Retreat);
+						_timeToSpendInStrategy = Random.Range(3f, 5f);
 						break;
 					}
 
@@ -88,45 +104,35 @@ namespace Enemy
 //                    
 //                    break;
 //                }
-				case AIStrategy.Retreat:
+				case AIStrategyEnum.Retreat:
 				{
 					if (_currentDestination == null)
 					{
 						_currentDestination = transform.position + -GetDirectionToPlayer() * 10;
 					}
 
-					if (DistanceToDestination() < 5 || timeInCurrentStrategy > 4)
+					if (DistanceToDestination() < 5 || timeInCurrentStrategy > _timeToSpendInStrategy)
 					{
-						ChangeStrategy(AIStrategy.Approach);
+						ChangeStrategy(AIStrategyEnum.Approach);
+						_timeToSpendInStrategy = Random.Range(5f, 6f);
 						break;
 					}
 
 					_nmAgent.destination = (Vector3) _currentDestination;
 					break;
 				}
-//                case AIStrategy.Flank:
-//                {
-//                    break; 
-//                }
-//                case AIStrategy.Flee:
-//                {
-//                    break;
-//                } 
-
-				//nb: likely best way to do these behaviours esp. the non-direct ones will be raycasting
-				//from the player or better yet, from their _camera_, so that they're behaving
-				//according to what the player is doing and we can exert more control over the gameplay flow.
 			}
-
-			//if (_currentDestination != null) _nmAgent.destination = (Vector3) _currentDestination;
+			
 		}
 
-		void ChangeStrategy(AIStrategy newStrategy)
+		void ChangeStrategy(AIStrategyEnum newStrategy)
 		{
 			Debug.Log(name + " changing strategy from " + _currentStrategy + " to " + newStrategy);
 			_currentDestination = null;
 			_currentStrategy    = newStrategy;
 			currentStrategy     = newStrategy;
+
+			
 			//_nmAgent.isStopped = true;
 			timeInCurrentStrategy = 0;
 		}
@@ -143,31 +149,39 @@ namespace Enemy
 				? 0
 				: Vector3.Distance(transform.position, (Vector3) _currentDestination);
 		}
+		
+		public Vector3 GetDirectionToPlayer()
+		{
+			return (_player.transform.position - transform.position).normalized;
+		}
 
 		public void Hit(float damageAmount, Vector3 force) {
-			_pips[0].damage(damageAmount);
-			//todo: integrate the force application
+			if (!_iFramesActive) {
+				_pips[0].damage(damageAmount);
+				ChangeStrategy(AIStrategyEnum.Retreat);
+				_iFramesActive = true;
+			}
 		}
 
 		private void OnDrawGizmos()
 		{
-			Gizmos.color = _currentStrategy == AIStrategy.Approach 
+			Gizmos.color = _currentStrategy == AIStrategyEnum.Approach 
 				? Color.red : Color.white; //nb: will use strategy types later
 			if (_currentDestination != null)
 			{
 				Gizmos.DrawLine(transform.position, (Vector3) _currentDestination);
 			}
 		}
+
+		public void SetAggressive(bool newState) {
+			_awareOfPlayer = newState;
+		}
 	}
 
 
-	enum AIStrategy //NB: placeholders due to moving behaviour from the proper class and asset until navmesh behaves.
+	enum AIStrategyEnum //NB: placeholders due to moving behaviour from the proper class and asset until navmesh behaves.
 	{
 		Approach,
-
-//        Circle,
 		Retreat,
-//        Flank,
-//        Flee
 	}
 }

@@ -1,4 +1,6 @@
 ﻿
+using UnityEngine;
+
 namespace Enemy
 {
     public class HealthPip
@@ -7,7 +9,7 @@ namespace Enemy
         private float _regenerationThreshold;
         private float _degenerationThreshold;
 
-        private const float TEMP_RATE = 0.1f; //TODO: Use the enemy's re/degen rate instead.
+        private const float TEMP_RATE = 0.015f; //TODO: Use the enemy's re/degen rate instead.
 
         public HealthPip(float hp, float regen, float degen)
         {
@@ -20,11 +22,11 @@ namespace Enemy
         {
             if (_hitpoints < _degenerationThreshold && _hitpoints > TEMP_RATE)
             {
-                _hitpoints -= TEMP_RATE / 2f;
+                _hitpoints -= TEMP_RATE / 2f * Time.deltaTime;
             }
             if (_hitpoints < _regenerationThreshold)
             {
-                _hitpoints += TEMP_RATE;
+                _hitpoints += TEMP_RATE * Time.deltaTime;
             }
         }
 
