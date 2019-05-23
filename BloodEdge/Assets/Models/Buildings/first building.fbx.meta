@@ -38,6 +38,10 @@ ModelImporter:
     100064: roof2
     100066: transform1
     100068: transform2
+    100070: pCube14
+    100072: pPyramid1
+    100074: transform3
+    100076: transform4
     400000: //RootNode
     400002: floor
     400004: floor1
@@ -73,6 +77,10 @@ ModelImporter:
     400064: roof2
     400066: transform1
     400068: transform2
+    400070: pCube14
+    400072: pPyramid1
+    400074: transform3
+    400076: transform4
     2100000: lambert1
     2100002: aiStandardSurface1
     2300000: //RootNode
@@ -107,6 +115,7 @@ ModelImporter:
     2300058: left_wall4
     2300060: left_wall5
     2300062: roof2
+    2300064: pCube14
     3300000: //RootNode
     3300002: floor
     3300004: floor1
@@ -139,6 +148,7 @@ ModelImporter:
     3300058: left_wall4
     3300060: left_wall5
     3300062: roof2
+    3300064: pCube14
     4300000: pCube1
     4300002: floor
     4300004: pCube2
@@ -170,6 +180,7 @@ ModelImporter:
     4300056: roof2
     4300058: left_wall4
     4300060: left_wall5
+    4300062: pCube14
   externalObjects: {}
   materials:
     importMaterials: 1
