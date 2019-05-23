@@ -37,8 +37,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
-
         //Movement
         Movement();
         if (desiredMoveDirection != Vector3.zero)
@@ -86,9 +84,7 @@ public class PlayerController : MonoBehaviour
         {
 
             if (!(velocity.x > 0.7 || velocity.x < -0.7 || velocity.z > 0.7 || velocity.z < -0.7))
-            {
-                
-
+            { 
                     anim.SetTrigger("Roll");
             }
 
@@ -96,8 +92,6 @@ public class PlayerController : MonoBehaviour
         }
         //Drag Force
         ApplyDrag();
-
-        Debug.Log(velocity);
     }
 
     void Movement()
@@ -126,9 +120,6 @@ public class PlayerController : MonoBehaviour
     {
         previousVelocity = velocity;
         velocity.y += gravity * Time.deltaTime;
-        //if (velocity.y < -20f ) {
-        //    velocity.y = -20f;
-        //}
 
         controller.Move(velocity * Time.deltaTime);
         if (controller.isGrounded && velocity.y < 0)
