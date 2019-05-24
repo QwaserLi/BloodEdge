@@ -45,19 +45,23 @@ public class PlayerHealth: MonoBehaviour, IHittable
             return;
         }
         currentHealth -= (damage / maxHealth)*100;
-        StartCoroutine(MakePlayerInvincible());
+		UpdateHealth.currentHealth = currentHealth;		
         if (currentHealth <= 0) {
             isDead = true;
             anim.CrossFade("Dying", 0.2F, 0, 0.2f);
             panel.SetActive(true);
             Cursor.visible = true;
-        }
+		}
+		else
+		{
+			StartCoroutine(MakePlayerInvincible());
+		}
     }
 
     IEnumerator MakePlayerInvincible()
     {
         invincible = true;
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         invincible = false;
     }
 }

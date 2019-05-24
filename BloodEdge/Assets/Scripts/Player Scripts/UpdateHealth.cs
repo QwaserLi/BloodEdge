@@ -7,12 +7,12 @@ public class UpdateHealth : MonoBehaviour
 {
 
     public Image bar;
-    public float currentHealth = 100;
+    public static float currentHealth = 100;
 
     // Update is called once per frame
     void Update()
     {
-        //UpdateHealthUI(currentHealth);
+        UpdateHealthUI(currentHealth);
     }
 
     public void UpdateHealthUI(float h)
