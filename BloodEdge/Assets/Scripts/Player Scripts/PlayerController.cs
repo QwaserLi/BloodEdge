@@ -37,6 +37,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (PlayerHealth.isDead) {
+            return;
+        }
+
         //Movement
         Movement();
         if (desiredMoveDirection != Vector3.zero)

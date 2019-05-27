@@ -756,7 +756,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11ef57dcc0f3c634e94afb21536a3c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &208459265
+  trail: {fileID: 2846522403649182456}
+--- !u!114 &2572428662095256357
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -765,14 +766,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 688404142}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd438dd108a0f284aa931a2da434f1d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_ImpulseDefinition:
     m_ImpulseChannel: 1
     m_RawSignal: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
-    m_AmplitudeGain: 0.6
-    m_FrequencyGain: 0.3
+    m_AmplitudeGain: 0.4
+    m_FrequencyGain: 0.4
     m_RepeatMode: 0
     m_Randomize: 1
     m_TimeEnvelope:
@@ -797,13 +798,6 @@ MonoBehaviour:
     m_DirectionMode: 0
     m_DissipationMode: 2
     m_DissipationDistance: 1000
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_IgnoreTag: 
-  m_UseImpactDirection: 0
-  m_ScaleImpactWithMass: 0
-  m_ScaleImpactWithSpeed: 0
 --- !u!1 &728635153
 GameObject:
   m_ObjectHideFlags: 0
@@ -1802,7 +1796,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 30.05
+  m_fontSize: 35.1
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4338,6 +4332,7 @@ MonoBehaviour:
   maxHealth: 100
   invincible: 0
   panel: {fileID: 728635153}
+  healthBar: {fileID: 638393018}
 --- !u!114 &1185802399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6355,6 +6350,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1705181105}
     m_Modifications:
+    - target: {fileID: 4187122067276990240, guid: 91aef959ae0c962478c248f613cfcf08,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 91aef959ae0c962478c248f613cfcf08, type: 3}
       propertyPath: m_Name
       value: scythe
@@ -6435,11 +6435,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6330316616120688699, guid: 91aef959ae0c962478c248f613cfcf08,
         type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6330316616120688699, guid: 91aef959ae0c962478c248f613cfcf08,
+        type: 3}
       propertyPath: ShapeModule.m_Scale.x
       value: 0.55
       objectReference: {fileID: 0}
+    - target: {fileID: 6330316616120688699, guid: 91aef959ae0c962478c248f613cfcf08,
+        type: 3}
+      propertyPath: TrailModule.minVertexDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6330316616120688699, guid: 91aef959ae0c962478c248f613cfcf08,
+        type: 3}
+      propertyPath: TrailModule.shadowBias
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91aef959ae0c962478c248f613cfcf08, type: 3}
+--- !u!1 &2846522403649182456 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2846522402995366646, guid: 91aef959ae0c962478c248f613cfcf08,
+    type: 3}
+  m_PrefabInstance: {fileID: 688500750}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &688404142 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 91aef959ae0c962478c248f613cfcf08,
@@ -6541,15 +6562,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79f8e2d759b51974bb8fa98b22dc8eaa, type: 3}
---- !u!4 &2941810681006299298 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2941810681288725601, guid: 79f8e2d759b51974bb8fa98b22dc8eaa,
-    type: 3}
-  m_PrefabInstance: {fileID: 863931587}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2941810681006299297 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2941810681288725602, guid: 79f8e2d759b51974bb8fa98b22dc8eaa,
+    type: 3}
+  m_PrefabInstance: {fileID: 863931587}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2941810681006299298 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2941810681288725601, guid: 79f8e2d759b51974bb8fa98b22dc8eaa,
     type: 3}
   m_PrefabInstance: {fileID: 863931587}
   m_PrefabAsset: {fileID: 0}
@@ -6665,16 +6686,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1705181121}
     m_Modifications:
-    - target: {fileID: 7711848571028919854, guid: 03b2a1e102861c44dbfb33137be70e38,
-        type: 3}
-      propertyPath: m_Name
-      value: BloodBeam
-      objectReference: {fileID: 0}
-    - target: {fileID: 7711848571028919854, guid: 03b2a1e102861c44dbfb33137be70e38,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4958797028591271956, guid: 03b2a1e102861c44dbfb33137be70e38,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6728,6 +6739,16 @@ PrefabInstance:
     - target: {fileID: 4958797028591271956, guid: 03b2a1e102861c44dbfb33137be70e38,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7711848571028919854, guid: 03b2a1e102861c44dbfb33137be70e38,
+        type: 3}
+      propertyPath: m_Name
+      value: BloodBeam
+      objectReference: {fileID: 0}
+    - target: {fileID: 7711848571028919854, guid: 03b2a1e102861c44dbfb33137be70e38,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -26,15 +26,7 @@ public class Spikes : MonoBehaviour
             paRef.UpdateComboCount();
         }
     }
-    /*
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.tag == "Attackable") {
-            print("Hit");
-            paRef.UpdateComboCount();
-        }
-    }
-    */
+
     private IEnumerator DestroySpikes()
     {
         while (gameObject.transform.localScale.y < 2.0f) {

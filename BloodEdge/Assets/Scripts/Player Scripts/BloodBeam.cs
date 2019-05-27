@@ -17,10 +17,7 @@ public class BloodBeam : MonoBehaviour
     }
 
     private void Update()
-    {
-        if (shakeSource != null) {
-            print("gottem");
-        }
+    {        
         shakeSource.GenerateImpulse();
     }
 

@@ -2,15 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth: MonoBehaviour, IHittable
 {
     public float currentHealth = 100;
     public float maxHealth = 100;
+    public static float healTimer = 0;
+    float increaseBy = 1; // Used to scale health regen overtime
     public bool invincible = false;
     public GameObject panel;
     public static bool isDead = false;
     Animator anim;
+    public Image healthBar;
 
     public void Start()
     {
@@ -24,6 +28,13 @@ public class PlayerHealth: MonoBehaviour, IHittable
         if (isDead) {
             return;
         }
+        healTimer += Time.deltaTime;
+        if (healTimer > 0.2f) {
+            Heal(increaseBy*=2);
+            healTimer = 0;
+        }
+        float healthPer = (currentHealth / maxHealth);
+        healthBar.fillAmount = healthPer;
     }
 
     /**
@@ -33,9 +44,10 @@ public class PlayerHealth: MonoBehaviour, IHittable
     {
         if (currentHealth + amt > maxHealth) {
             currentHealth = maxHealth;
+            increaseBy = 1;
         } else {
             currentHealth += amt;
-        }
+        }       
     }
 
     // Method to call if player is hit
@@ -44,6 +56,7 @@ public class PlayerHealth: MonoBehaviour, IHittable
         if (invincible) { // Prevents the player from being 1 shot
             return;
         }
+        healTimer = -3.0f;
         currentHealth -= (damage / maxHealth)*100;
 		UpdateHealth.currentHealth = currentHealth;		
         if (currentHealth <= 0) {
