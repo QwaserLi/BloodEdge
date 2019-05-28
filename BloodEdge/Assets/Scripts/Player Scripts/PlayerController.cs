@@ -118,9 +118,11 @@ public class PlayerController : MonoBehaviour
         }
         if (!PlayerAttack.isAttacking) {
             controller.Move(desiredMoveDirection * Time.deltaTime * speed);
-        } else {
-            controller.Move(desiredMoveDirection * Time.deltaTime * (speed*0.5f));
         }
+
+        //else {
+        //    controller.Move(desiredMoveDirection * Time.deltaTime * (speed*0.5f));
+        //}
     }
 
     void ApplyGravity()
