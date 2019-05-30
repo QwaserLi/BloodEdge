@@ -1,0 +1,510 @@
+fileFormatVersion: 2
+guid: b3f09d58d6476824ca87d55eb99350a9
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: group
+    100004: pCube1
+    100006: pCube2
+    100008: pCube3
+    100010: pCube4
+    100012: pCube5
+    100014: pCube6
+    100016: floor
+    100018: frame2
+    100020: frame3
+    100022: frame4
+    100024: frame5
+    100026: pillar
+    100028: pillar1
+    100030: pillar2
+    100032: pillar3
+    100034: roof
+    100036: wall
+    100038: wall1
+    100040: wall2
+    100042: wall3
+    100044: frame_type
+    100046: frame_type 1
+    100048: frame_type 2
+    100050: frame_type 3
+    100052: frame_type1
+    100054: frame_type1 1
+    100056: frame_type1 2
+    100058: frame_type1 3
+    100060: frame_type2
+    100062: frame_type2 1
+    100064: frame_type2 2
+    100066: frame_type2 3
+    100068: frame_type3
+    100070: frame_type3 1
+    100072: frame_type3 2
+    100074: frame_type3 3
+    100076: frame_type4
+    100078: frame_type4 1
+    100080: frame_type4 2
+    100082: frame_type4 3
+    100084: frame_type5
+    100086: frame_type5 1
+    100088: frame_type5 2
+    100090: frame_type5 3
+    100092: smaller_frame
+    100094: smaller_frame1
+    100096: smaller_frame2
+    100098: smaller_frame3
+    100100: inner_pillar
+    100102: inner_pillar 1
+    100104: inner_pillar1
+    100106: inner_pillar1 1
+    100108: inner_pillar2
+    100110: inner_pillar2 1
+    100112: inner_pillar3
+    100114: inner_pillar4
+    100116: inner_pillar 2
+    100118: inner_pillar 3
+    100120: inner_pillar1 2
+    100122: inner_pillar1 3
+    100124: inner_pillar2 2
+    100126: inner_pillar2 3
+    100128: inner_pillar5
+    100130: inner_pillar6
+    100132: wall4
+    100134: wall5
+    100136: wall6
+    100138: wall7
+    100140: floor1
+    100142: floor2
+    100144: floor3
+    100146: floor4
+    100148: floor5
+    100150: floor6
+    100152: floor7
+    100154: floor8
+    100156: inner_pillar3_inner_pillar1
+    100158: inner_pillar3_inner_pillar2
+    100160: pCube7
+    100162: pillar4
+    100164: smaller_frame3_frame_type4
+    100166: smaller_frame_frame_type3
+    100168: smaller_frame_frame_type4
+    100170: transform1
+    100172: transform2
+    100174: transform3
+    100176: transform4
+    100178: transform5
+    100180: transform6
+    100182: transform7
+    100184: transform8
+    100186: wall8
+    100188: wall9
+    400000: //RootNode
+    400002: group
+    400004: pCube1
+    400006: pCube2
+    400008: pCube3
+    400010: pCube4
+    400012: pCube5
+    400014: pCube6
+    400016: floor
+    400018: frame2
+    400020: frame3
+    400022: frame4
+    400024: frame5
+    400026: pillar
+    400028: pillar1
+    400030: pillar2
+    400032: pillar3
+    400034: roof
+    400036: wall
+    400038: wall1
+    400040: wall2
+    400042: wall3
+    400044: frame_type
+    400046: frame_type 1
+    400048: frame_type 2
+    400050: frame_type 3
+    400052: frame_type1
+    400054: frame_type1 1
+    400056: frame_type1 2
+    400058: frame_type1 3
+    400060: frame_type2
+    400062: frame_type2 1
+    400064: frame_type2 2
+    400066: frame_type2 3
+    400068: frame_type3
+    400070: frame_type3 1
+    400072: frame_type3 2
+    400074: frame_type3 3
+    400076: frame_type4
+    400078: frame_type4 1
+    400080: frame_type4 2
+    400082: frame_type4 3
+    400084: frame_type5
+    400086: frame_type5 1
+    400088: frame_type5 2
+    400090: frame_type5 3
+    400092: smaller_frame
+    400094: smaller_frame1
+    400096: smaller_frame2
+    400098: smaller_frame3
+    400100: inner_pillar
+    400102: inner_pillar 1
+    400104: inner_pillar1
+    400106: inner_pillar1 1
+    400108: inner_pillar2
+    400110: inner_pillar2 1
+    400112: inner_pillar3
+    400114: inner_pillar4
+    400116: inner_pillar 2
+    400118: inner_pillar 3
+    400120: inner_pillar1 2
+    400122: inner_pillar1 3
+    400124: inner_pillar2 2
+    400126: inner_pillar2 3
+    400128: inner_pillar5
+    400130: inner_pillar6
+    400132: wall4
+    400134: wall5
+    400136: wall6
+    400138: wall7
+    400140: floor1
+    400142: floor2
+    400144: floor3
+    400146: floor4
+    400148: floor5
+    400150: floor6
+    400152: floor7
+    400154: floor8
+    400156: inner_pillar3_inner_pillar1
+    400158: inner_pillar3_inner_pillar2
+    400160: pCube7
+    400162: pillar4
+    400164: smaller_frame3_frame_type4
+    400166: smaller_frame_frame_type3
+    400168: smaller_frame_frame_type4
+    400170: transform1
+    400172: transform2
+    400174: transform3
+    400176: transform4
+    400178: transform5
+    400180: transform6
+    400182: transform7
+    400184: transform8
+    400186: wall8
+    400188: wall9
+    2100000: lambert1
+    2300000: pCube1
+    2300002: pCube2
+    2300004: pCube3
+    2300006: pCube4
+    2300008: pCube5
+    2300010: pCube6
+    2300012: floor
+    2300014: frame2
+    2300016: frame3
+    2300018: frame4
+    2300020: frame5
+    2300022: pillar
+    2300024: pillar1
+    2300026: pillar2
+    2300028: pillar3
+    2300030: roof
+    2300032: wall
+    2300034: wall1
+    2300036: wall2
+    2300038: wall3
+    2300040: frame_type
+    2300042: frame_type 1
+    2300044: frame_type 2
+    2300046: frame_type 3
+    2300048: frame_type1
+    2300050: frame_type1 1
+    2300052: frame_type1 2
+    2300054: frame_type1 3
+    2300056: frame_type2
+    2300058: frame_type2 1
+    2300060: frame_type2 2
+    2300062: frame_type2 3
+    2300064: frame_type3
+    2300066: frame_type3 1
+    2300068: frame_type3 2
+    2300070: frame_type3 3
+    2300072: frame_type4
+    2300074: frame_type4 1
+    2300076: frame_type4 2
+    2300078: frame_type4 3
+    2300080: frame_type5
+    2300082: frame_type5 1
+    2300084: frame_type5 2
+    2300086: frame_type5 3
+    2300088: inner_pillar
+    2300090: inner_pillar 1
+    2300092: inner_pillar1
+    2300094: inner_pillar1 1
+    2300096: inner_pillar2
+    2300098: inner_pillar2 1
+    2300100: inner_pillar 2
+    2300102: inner_pillar 3
+    2300104: inner_pillar1 2
+    2300106: inner_pillar1 3
+    2300108: inner_pillar2 2
+    2300110: inner_pillar2 3
+    2300112: wall4
+    2300114: wall5
+    2300116: wall6
+    2300118: wall7
+    2300120: floor1
+    2300122: floor2
+    2300124: floor3
+    2300126: floor4
+    2300128: floor5
+    2300130: floor6
+    2300132: floor7
+    2300134: floor8
+    2300136: inner_pillar3_inner_pillar1
+    2300138: inner_pillar3_inner_pillar2
+    2300140: pillar4
+    2300142: smaller_frame3_frame_type4
+    2300144: smaller_frame_frame_type3
+    2300146: smaller_frame_frame_type4
+    2300148: wall8
+    2300150: wall9
+    3300000: pCube1
+    3300002: pCube2
+    3300004: pCube3
+    3300006: pCube4
+    3300008: pCube5
+    3300010: pCube6
+    3300012: floor
+    3300014: frame2
+    3300016: frame3
+    3300018: frame4
+    3300020: frame5
+    3300022: pillar
+    3300024: pillar1
+    3300026: pillar2
+    3300028: pillar3
+    3300030: roof
+    3300032: wall
+    3300034: wall1
+    3300036: wall2
+    3300038: wall3
+    3300040: frame_type
+    3300042: frame_type 1
+    3300044: frame_type 2
+    3300046: frame_type 3
+    3300048: frame_type1
+    3300050: frame_type1 1
+    3300052: frame_type1 2
+    3300054: frame_type1 3
+    3300056: frame_type2
+    3300058: frame_type2 1
+    3300060: frame_type2 2
+    3300062: frame_type2 3
+    3300064: frame_type3
+    3300066: frame_type3 1
+    3300068: frame_type3 2
+    3300070: frame_type3 3
+    3300072: frame_type4
+    3300074: frame_type4 1
+    3300076: frame_type4 2
+    3300078: frame_type4 3
+    3300080: frame_type5
+    3300082: frame_type5 1
+    3300084: frame_type5 2
+    3300086: frame_type5 3
+    3300088: inner_pillar
+    3300090: inner_pillar 1
+    3300092: inner_pillar1
+    3300094: inner_pillar1 1
+    3300096: inner_pillar2
+    3300098: inner_pillar2 1
+    3300100: inner_pillar 2
+    3300102: inner_pillar 3
+    3300104: inner_pillar1 2
+    3300106: inner_pillar1 3
+    3300108: inner_pillar2 2
+    3300110: inner_pillar2 3
+    3300112: wall4
+    3300114: wall5
+    3300116: wall6
+    3300118: wall7
+    3300120: floor1
+    3300122: floor2
+    3300124: floor3
+    3300126: floor4
+    3300128: floor5
+    3300130: floor6
+    3300132: floor7
+    3300134: floor8
+    3300136: inner_pillar3_inner_pillar1
+    3300138: inner_pillar3_inner_pillar2
+    3300140: pillar4
+    3300142: smaller_frame3_frame_type4
+    3300144: smaller_frame_frame_type3
+    3300146: smaller_frame_frame_type4
+    3300148: wall8
+    3300150: wall9
+    4300000: pCube1
+    4300002: pCube2
+    4300004: pCube3
+    4300006: pCube4
+    4300008: pCube5
+    4300010: pCube6
+    4300012: floor
+    4300014: wall
+    4300016: wall1
+    4300018: wall2
+    4300020: wall3
+    4300022: roof
+    4300024: pillar
+    4300026: pillar1
+    4300028: pillar2
+    4300030: pillar3
+    4300032: frame2
+    4300034: frame3
+    4300036: frame4
+    4300038: frame5
+    4300040: frame_type
+    4300042: frame_type1
+    4300044: frame_type2
+    4300046: frame_type3
+    4300048: frame_type4
+    4300050: frame_type5
+    4300052: frame_type
+    4300054: frame_type1
+    4300056: frame_type2
+    4300058: frame_type3
+    4300060: frame_type4
+    4300062: frame_type5
+    4300064: frame_type
+    4300066: frame_type1
+    4300068: frame_type2
+    4300070: frame_type3
+    4300072: frame_type4
+    4300074: frame_type5
+    4300076: frame_type
+    4300078: frame_type1
+    4300080: frame_type2
+    4300082: frame_type3
+    4300084: frame_type4
+    4300086: frame_type5
+    4300088: inner_pillar2
+    4300090: inner_pillar1
+    4300092: inner_pillar
+    4300094: inner_pillar2
+    4300096: inner_pillar1
+    4300098: inner_pillar
+    4300100: inner_pillar2
+    4300102: inner_pillar1
+    4300104: inner_pillar
+    4300106: inner_pillar2
+    4300108: inner_pillar1
+    4300110: inner_pillar
+    4300112: wall4
+    4300114: wall5
+    4300116: wall6
+    4300118: wall7
+    4300120: floor1
+    4300122: floor2
+    4300124: floor3
+    4300126: floor4
+    4300128: floor5
+    4300130: floor6
+    4300132: wall8
+    4300134: inner_pillar3_inner_pillar1
+    4300136: smaller_frame_frame_type3
+    4300138: smaller_frame_frame_type4
+    4300140: pillar4
+    4300142: inner_pillar3_inner_pillar2
+    4300144: floor7
+    4300146: floor8
+    4300148: smaller_frame3_frame_type4
+    4300150: wall9
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
