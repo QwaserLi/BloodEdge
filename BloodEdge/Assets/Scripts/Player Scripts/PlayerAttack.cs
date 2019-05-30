@@ -133,6 +133,7 @@ public class PlayerAttack: MonoBehaviour
         if (currentComboNum == 3 || !comboString.Contains(type.ToString())) { 
             BackToPlayerIdle();
         }
+        isAttacking = true;
         ActivateScytheCollider();
         if (type == 0) { // Weak
             if (currentComboNum == 0) {
