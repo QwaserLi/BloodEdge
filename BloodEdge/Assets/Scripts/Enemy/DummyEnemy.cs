@@ -164,12 +164,14 @@ namespace Enemy
 			return (_player.transform.position - transform.position).normalized;
 		}
 
-		public void Hit(float damageAmount, Vector3 force) {
+		public bool Hit(float damageAmount, Vector3 force) {
 			if (!_iFramesActive) {
 				_pips[0].damage(damageAmount);
 				ChangeStrategy(AIStrategyEnum.Retreat);
 				_iFramesActive = true;
 			}
+
+			return false;
 		}
 
 		private void OnDrawGizmos()

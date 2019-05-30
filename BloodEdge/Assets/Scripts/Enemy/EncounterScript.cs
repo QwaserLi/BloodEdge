@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 namespace Enemy {
     public class EncounterScript : MonoBehaviour {
-        [SerializeField] private DummyEnemy enemyType;
+        [SerializeField] private NouveauEnemy enemyPrefab;
         [Space(10)]
         [SerializeField] private int numberOfEnemies = 3;
         [SerializeField] private float spawnAreaRadius = 5f;
@@ -13,16 +13,16 @@ namespace Enemy {
         [SerializeField] private float aggroRange = 20f;
 
         private GameObject _player;
-        private List<DummyEnemy> _spawnedEnemyScripts;
+        private List<NouveauEnemy> _spawnedEnemyScripts;
         private bool _activated = false;
         
         void Start()
         {
             _player = GameObject.FindWithTag("Player");
-            _spawnedEnemyScripts = new List<DummyEnemy>();
+            _spawnedEnemyScripts = new List<NouveauEnemy>();
             for (int i = 0; i < numberOfEnemies; i++) {
                 float rotation = Random.Range(0f, Mathf.PI*2f);
-                _spawnedEnemyScripts.Add(Instantiate(enemyType, transform.position +
+                _spawnedEnemyScripts.Add(Instantiate(enemyPrefab, transform.position +
                         new Vector3(
                             Mathf.Sin(rotation) * spawnAreaRadius * Random.Range(0f, 1f),
                             0,
@@ -36,8 +36,9 @@ namespace Enemy {
         void Update()
         {
             if (!_activated && Vector3.Distance(_player.transform.position, transform.position) <= aggroRange) {
-                foreach (DummyEnemy enemy in _spawnedEnemyScripts) {
-                    enemy.SetAggressive(true);
+                foreach (NouveauEnemy enemy in _spawnedEnemyScripts) {
+                    //enemy.SetAggressive(true);
+                    enemy.SetAwareness(true);
                 }
                 _activated = true;
             }

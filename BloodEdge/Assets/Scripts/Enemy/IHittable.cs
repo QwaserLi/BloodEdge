@@ -18,6 +18,6 @@ namespace Enemy
         ///     HitEnemy.Hit(scytheDamage, (HitEnemy.transform.position - transform.position).normalized);
         ///     </code>
         /// </example>
-        void Hit(float damage, Vector3 force);
+        bool Hit(float damage, Vector3 force);
     }
 }

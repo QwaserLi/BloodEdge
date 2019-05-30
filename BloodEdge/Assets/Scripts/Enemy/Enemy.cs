@@ -182,9 +182,10 @@ namespace Enemy
 //				: Vector3.Distance(transform.position, (Vector3) _currentDestination);
 //		}
 
-		public void Hit(float damageAmount, Vector3 force) {
+		public bool Hit(float damageAmount, Vector3 force) {
 			_pips[0].damage(damageAmount);
 			ChangeStrategy(_PLAYTEST_Retreat);
+			return false;
 			//todo: integrate the force application
 		}
 

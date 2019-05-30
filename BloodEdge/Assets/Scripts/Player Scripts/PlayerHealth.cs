@@ -51,10 +51,10 @@ public class PlayerHealth: MonoBehaviour, IHittable
     }
 
     // Method to call if player is hit
-    public void Hit(float damage, Vector3 force)
+    public bool Hit(float damage, Vector3 force)
     {
         if (invincible) { // Prevents the player from being 1 shot
-            return;
+            return false;
         }
         healTimer = -3.0f;
         currentHealth -= (damage / maxHealth)*100;
@@ -69,6 +69,8 @@ public class PlayerHealth: MonoBehaviour, IHittable
 		{
 			StartCoroutine(MakePlayerInvincible());
 		}
+
+        return true;
     }
 
     IEnumerator MakePlayerInvincible()
