@@ -42,6 +42,34 @@ ModelImporter:
     100072: pPyramid1
     100074: transform3
     100076: transform4
+    100078: back_wall2
+    100080: back_wall3
+    100082: pCube16
+    100084: pCube17
+    100086: pCube19
+    100088: transform5
+    100090: transform6
+    100092: outlet_thing1
+    100094: outlet_thing3
+    100096: outlet_thing4
+    100098: pCube24
+    100100: pCube25
+    100102: pCube26
+    100104: pCube27
+    100106: pCube28
+    100108: transform7
+    100110: transform8
+    100112: pCube29
+    100114: second_floor2
+    100116: outlet_thing10
+    100118: outlet_thing11
+    100120: outlet_thing12
+    100122: outlet_thing13
+    100124: outlet_thing14
+    100126: outlet_thing15
+    100128: outlet_thing5
+    100130: outlet_thing6
+    100132: outlet_thing7
     400000: //RootNode
     400002: floor
     400004: floor1
@@ -81,6 +109,34 @@ ModelImporter:
     400072: pPyramid1
     400074: transform3
     400076: transform4
+    400078: back_wall2
+    400080: back_wall3
+    400082: pCube16
+    400084: pCube17
+    400086: pCube19
+    400088: transform5
+    400090: transform6
+    400092: outlet_thing1
+    400094: outlet_thing3
+    400096: outlet_thing4
+    400098: pCube24
+    400100: pCube25
+    400102: pCube26
+    400104: pCube27
+    400106: pCube28
+    400108: transform7
+    400110: transform8
+    400112: pCube29
+    400114: second_floor2
+    400116: outlet_thing10
+    400118: outlet_thing11
+    400120: outlet_thing12
+    400122: outlet_thing13
+    400124: outlet_thing14
+    400126: outlet_thing15
+    400128: outlet_thing5
+    400130: outlet_thing6
+    400132: outlet_thing7
     2100000: lambert1
     2100002: aiStandardSurface1
     2300000: //RootNode
@@ -116,6 +172,25 @@ ModelImporter:
     2300060: left_wall5
     2300062: roof2
     2300064: pCube14
+    2300066: back_wall3
+    2300068: pCube16
+    2300070: pCube17
+    2300072: outlet_thing1
+    2300074: outlet_thing3
+    2300076: outlet_thing4
+    2300078: pCube24
+    2300080: pCube28
+    2300082: pCube29
+    2300084: second_floor2
+    2300086: outlet_thing10
+    2300088: outlet_thing11
+    2300090: outlet_thing12
+    2300092: outlet_thing13
+    2300094: outlet_thing14
+    2300096: outlet_thing15
+    2300098: outlet_thing5
+    2300100: outlet_thing6
+    2300102: outlet_thing7
     3300000: //RootNode
     3300002: floor
     3300004: floor1
@@ -149,6 +224,25 @@ ModelImporter:
     3300060: left_wall5
     3300062: roof2
     3300064: pCube14
+    3300066: back_wall3
+    3300068: pCube16
+    3300070: pCube17
+    3300072: outlet_thing1
+    3300074: outlet_thing3
+    3300076: outlet_thing4
+    3300078: pCube24
+    3300080: pCube28
+    3300082: pCube29
+    3300084: second_floor2
+    3300086: outlet_thing10
+    3300088: outlet_thing11
+    3300090: outlet_thing12
+    3300092: outlet_thing13
+    3300094: outlet_thing14
+    3300096: outlet_thing15
+    3300098: outlet_thing5
+    3300100: outlet_thing6
+    3300102: outlet_thing7
     4300000: pCube1
     4300002: floor
     4300004: pCube2
@@ -181,6 +275,26 @@ ModelImporter:
     4300058: left_wall4
     4300060: left_wall5
     4300062: pCube14
+    4300064: pCube16
+    4300066: pCube17
+    4300068: back_wall3
+    4300070: pCube24
+    4300072: outlet_thing1
+    4300074: outlet_thing3
+    4300076: outlet_thing4
+    4300078: pCube28
+    4300080: pCube29
+    4300082: second_floor2
+    4300084: outlet_thing5
+    4300086: outlet_thing6
+    4300088: outlet_thing7
+    4300090: outlet_thing10
+    4300092: outlet_thing11
+    4300094: outlet_thing12
+    4300096: outlet_thing13
+    4300098: outlet_thing14
+    4300100: outlet_thing15
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
