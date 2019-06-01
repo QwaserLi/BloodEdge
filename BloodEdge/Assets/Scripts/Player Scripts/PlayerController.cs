@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
     private Animator anim;
     private Camera cam;
-    private CharacterController controller;
+    public CharacterController controller;
     private float gravity;
     private Vector3 velocity;
     private Vector3 previousVelocity;

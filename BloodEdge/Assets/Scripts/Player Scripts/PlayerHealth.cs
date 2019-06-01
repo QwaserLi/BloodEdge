@@ -1,4 +1,5 @@
 ﻿using Enemy;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,12 +15,34 @@ public class PlayerHealth: MonoBehaviour, IHittable
     public GameObject panel;
     public static bool isDead = false;
     Animator anim;
+    PlayerController pc;
     public Image healthBar;
+    public GameObject lastCheckpoint;
 
     public void Start()
     {
         isDead = false;
         anim = GetComponent<Animator>();
+        pc = GetComponent<PlayerController>();
+        pc.controller.enabled = false;
+        if (lastCheckpoint == null) {
+            Checkpoint[] chp = FindObjectsOfType<Checkpoint>();
+            foreach (Checkpoint c in chp) {
+                if (c.starter) {
+                    lastCheckpoint = c.gameObject;
+                    break;
+                }
+            }
+        } 
+        if (lastCheckpoint != null) {
+            gameObject.transform.position = lastCheckpoint.transform.position;
+        }       
+        currentHealth = maxHealth;
+        isDead = false;
+        healTimer = 0;
+        panel.SetActive(false);
+        Cursor.visible = true;
+        pc.controller.enabled = true;
     }
 
     //
@@ -28,6 +51,10 @@ public class PlayerHealth: MonoBehaviour, IHittable
         if (isDead) {
             return;
         }
+        if (Input.GetKey("k")) {
+            Hit(20000, new Vector3());
+        }
+
         healTimer += Time.deltaTime;
         if (healTimer > 0.2f) {
             Heal(increaseBy*=2);
@@ -35,6 +62,26 @@ public class PlayerHealth: MonoBehaviour, IHittable
         }
         float healthPer = (currentHealth / maxHealth);
         healthBar.fillAmount = healthPer;
+    }
+
+    public void Respawn()
+    {
+        pc.controller.enabled = false;
+        if (lastCheckpoint != null) {
+            gameObject.transform.position = lastCheckpoint.transform.position;
+        }
+        currentHealth = maxHealth;
+        isDead = false;
+        healTimer = 0;
+        panel.SetActive(false);
+        Cursor.visible = true;
+        anim.SetTrigger("Alive");
+        pc.controller.enabled = true;
+    }
+
+    public void SetCheckpoint(GameObject checkPoint)
+    {
+        lastCheckpoint = checkPoint;
     }
 
     /**
@@ -61,7 +108,8 @@ public class PlayerHealth: MonoBehaviour, IHittable
 		UpdateHealth.currentHealth = currentHealth;		
         if (currentHealth <= 0) {
             isDead = true;
-            anim.CrossFade("Dying", 0.2F, 0, 0.2f);
+            anim.SetTrigger("Died");
+            //anim.CrossFade("Dying", 0.2F, 0, 0.2f);
             panel.SetActive(true);
             Cursor.visible = true;
 		}

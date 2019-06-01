@@ -9,4 +9,9 @@ public class RestartLevel : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    public void Respawn()
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().Respawn();
+    }
 }

@@ -4333,6 +4333,7 @@ MonoBehaviour:
   invincible: 0
   panel: {fileID: 728635153}
   healthBar: {fileID: 638393018}
+  lastCheckpoint: {fileID: 0}
 --- !u!114 &1185802399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4349,6 +4350,7 @@ MonoBehaviour:
   jumpHeight: 6
   rollDistance: 6
   Drag: {x: 3, y: 0, z: 3}
+  controller: {fileID: 0}
 --- !u!114 &1185802400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5610,7 +5612,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647632019886562397}
-  m_LocalRotation: {x: -0.1881443, y: 0.0000000037419543, z: -0.000000022955712, w: 0.98214144}
+  m_LocalRotation: {x: -0.1881443, y: -0.0000000131571465, z: -0.000000026192994,
+    w: 0.98214144}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5688,7 +5691,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647632019938512966}
-  m_LocalRotation: {x: -0.18814433, y: 0.0000000168991, z: 0.0000000032372833, w: 0.98214144}
+  m_LocalRotation: {x: -0.18814433, y: -0.0000000168991, z: -0.0000000032372833, w: 0.98214144}
   m_LocalPosition: {x: 0, y: 9.975215, z: -20.48035}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6257,7 +6260,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647632021315793700}
-  m_LocalRotation: {x: -0.17029586, y: 0.00000002192936, z: -0.000000007710616, w: 0.985393}
+  m_LocalRotation: {x: -0.17029586, y: -0.000000026026754, z: -0.000000015998404,
+    w: 0.985393}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6320,7 +6324,7 @@ GameObject:
   - component: {fileID: 8972574014586842337}
   m_Layer: 0
   m_Name: PlayerAndCamera
-  m_TagString: Untagged
+  m_TagString: PlayerAndCam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6350,11 +6354,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1705181105}
     m_Modifications:
-    - target: {fileID: 4187122067276990240, guid: 91aef959ae0c962478c248f613cfcf08,
-        type: 3}
-      propertyPath: m_Volume
-      value: 0.7
-      objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 91aef959ae0c962478c248f613cfcf08, type: 3}
       propertyPath: m_Name
       value: scythe
@@ -6423,12 +6422,17 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2944295075953635419, guid: 91aef959ae0c962478c248f613cfcf08,
+    - target: {fileID: 4187122067276990240, guid: 91aef959ae0c962478c248f613cfcf08,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846522402995366646, guid: 91aef959ae0c962478c248f613cfcf08,
         type: 3}
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 2846522402995366646, guid: 91aef959ae0c962478c248f613cfcf08,
+    - target: {fileID: 2944295075953635419, guid: 91aef959ae0c962478c248f613cfcf08,
         type: 3}
       propertyPath: m_Layer
       value: 9
@@ -6686,6 +6690,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1705181121}
     m_Modifications:
+    - target: {fileID: 7711848571028919854, guid: 03b2a1e102861c44dbfb33137be70e38,
+        type: 3}
+      propertyPath: m_Name
+      value: BloodBeam
+      objectReference: {fileID: 0}
+    - target: {fileID: 7711848571028919854, guid: 03b2a1e102861c44dbfb33137be70e38,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4958797028591271956, guid: 03b2a1e102861c44dbfb33137be70e38,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6739,16 +6753,6 @@ PrefabInstance:
     - target: {fileID: 4958797028591271956, guid: 03b2a1e102861c44dbfb33137be70e38,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7711848571028919854, guid: 03b2a1e102861c44dbfb33137be70e38,
-        type: 3}
-      propertyPath: m_Name
-      value: BloodBeam
-      objectReference: {fileID: 0}
-    - target: {fileID: 7711848571028919854, guid: 03b2a1e102861c44dbfb33137be70e38,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
