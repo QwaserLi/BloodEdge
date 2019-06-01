@@ -32,12 +32,15 @@ public class PlayerAttack: MonoBehaviour
     string comboString = "";
     int currentComboNum;
 
+    AudioManager soundManager;
+
     /*
      *  Sort out references
      */
     void Start() {
         anim = GetComponent<Animator>();
         sbc = Scythe.GetComponent<BoxCollider>();
+        soundManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     // Main Loop
@@ -135,6 +138,9 @@ public class PlayerAttack: MonoBehaviour
         }
         isAttacking = true;
         ActivateScytheCollider();
+        if (soundManager != null) {
+            soundManager.Play("ScytheMiss");
+        }
         if (type == 0) { // Weak
             if (currentComboNum == 0) {
                 anim.SetInteger("CurrentCombo", 0);

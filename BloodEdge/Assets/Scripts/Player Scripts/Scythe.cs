@@ -9,12 +9,14 @@ public class Scythe : MonoBehaviour
     PlayerAttack paRef;
     CinemachineImpulseSource shaker;
     AudioSource audio;
+    AudioManager soundManager;
     public GameObject trail;
     float currentDamageToDeal = 30;
 
     private void Start()
     {
         paRef = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
+        soundManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         shaker = GetComponent<CinemachineImpulseSource>();
         audio = GetComponent<AudioSource>();
     }
@@ -24,16 +26,24 @@ public class Scythe : MonoBehaviour
         currentDamageToDeal = amt;
     }
 
+    public void PlayHitSound()
+    {
+        soundManager.Play("ScytheHit");
+    }
+
+    public void PlaySwingSound()
+    {
+        soundManager.Play("ScytheMiss");
+    }
+
     public void OnTriggerEnter(Collider collider)
     {
         trail.SetActive(true);
-        if (collider.tag == "Attackable") {
-            if (!audio.isPlaying) {
-                audio.Play();
-            }
+        if (collider.tag == "Attackable") {            
             shaker.GenerateImpulse();
-            collider.GetComponent<IHittable>().Hit(currentDamageToDeal, new Vector3(1, 1, 1));
-            paRef.UpdateComboCount();
+            if(collider.GetComponent<IHittable>().Hit(currentDamageToDeal, new Vector3(1, 1, 1))) {
+                paRef.UpdateComboCount();
+            }
         }
     }
 }

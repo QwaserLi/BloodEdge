@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3871435114705699271}
-  - component: {fileID: 3871435114705699268}
+  - component: {fileID: 1891347597}
   m_Layer: 0
   m_Name: AudioManager
-  m_TagString: Untagged
+  m_TagString: AudioManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3871435114705699268
+--- !u!114 &1891347597
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,18 +47,35 @@ MonoBehaviour:
   - name: Menu
     clip: {fileID: 8300000, guid: 42dbe0bc4d8bc64448def1518ead5097, type: 3}
     volume: 0.5
-    pitch: 0
-    loop: 0
+    pitch: 1
+    loop: 1
+    fade: 1
     source: {fileID: 0}
   - name: Level1Ambient
     clip: {fileID: 8300000, guid: 18aa742f0d0cbe14382ab889a77cd01f, type: 3}
-    volume: 1
-    pitch: 0
+    volume: 0.5
+    pitch: 1
     loop: 1
+    fade: 1
     source: {fileID: 0}
   - name: FogWall
     clip: {fileID: 8300000, guid: 347e128680e83914b83853b4d487784d, type: 3}
     volume: 0.5
-    pitch: 0
+    pitch: 1
+    loop: 1
+    fade: 1
+    source: {fileID: 0}
+  - name: ScytheHit
+    clip: {fileID: 8300000, guid: fe4b4865844465a42b09bcc31d0bc4ff, type: 3}
+    volume: 1
+    pitch: 1
     loop: 0
+    fade: 0
+    source: {fileID: 0}
+  - name: ScytheMiss
+    clip: {fileID: 8300000, guid: 80673d2c84fdbed4d82ffa016d58b920, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    fade: 0
     source: {fileID: 0}

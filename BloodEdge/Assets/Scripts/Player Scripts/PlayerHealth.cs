@@ -109,7 +109,6 @@ public class PlayerHealth: MonoBehaviour, IHittable
         if (currentHealth <= 0) {
             isDead = true;
             anim.SetTrigger("Died");
-            //anim.CrossFade("Dying", 0.2F, 0, 0.2f);
             panel.SetActive(true);
             Cursor.visible = true;
 		}

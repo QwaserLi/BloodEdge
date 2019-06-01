@@ -22,8 +22,9 @@ public class Spikes : MonoBehaviour
     {
         if (other.tag == "Attackable") {
             print("hit");
-            other.GetComponent<IHittable>().Hit(20, new Vector3(1,1,1));
-            paRef.UpdateComboCount();
+            if (other.GetComponent<IHittable>().Hit(20, new Vector3(1, 1, 1))) {
+                paRef.UpdateComboCount();
+            }
         }
     }
 

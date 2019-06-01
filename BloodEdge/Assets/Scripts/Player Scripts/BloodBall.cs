@@ -20,9 +20,10 @@ public class BloodBall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Attackable") {            
-            other.GetComponent<IHittable>().Hit(5, new Vector3(1, 1, 1));
-            paRef.UpdateComboCount();
+        if (other.gameObject.tag == "Attackable") {
+            if (other.GetComponent<IHittable>().Hit(5, new Vector3(1, 1, 1))) {
+                paRef.UpdateComboCount();
+            }            
         }
     }
 
