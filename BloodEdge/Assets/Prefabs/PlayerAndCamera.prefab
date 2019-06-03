@@ -4369,7 +4369,7 @@ MonoBehaviour:
     type: 3}
   Scythe: {fileID: 688404142}
   HandEffect: {fileID: 2941810681006299297}
-  Spikes: {fileID: 4171539952574057470, guid: c66825a278a6bfe4b858272b26dcca06, type: 3}
+  Spikes: {fileID: 2033950139656034000, guid: 49c8d80421c7b1847afcc5aaa780dcbd, type: 3}
   BloodBeam: {fileID: 3159452257399204521}
 --- !u!1 &1705337827
 GameObject:
