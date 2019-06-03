@@ -9,9 +9,12 @@ public class PlayerController : MonoBehaviour
     public float rollDistance;
     public Vector3 Drag;
 
+    [HideInInspector]
+    public CharacterController controller;
+
+
     private Animator anim;
     private Camera cam;
-    public CharacterController controller;
     private float gravity;
     private Vector3 velocity;
     private Vector3 previousVelocity;
@@ -117,7 +120,7 @@ public class PlayerController : MonoBehaviour
 
         }
         if (!PlayerAttack.isAttacking) {
-            controller.Move(desiredMoveDirection * Time.deltaTime * speed);
+            controller.Move(desiredMoveDirection.normalized * Time.deltaTime * speed);
         }
 
         //else {

@@ -4346,8 +4346,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8783954d50535474a900dc7d82dd7855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
-  jumpHeight: 6
+  speed: 7
+  jumpHeight: 4
   rollDistance: 6
   Drag: {x: 3, y: 0, z: 3}
   controller: {fileID: 0}
@@ -5411,7 +5411,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647632019710417307}
-  m_LocalRotation: {x: 0.1080637, y: 0.000000015836473, z: 0.000000014602168, w: 0.994144}
+  m_LocalRotation: {x: 0.10806372, y: -0.000000019427665, z: 0.000000018435378, w: 0.994144}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5612,7 +5612,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647632019886562397}
-  m_LocalRotation: {x: 0.07188017, y: -0.000000015473224, z: -0.000000022194977, w: 0.99741334}
+  m_LocalRotation: {x: 0.07188017, y: 0.000000018850525, z: -0.000000024668571, w: 0.99741334}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5690,8 +5690,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647632019938512966}
-  m_LocalRotation: {x: 0.08996288, y: -0.00000003532803, z: 0.000000003191151, w: 0.99594516}
-  m_LocalPosition: {x: -1.4035505, y: 12.362215, z: -14.410698}
+  m_LocalRotation: {x: 0.08996288, y: 0.00000003532803, z: -0.000000003191151, w: 0.99594516}
+  m_LocalPosition: {x: 0, y: 12.275215, z: -21.68035}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1361898826}
@@ -6723,6 +6723,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1705181121}
     m_Modifications:
+    - target: {fileID: 7711848571028919854, guid: 03b2a1e102861c44dbfb33137be70e38,
+        type: 3}
+      propertyPath: m_Name
+      value: BloodBeam
+      objectReference: {fileID: 0}
+    - target: {fileID: 7711848571028919854, guid: 03b2a1e102861c44dbfb33137be70e38,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4958797028591271956, guid: 03b2a1e102861c44dbfb33137be70e38,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6776,16 +6786,6 @@ PrefabInstance:
     - target: {fileID: 4958797028591271956, guid: 03b2a1e102861c44dbfb33137be70e38,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7711848571028919854, guid: 03b2a1e102861c44dbfb33137be70e38,
-        type: 3}
-      propertyPath: m_Name
-      value: BloodBeam
-      objectReference: {fileID: 0}
-    - target: {fileID: 7711848571028919854, guid: 03b2a1e102861c44dbfb33137be70e38,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
