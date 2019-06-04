@@ -290,6 +290,10 @@ namespace Enemy {
 		        _idle = false; //hacky, temporary.
 	        }
         }
+
+        public bool GetAwareness() {
+	        return _awareOfPlayer;
+        }
         
         
         /*--------------------------------------*\
@@ -355,5 +359,8 @@ namespace Enemy {
         }
 
 
+        public float GetHP() {
+	        return hp;
+        }
     }
 }

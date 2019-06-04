@@ -14,8 +14,11 @@ namespace Enemy {
 
         private GameObject _player;
         private List<NouveauEnemy> _spawnedEnemyScripts;
-        private bool _activated = false;
-        
+        private bool _activated;
+        private bool _cleared;
+
+        private float _encounterTimer;
+
         void Start()
         {
             _player = GameObject.FindWithTag("Player");
@@ -35,17 +38,41 @@ namespace Enemy {
 
         void Update()
         {
-            if (!_activated && Vector3.Distance(_player.transform.position, transform.position) <= aggroRange) {
-                foreach (NouveauEnemy enemy in _spawnedEnemyScripts) {
-                    //enemy.SetAggressive(true);
-                    enemy.SetAwareness(true);
-                }
-                _activated = true;
-            }
+	        if (!_cleared) {
+		        if (!_activated) {
+			        if (Vector3.Distance(_player.transform.position, transform.position) <= aggroRange) {
+				        _activated = true;
+			        }
+		        }
+		        else if (_encounterTimer >= 1) {
+			        _encounterTimer -= Random.Range(0.5f, 1.5f);
+			        bool allDefeated = true;
+			        foreach (NouveauEnemy enemy in _spawnedEnemyScripts) {
+				        if (!enemy.GetAwareness() && Random.Range(0, 2) == 0) { 
+					        //1 in 3 chance each cycle
+					        enemy.SetAwareness(true);
+				        }
+				        if (allDefeated && enemy.GetHP() > 0) {
+					        allDefeated = false;
+				        }
+			        }
+			        if (allDefeated) {
+				        _activated = false;
+				        _cleared = true;
+			        }
+		        }
+		        else {
+			        _encounterTimer += Time.deltaTime;
+		        }
+	        }
+        }
+
+        public bool IsCleared() {
+	        return _cleared;
         }
 
         private void OnDrawGizmos() {
-            Gizmos.color = _activated ? Color.gray: Color.red;
+            Gizmos.color = _activated ? Color.yellow : _cleared ? Color.grey : Color.red;
             var pos = transform.position;
             var size = Mathf.Sqrt(numberOfEnemies)/4f;
             Gizmos.DrawSphere(pos, size);
@@ -53,13 +80,9 @@ namespace Enemy {
             {
                 Gizmos.DrawSphere(pos, size - size * 0.95f * i/l);
             }
-//            Gizmos.DrawWireSphere(pos, 1.03f);
             Gizmos.DrawWireSphere(pos, aggroRange);
-//            Gizmos.color = Color.blue;
-//            Gizmos.DrawWireSphere(pos, 1.02f);
-            
         }
-
+        
         private void OnDrawGizmosSelected() {
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, spawnAreaRadius);
