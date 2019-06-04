@@ -16,7 +16,6 @@ public class Scythe : MonoBehaviour
     private void Start()
     {
         paRef = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
-        soundManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         shaker = GetComponent<CinemachineImpulseSource>();
         audio = GetComponent<AudioSource>();
     }

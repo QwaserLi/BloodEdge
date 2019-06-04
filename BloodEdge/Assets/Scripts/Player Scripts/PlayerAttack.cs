@@ -166,7 +166,6 @@ public class PlayerAttack: MonoBehaviour
     // Allows the player to attack again
     public void ResetAttack()
     {
-        print("Reset");
         canAttack = true;
         courComboRef = StartCoroutine(StartComboCoolDown());
     }

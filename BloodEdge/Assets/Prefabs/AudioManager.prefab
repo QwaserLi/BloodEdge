@@ -67,14 +67,14 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: ScytheHit
     clip: {fileID: 8300000, guid: fe4b4865844465a42b09bcc31d0bc4ff, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 0
     fade: 0
     source: {fileID: 0}
   - name: ScytheMiss
     clip: {fileID: 8300000, guid: 80673d2c84fdbed4d82ffa016d58b920, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 0
     fade: 0
