@@ -23,7 +23,8 @@ public class PlayerController : MonoBehaviour
     // Animation variables
     bool isRunning = false;
     bool wasInAir = false;
-    bool inAir = false;
+    [HideInInspector]
+    public bool inAir = false;
 
     // Start is called before the first frame update
     void Start()
@@ -71,6 +72,9 @@ public class PlayerController : MonoBehaviour
 
         if (wasInAir == true && inAir == false)
         { // No longer in the air
+            if (PlayerAttack.isAttacking) {
+                anim.SetBool("AttackInAir", false);
+            }
             anim.SetBool("InAir", false);
             wasInAir = false;
         }
@@ -197,8 +201,15 @@ public class PlayerController : MonoBehaviour
     public void InAir()
     {
         inAir = true;
+        if (!wasInAir) {
+            anim.SetBool("InAir", inAir);
+            wasInAir = true;
+            return;
+        }
         wasInAir = true;
-        anim.SetBool("InAir", inAir);
+        if (!PlayerAttack.isAttacking) {
+            anim.SetBool("InAir", inAir);
+        }         
     }
 
 
