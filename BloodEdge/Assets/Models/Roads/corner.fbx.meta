@@ -25,6 +25,7 @@ ModelImporter:
     400018: side_walk9
     2100000: road
     2100002: lambert1
+    2100004: straight_road_segment1_vent
     2300000: curb
     2300002: curb 1
     2300004: curb1
