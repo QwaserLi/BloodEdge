@@ -19443,7 +19443,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.25
+  - time: 0.4
     functionName: EndAirAttack
     data: 
     objectReferenceParameter: {fileID: 0}
