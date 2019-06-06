@@ -94,14 +94,15 @@ public class PlayerAttack: MonoBehaviour
         if (Input.GetButtonDown("Special") && specialScytheAttackCharge >= 100) {
             if (specialScytheAttackCharge >= 100) {
                 rageMode = true;
+                ActivateScytheCollider();
                 MakeScytheBoxBigger();
             }
         }
 
         if ((Input.GetAxisRaw("Fire1") > 0 || Input.GetAxisRaw("Fire2") > 0) && canAttack && pMove.inAir && currentWeapon == 0) {
-            print("Air Attack");
             isAttacking = true;
             canAttack = false;
+            ActivateScytheCollider();
             anim.SetBool("AttackInAir", true);
             anim.SetBool("AirAttackFinished", false);
         } else if (Input.GetAxisRaw("Fire1") > 0 && canAttack) {  // Basic Attack            
@@ -109,16 +110,22 @@ public class PlayerAttack: MonoBehaviour
             if (currentWeapon == 0) {
                 PerformScytheAttack(-1);
             } else {
-                isAttacking = true;
-                anim.SetTrigger("BasicMagic");
+                if (specialMagicAttackCharge >= 35) {
+                    specialMagicAttackCharge -= 35;
+                    isAttacking = true;
+                    anim.SetTrigger("BasicMagic");
+                }                
             }
         } else if (Input.GetAxisRaw("Fire2") > 0 && canAttack) { // Strong Attack
             PrepareNextAttack();
             if (currentWeapon == 0) {
                 PerformScytheAttack(1);
             } else {
-                isAttacking = true;
-                anim.SetTrigger("StrongMagic");
+                if (specialMagicAttackCharge >= 35) {
+                    specialMagicAttackCharge -= 35;
+                    isAttacking = true;
+                    anim.SetTrigger("StrongMagic");
+                }                   
             }
         }
     }
@@ -213,6 +220,7 @@ public class PlayerAttack: MonoBehaviour
 
     public void EndAirAttack()
     {
+        sbc.enabled = false;
         anim.SetBool("AirAttackFinished", true);
     }
     
