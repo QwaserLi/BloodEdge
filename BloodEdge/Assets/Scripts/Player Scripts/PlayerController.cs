@@ -123,6 +123,7 @@ public class PlayerController : MonoBehaviour
         Vector3 forward = cam.transform.forward;
         Vector3 right = cam.transform.right;
 
+
         forward.y = 0f;
         right.y = 0f;
 
@@ -136,8 +137,10 @@ public class PlayerController : MonoBehaviour
         }
         if (!PlayerAttack.isAttacking) {
             controller.Move(desiredMoveDirection.normalized * Time.deltaTime * speed);
-        } else {
+            //velocity += desiredMoveDirection.normalized * Time.deltaTime * speed;
+        }else {
             controller.Move(desiredMoveDirection * Time.deltaTime * (speed*0.5f));
+            //velocity += desiredMoveDirection.normalized * Time.deltaTime * speed*5;
         }
     }
 
@@ -153,6 +156,11 @@ public class PlayerController : MonoBehaviour
             gravity = Physics.gravity.y * 100;
             velocity.y = 0;
         }
+        else if (!controller.isGrounded && PlayerAttack.isAttacking)
+        {
+            gravity = -60f;
+        }
+
         else
         {
             gravity = -20f;
@@ -199,7 +207,7 @@ public class PlayerController : MonoBehaviour
 
     void ApplyDrag()
     {
-        velocity.x /= 1 + Drag.x * Time.deltaTime;
+        velocity.x /= 3 + Drag.x * Time.deltaTime;
         velocity.y /= 1 + Drag.y * Time.deltaTime;
         velocity.z /= 1 + Drag.z * Time.deltaTime;
     }
