@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (wasInAir == true && inAir == false)
-        { // No longer in the air
+        { // No longer in the air          
             if (PlayerAttack.isAttacking) {
                 anim.SetBool("AttackInAir", false);
             }
@@ -200,16 +200,13 @@ public class PlayerController : MonoBehaviour
      * */
     public void InAir()
     {
-        inAir = true;
-        if (!wasInAir) {
-            anim.SetBool("InAir", inAir);
-            wasInAir = true;
-            return;
-        }
         wasInAir = true;
-        if (!PlayerAttack.isAttacking) {
-            anim.SetBool("InAir", inAir);
-        }         
+        inAir = true;
+        if (!PlayerAttack.isAttacking) {            
+            anim.SetBool("InAir", inAir);                      
+        } else {
+            anim.SetBool("InAir", false);
+        }
     }
 
 
