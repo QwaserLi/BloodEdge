@@ -30,16 +30,14 @@ public class PlayerAttack: MonoBehaviour
     public GameObject Spikes;
     public GameObject BloodBeam;
     BoxCollider sbc;
-    GameObject trail;
+    Scythe scytheScript;
 
     public TextMeshProUGUI comboName;
-
     string comboString = "";
     int comboValue = 0;
     int currentComboNum;
 
     AudioManager soundManager;
-
     PlayerController pMove;
 
     /*
@@ -50,7 +48,7 @@ public class PlayerAttack: MonoBehaviour
         sbc = Scythe.GetComponent<BoxCollider>();
         soundManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         pMove = gameObject.GetComponent<PlayerController>();
-        trail = Scythe.GetComponent<Scythe>().trail;
+        scytheScript = Scythe.GetComponent<Scythe>();
     }
 
     // Main Loop
@@ -79,7 +77,7 @@ public class PlayerAttack: MonoBehaviour
         }
 
         // Change Weapons
-        if (Input.GetAxis("Mouse ScrollWheel") != 0 && weaponChangeTimer > 0.25f) {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && weaponChangeTimer > 0.25f && !isAttacking) {
             if (currentWeapon == 0) {
                 currentWeapon = 1;
                 Scythe.SetActive(false);
@@ -93,10 +91,12 @@ public class PlayerAttack: MonoBehaviour
         }
 
         if ((Input.GetAxisRaw("Fire1") > 0 || Input.GetAxisRaw("Fire2") > 0) && canAttack && pMove.inAir && currentWeapon == 0) {
-            //isAttacking = true;
-            //canAttack = false;
-            //anim.SetBool("AttackInAir", true);
+            print("Air Attack");
+            isAttacking = true;
+            canAttack = false;
+            anim.SetBool("AttackInAir", true);
         } else if (Input.GetButtonDown("Special") && canAttack && !pMove.inAir) {
+            /*
             if (currentWeapon == 0 && specialScytheAttackCharge >= 100) {
                 isAttacking = true;
                 canAttack = false;
@@ -108,6 +108,7 @@ public class PlayerAttack: MonoBehaviour
                 anim.SetTrigger("MagicSpecial");
                 specialMagicAttackCharge = 0;
             }
+            */
         } else if (Input.GetAxisRaw("Fire1") > 0 && canAttack) {  // Basic Attack            
             PrepareNextAttack();
             if (currentWeapon == 0) {
@@ -164,6 +165,11 @@ public class PlayerAttack: MonoBehaviour
             soundManager.Play("ScytheMiss");
         }
         comboValue += type;
+        if (currentComboNum + 1 == 3) {
+            Scythe.GetComponent<Scythe>().UpdateDamage(35*3);
+        } else {
+            Scythe.GetComponent<Scythe>().UpdateDamage(35);
+        }
         anim.SetInteger("CurrentCombo", comboValue);
         anim.SetInteger("ComboLength", currentComboNum);
         // Add to combo
@@ -189,7 +195,7 @@ public class PlayerAttack: MonoBehaviour
                     courComboNameRef = StartCoroutine(UpdateComboName("Bloody Swipes"));
                     break;
                 case "Weak+Strong+Strong":
-                    courComboNameRef = StartCoroutine(UpdateComboName("Revengeful Ripper"));
+                    courComboNameRef = StartCoroutine(UpdateComboName("Vengeful Ripper"));
                     break;
                 case "Strong+Strong+Strong":
                     courComboNameRef = StartCoroutine(UpdateComboName("Crimson Crusher"));
@@ -216,6 +222,7 @@ public class PlayerAttack: MonoBehaviour
         courComboRef = StartCoroutine(StartComboCoolDown());
         anim.SetBool("NewComboStart", false);
         canAttack = true;
+        isAttacking = false;
     }
 
     /*
@@ -232,7 +239,7 @@ public class PlayerAttack: MonoBehaviour
      **/
     public void BackToPlayerIdle()
     {
-        Scythe.GetComponent<Scythe>().trail.SetActive(false);
+        scytheScript.trail.SetActive(false);
         isAttacking = false;
         DeactivateScytheCollider();
         currentComboNum = 0;

@@ -8,10 +8,9 @@ public class Scythe : MonoBehaviour
 {
     PlayerAttack paRef;
     CinemachineImpulseSource shaker;
-    AudioSource audio;
     AudioManager soundManager;
     public GameObject trail;
-    float currentDamageToDeal = 30;
+    float currentDamageToDeal = 35;
 
     private void Start()
     {
