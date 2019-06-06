@@ -29,6 +29,15 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public bool IsPlaying(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s.source.isPlaying) {
+            return true;
+        }
+        return false;
+    }
+
     // Update is called once per frame
     public void Play(string name)
     {
@@ -43,6 +52,10 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
         if (s.fade) {
             StartCoroutine(FadeVolumeUp(s));
+        } else {
+            if (s.source.volume > s.maxVolume) {
+                s.source.volume = s.maxVolume;
+            }
         }
     }
 
@@ -55,6 +68,8 @@ public class AudioManager : MonoBehaviour
         }
         if (s.fade) {
             StartCoroutine(FadeVolumeDown(s));
+        } else {
+            s.source.Stop();
         }
     }
 
@@ -68,8 +83,11 @@ public class AudioManager : MonoBehaviour
     }
 
     IEnumerator FadeVolumeUp(Sound s)
-    {        
-        while (s.source.volume < 1) {
+    {
+        if (s.source.volume > s.maxVolume) {
+            s.source.volume = s.maxVolume;
+        }
+        while (s.source.volume < s.maxVolume) {
             s.source.volume += 0.05f;
             yield return new WaitForSeconds(0.5f);
         }

@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 previousVelocity;
     private Vector3 desiredMoveDirection;
 
+    AudioManager soundManager;
+
     // Animation variables
     bool isRunning = false;
     bool wasInAir = false;
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour
         cam = Camera.main;
         controller = GetComponent<CharacterController>();
         gravity = Physics.gravity.y * 100;
+        soundManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -50,15 +53,18 @@ public class PlayerController : MonoBehaviour
 
         //Movement
         Movement();
-        if (desiredMoveDirection != Vector3.zero)
+        if (desiredMoveDirection != Vector3.zero && !wasInAir)
         {
             isRunning = true;
+            if (!soundManager.IsPlaying("Running")) {
+                soundManager.Play("Running");
+            }            
         }
         else
         {
             isRunning = false;
+            soundManager.Stop("Running");
         }
-
         anim.SetBool("isRunning", isRunning);
 
         //Apply Gravity
@@ -77,7 +83,9 @@ public class PlayerController : MonoBehaviour
         { // No longer in the air          
             if (PlayerAttack.isAttacking) {
                 anim.SetBool("AttackInAir", false);
+                soundManager.Play("AirAttackHit");
             }
+            soundManager.Play("Landing");            
             anim.SetBool("InAir", false);
             wasInAir = false;
         }
@@ -206,7 +214,7 @@ public class PlayerController : MonoBehaviour
         wasInAir = true;
         inAir = true;
         if (!PlayerAttack.isAttacking) {            
-            anim.SetBool("InAir", inAir);                      
+            anim.SetBool("InAir", true);                      
         } else {
             anim.SetBool("InAir", false);
         }

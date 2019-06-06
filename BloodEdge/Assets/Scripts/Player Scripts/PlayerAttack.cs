@@ -17,6 +17,7 @@ public class PlayerAttack: MonoBehaviour
     public float attackTimer = 0;
 
     bool inCombo = false;
+    bool rageMode = false;
 
     float comboCount = 0;
     float comboTimer = 5.0f;
@@ -89,26 +90,20 @@ public class PlayerAttack: MonoBehaviour
             }
             weaponChangeTimer = 0;
         }
+        // Rage Mode
+        if (Input.GetButtonDown("Special") && specialScytheAttackCharge >= 100) {
+            if (specialScytheAttackCharge >= 100) {
+                rageMode = true;
+                MakeScytheBoxBigger();
+            }
+        }
 
         if ((Input.GetAxisRaw("Fire1") > 0 || Input.GetAxisRaw("Fire2") > 0) && canAttack && pMove.inAir && currentWeapon == 0) {
             print("Air Attack");
             isAttacking = true;
             canAttack = false;
             anim.SetBool("AttackInAir", true);
-        } else if (Input.GetButtonDown("Special") && canAttack && !pMove.inAir) {
-            /*
-            if (currentWeapon == 0 && specialScytheAttackCharge >= 100) {
-                isAttacking = true;
-                canAttack = false;
-                SpecialScytheAttack();
-                specialScytheAttackCharge = 0;
-            } else if(currentWeapon == 1 && specialMagicAttackCharge >= 100) {
-                isAttacking = true;
-                canAttack = false;
-                anim.SetTrigger("MagicSpecial");
-                specialMagicAttackCharge = 0;
-            }
-            */
+            anim.SetBool("AirAttackFinished", false);
         } else if (Input.GetAxisRaw("Fire1") > 0 && canAttack) {  // Basic Attack            
             PrepareNextAttack();
             if (currentWeapon == 0) {
@@ -189,10 +184,10 @@ public class PlayerAttack: MonoBehaviour
         if (currentComboNum == 3) {
             switch (comboString) {
                 case "Weak+Weak+Weak":
-                    courComboNameRef = StartCoroutine(UpdateComboName("Demonic  Tempest"));
+                    courComboNameRef = StartCoroutine(UpdateComboName("Bloody Swipes"));
                     break;
                 case "Weak+Weak+Strong":
-                    courComboNameRef = StartCoroutine(UpdateComboName("Bloody Swipes"));
+                    courComboNameRef = StartCoroutine(UpdateComboName("Demonic Tempest"));
                     break;
                 case "Weak+Strong+Strong":
                     courComboNameRef = StartCoroutine(UpdateComboName("Vengeful Ripper"));
@@ -214,6 +209,11 @@ public class PlayerAttack: MonoBehaviour
         comboName.text = name;
         yield return new WaitForSeconds(1.3f);
         comboName.text = "";
+    }
+
+    public void EndAirAttack()
+    {
+        anim.SetBool("AirAttackFinished", true);
     }
     
     // Allows the player to attack again
@@ -315,6 +315,16 @@ public class PlayerAttack: MonoBehaviour
         ResetAttack();
     }
 
+    void MakeScytheBoxBigger()
+    {
+        Scythe.GetComponent<BoxCollider>().size = Scythe.GetComponent<BoxCollider>().size *= 3;
+    }
+
+    void MakeScytheBoxSmaller()
+    {
+        Scythe.GetComponent<BoxCollider>().size = Scythe.GetComponent<BoxCollider>().size /= 3;
+    }
+
     /*
      * Starts magics special attack
      * */
@@ -351,10 +361,19 @@ public class PlayerAttack: MonoBehaviour
      * */
     public void UpdateRedBar(float amt)
     {
-        if (specialScytheAttackCharge + amt < 100) {
-            specialScytheAttackCharge += amt;
+        if (!rageMode) {
+            if (specialScytheAttackCharge + amt < 100) {
+                specialScytheAttackCharge += amt;
+            } else {
+                specialScytheAttackCharge = 100;
+            }
         } else {
-            specialScytheAttackCharge = 100;
+            if (specialScytheAttackCharge > 0) {
+                specialScytheAttackCharge -= 2.5f;
+            } else {
+                rageMode = false;
+                MakeScytheBoxSmaller();
+            }
         }        
         UpdateCharge.currentRedCharge = specialScytheAttackCharge;
     }
@@ -364,8 +383,12 @@ public class PlayerAttack: MonoBehaviour
      * */
     public void UpdateBlueBar(float amt)
     {
-        if (specialMagicAttackCharge + amt < 100) {
-            specialMagicAttackCharge += amt;
+        float chargeAmt = amt;
+        if (rageMode) {
+            chargeAmt *= 2;
+        }
+        if (specialMagicAttackCharge + chargeAmt < 100) {
+            specialMagicAttackCharge += chargeAmt;
         } else {
             specialMagicAttackCharge = 100;
         }

@@ -47,13 +47,15 @@ MonoBehaviour:
   - name: Menu
     clip: {fileID: 8300000, guid: 42dbe0bc4d8bc64448def1518ead5097, type: 3}
     volume: 0.5
+    maxVolume: 0.4
     pitch: 1
     loop: 1
     fade: 1
     source: {fileID: 0}
   - name: Level1Ambient
-    clip: {fileID: 8300000, guid: 18aa742f0d0cbe14382ab889a77cd01f, type: 3}
+    clip: {fileID: 8300000, guid: b1c9d8a514373054aa4c6a955a582f07, type: 3}
     volume: 0.5
+    maxVolume: 0.15
     pitch: 1
     loop: 1
     fade: 1
@@ -61,6 +63,7 @@ MonoBehaviour:
   - name: FogWall
     clip: {fileID: 8300000, guid: 347e128680e83914b83853b4d487784d, type: 3}
     volume: 0.5
+    maxVolume: 0.5
     pitch: 1
     loop: 1
     fade: 1
@@ -68,6 +71,7 @@ MonoBehaviour:
   - name: ScytheHit
     clip: {fileID: 8300000, guid: fe4b4865844465a42b09bcc31d0bc4ff, type: 3}
     volume: 0.5
+    maxVolume: 0.5
     pitch: 1
     loop: 0
     fade: 0
@@ -75,6 +79,31 @@ MonoBehaviour:
   - name: ScytheMiss
     clip: {fileID: 8300000, guid: 80673d2c84fdbed4d82ffa016d58b920, type: 3}
     volume: 0.5
+    maxVolume: 0.4
+    pitch: 1
+    loop: 0
+    fade: 0
+    source: {fileID: 0}
+  - name: Running
+    clip: {fileID: 8300000, guid: a2f424f6d16367643b54797bd0bf1ce9, type: 3}
+    volume: 1
+    maxVolume: 1
+    pitch: 1
+    loop: 1
+    fade: 0
+    source: {fileID: 0}
+  - name: Landing
+    clip: {fileID: 8300000, guid: 8b774780eba06304c9552364590a72e7, type: 3}
+    volume: 1
+    maxVolume: 1
+    pitch: 1
+    loop: 0
+    fade: 0
+    source: {fileID: 0}
+  - name: AirAttackHit
+    clip: {fileID: 8300000, guid: a007e78fc9cbfcc40a7eaad6fc4d38ab, type: 3}
+    volume: 1
+    maxVolume: 1
     pitch: 1
     loop: 0
     fade: 0

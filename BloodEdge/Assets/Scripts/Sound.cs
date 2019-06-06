@@ -11,6 +11,8 @@ public class Sound
 
     [Range(0f, 1f)]
     public float volume;
+    [Range(0f, 1f)]
+    public float maxVolume;
     [Range(0.1f, 1.0f)]
     public float pitch;
     public bool loop;
