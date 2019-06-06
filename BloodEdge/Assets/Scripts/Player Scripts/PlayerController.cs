@@ -26,13 +26,15 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public bool inAir = false;
 
+
     // Start is called before the first frame update
     void Start()
     {
-        //REMOVE LATER Because Dylan complains too much
-        Cursor.visible = false;
+		//Move somewhere else
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
 
-        anim = GetComponent<Animator>();
+		anim = GetComponent<Animator>();
         cam = Camera.main;
         controller = GetComponent<CharacterController>();
         gravity = Physics.gravity.y * 100;
@@ -41,7 +43,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (PlayerHealth.isDead) {
+
+		if (PlayerHealth.isDead) {
             return;
         }
 
