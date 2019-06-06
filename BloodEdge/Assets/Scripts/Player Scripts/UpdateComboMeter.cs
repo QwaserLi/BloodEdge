@@ -21,7 +21,7 @@ public class UpdateComboMeter : MonoBehaviour
     {
         float ra = 1.0f - (h / 5.0f);
         bar.fillAmount = ra;
-        comboNum.text = "Hits: " + currentComboNumber;
+        comboNum.text = "   Hits: " + currentComboNumber;
     }
 
     public static void UpdateComboTimer(float nt)

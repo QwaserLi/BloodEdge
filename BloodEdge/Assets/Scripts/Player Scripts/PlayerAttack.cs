@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerAttack: MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class PlayerAttack: MonoBehaviour
     float comboCount = 0;
     float comboTimer = 5.0f;
     Coroutine courComboRef;
+    Coroutine courComboNameRef;
 
     // Weapons
     public GameObject BloodBall;
@@ -27,8 +29,11 @@ public class PlayerAttack: MonoBehaviour
     public GameObject HandEffect;
     public GameObject Spikes;
     public GameObject BloodBeam;
-
     BoxCollider sbc;
+    GameObject trail;
+
+    public TextMeshProUGUI comboName;
+
     string comboString = "";
     int comboValue = 0;
     int currentComboNum;
@@ -45,6 +50,7 @@ public class PlayerAttack: MonoBehaviour
         sbc = Scythe.GetComponent<BoxCollider>();
         soundManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         pMove = gameObject.GetComponent<PlayerController>();
+        trail = Scythe.GetComponent<Scythe>().trail;
     }
 
     // Main Loop
@@ -107,6 +113,7 @@ public class PlayerAttack: MonoBehaviour
             if (currentWeapon == 0) {
                 PerformScytheAttack(-1);
             } else {
+                isAttacking = true;
                 anim.SetTrigger("BasicMagic");
             }
         } else if (Input.GetAxisRaw("Fire2") > 0 && canAttack) { // Strong Attack
@@ -114,6 +121,7 @@ public class PlayerAttack: MonoBehaviour
             if (currentWeapon == 0) {
                 PerformScytheAttack(1);
             } else {
+                isAttacking = true;
                 anim.SetTrigger("StrongMagic");
             }
         }
@@ -135,41 +143,79 @@ public class PlayerAttack: MonoBehaviour
      * Performs an attack with the scythe. The type of attack, weak or strong, is passed through
      * */
     public void PerformScytheAttack(int type)
-    {
-        // * TEMP method until Anims are done and we know all the combos* 
-        // Will Reset back to idle animations if we have completed a string of 3 combos, or if the input does not continue a viable combo (
-        // Say they try end on a weak attack, when you can only end on a strong attack
+    {        
         if (currentComboNum == 3) { // Max combo sequence is 3
-              BackToPlayerIdle();                    
-        }else if (currentComboNum == 2) { // Cannot end the combo on a weak attack, unless in an only weak combo
-            if (type == -1 && comboString != "WeakWeak") {
-                BackToPlayerIdle();
-            }
-        }
-       
+            //print("Time For new Combo");
+            comboValue = 0;
+            comboString = "";
+            currentComboNum = 0;
+            anim.SetBool("NewComboStart", true);
+        } else if (currentComboNum == 2) { // Cannot end the combo on a weak attack, unless in an only weak combo  
+            if (type == -1 && comboString != "Weak+Weak") {
+                comboValue = 0;
+                comboString = "";
+                currentComboNum = 0;
+                anim.SetBool("NewComboStart", true);
+            }            
+        }       
         isAttacking = true;
         ActivateScytheCollider();
         if (soundManager != null) {
             soundManager.Play("ScytheMiss");
         }
         comboValue += type;
-        //print(comboValue);
         anim.SetInteger("CurrentCombo", comboValue);
         anim.SetInteger("ComboLength", currentComboNum);
         // Add to combo
+        if (currentComboNum > 0) {
+            comboString += "+";
+        }
         if (type < 0) {
             comboString += "Weak";
         } else {
             comboString += "Strong";
-        }        
-        currentComboNum++;        
+        }
+        currentComboNum++;
+        // Update Combo Text
+        if (courComboNameRef != null) {
+            StopCoroutine(courComboNameRef);
+        }
+        if (currentComboNum == 3) {
+            switch (comboString) {
+                case "Weak+Weak+Weak":
+                    courComboNameRef = StartCoroutine(UpdateComboName("Demonic  Tempest"));
+                    break;
+                case "Weak+Weak+Strong":
+                    courComboNameRef = StartCoroutine(UpdateComboName("Bloody Swipes"));
+                    break;
+                case "Weak+Strong+Strong":
+                    courComboNameRef = StartCoroutine(UpdateComboName("Revengeful Ripper"));
+                    break;
+                case "Strong+Strong+Strong":
+                    courComboNameRef = StartCoroutine(UpdateComboName("Crimson Crusher"));
+                    break;
+                case "Strong+Weak+Strong":
+                    courComboNameRef = StartCoroutine(UpdateComboName("Scarlet Butterfly"));
+                    break;
+            }
+        } else {
+            courComboNameRef = StartCoroutine(UpdateComboName(comboString));
+        }
+    }
+
+    IEnumerator UpdateComboName(string name)
+    {
+        comboName.text = name;
+        yield return new WaitForSeconds(1.3f);
+        comboName.text = "";
     }
     
     // Allows the player to attack again
     public void ResetAttack()
     {
-        canAttack = true;
         courComboRef = StartCoroutine(StartComboCoolDown());
+        anim.SetBool("NewComboStart", false);
+        canAttack = true;
     }
 
     /*
@@ -177,7 +223,7 @@ public class PlayerAttack: MonoBehaviour
      * */
     IEnumerator StartComboCoolDown()
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.3f);
         BackToPlayerIdle();
     }
 
@@ -190,7 +236,7 @@ public class PlayerAttack: MonoBehaviour
         isAttacking = false;
         DeactivateScytheCollider();
         currentComboNum = 0;
-        anim.SetInteger("ComboLength", currentComboNum);
+        anim.SetInteger("ComboLength", 0);
         comboValue = 0;
         comboString = "";
         anim.SetInteger("CurrentCombo", 9999);
