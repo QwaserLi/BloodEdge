@@ -20,9 +20,9 @@ public class UpdateCharge : MonoBehaviour
 
     void UpdateChargeUI(float rc, float bc)
     {
-        float ra = (rc / 100.0f) * 180 / 360;
+        float ra = (rc / 100.0f);
         redCharge.fillAmount = ra;
-        float ba = (bc / 100.0f) * 180 / 360;
+        float ba = (bc / 100.0f);
         blueCharge.fillAmount = ba;
     }
 }
