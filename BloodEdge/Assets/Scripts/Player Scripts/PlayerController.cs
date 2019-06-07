@@ -207,7 +207,7 @@ public class PlayerController : MonoBehaviour
 
     void ApplyDrag()
     {
-        velocity.x /= 3 + Drag.x * Time.deltaTime;
+        velocity.x /= 1 + Drag.x * Time.deltaTime;
         velocity.y /= 1 + Drag.y * Time.deltaTime;
         velocity.z /= 1 + Drag.z * Time.deltaTime;
     }

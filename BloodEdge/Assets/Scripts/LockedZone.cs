@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Enemy;
 
 public class LockedZone : MonoBehaviour
 {
@@ -13,6 +14,12 @@ public class LockedZone : MonoBehaviour
     float t = 0.0f;
     Vector3 startPosition;
     Vector3[] startingPositions;
+    EncounterScript encounter;
+
+    private void Start()
+    {
+        encounter = GetComponentInChildren<EncounterScript>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -33,7 +40,7 @@ public class LockedZone : MonoBehaviour
 
         //When all enemies are killed removed the walss by destroying for now
         //Need to ask Mat there's a way to tell if enemies have been destroyed
-        if (false)
+        if (encounter.IsCleared())
         {
             Destroy(gameObject);
         }
