@@ -78,7 +78,7 @@ public class PlayerAttack: MonoBehaviour
         }
 
         // Change Weapons
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 && weaponChangeTimer > 0.25f && !isAttacking) {
+        if (Input.GetAxis("Mouse ScrollWheel") != 0 && weaponChangeTimer > 0.25f && !isAttacking) {
             if (currentWeapon == 0) {
                 currentWeapon = 1;
                 Scythe.SetActive(false);
@@ -106,22 +106,24 @@ public class PlayerAttack: MonoBehaviour
             anim.SetBool("AttackInAir", true);
             anim.SetBool("AirAttackFinished", false);
         } else if (Input.GetAxisRaw("Fire1") > 0 && canAttack) {  // Basic Attack            
-            PrepareNextAttack();
             if (currentWeapon == 0) {
+                PrepareNextAttack();
                 PerformScytheAttack(-1);
             } else {
                 if (specialMagicAttackCharge >= 35) {
+                    PrepareNextAttack();
                     specialMagicAttackCharge -= 35;
                     isAttacking = true;
                     anim.SetTrigger("BasicMagic");
                 }                
             }
         } else if (Input.GetAxisRaw("Fire2") > 0 && canAttack) { // Strong Attack
-            PrepareNextAttack();
             if (currentWeapon == 0) {
+                PrepareNextAttack();
                 PerformScytheAttack(1);
             } else {
                 if (specialMagicAttackCharge >= 35) {
+                    PrepareNextAttack();
                     specialMagicAttackCharge -= 35;
                     isAttacking = true;
                     anim.SetTrigger("StrongMagic");
