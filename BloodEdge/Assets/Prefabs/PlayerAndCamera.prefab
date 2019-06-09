@@ -1874,7 +1874,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 43.6
+  m_fontSize: 32.95
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4370,7 +4370,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 62277ba2df1ec7947bc4c9cce2fbef14, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -5770,7 +5770,6 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647632019938512966}
-  m_LocalRotation: {x: 0.08996288, y: 0.00000003532803, z: -0.000000003191151, w: 0.99594516}
   m_LocalPosition: {x: 0, y: 12.275215, z: -21.68035}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6339,7 +6338,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647632021315793700}
-  m_LocalRotation: {x: 0.08996287, y: 0.000000018700293, z: -0.000000013067787, w: 0.99594516}
+  m_LocalRotation: {x: 0.08996287, y: -0.000000016627737, z: -0.000000009876636, w: 0.99594516}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6606,16 +6605,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1705181121}
     m_Modifications:
-    - target: {fileID: 7711848571028919854, guid: 03b2a1e102861c44dbfb33137be70e38,
-        type: 3}
-      propertyPath: m_Name
-      value: BloodBeam
-      objectReference: {fileID: 0}
-    - target: {fileID: 7711848571028919854, guid: 03b2a1e102861c44dbfb33137be70e38,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4958797028591271956, guid: 03b2a1e102861c44dbfb33137be70e38,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6671,6 +6660,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7711848571028919854, guid: 03b2a1e102861c44dbfb33137be70e38,
+        type: 3}
+      propertyPath: m_Name
+      value: BloodBeam
+      objectReference: {fileID: 0}
+    - target: {fileID: 7711848571028919854, guid: 03b2a1e102861c44dbfb33137be70e38,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03b2a1e102861c44dbfb33137be70e38, type: 3}
 --- !u!1 &3159452257399204521 stripped
@@ -6701,11 +6700,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2941810681288725600, guid: 79f8e2d759b51974bb8fa98b22dc8eaa,
-        type: 3}
-      propertyPath: lengthInSec
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2941810681288725601, guid: 79f8e2d759b51974bb8fa98b22dc8eaa,
         type: 3}
@@ -6761,6 +6755,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2941810681288725600, guid: 79f8e2d759b51974bb8fa98b22dc8eaa,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79f8e2d759b51974bb8fa98b22dc8eaa, type: 3}
