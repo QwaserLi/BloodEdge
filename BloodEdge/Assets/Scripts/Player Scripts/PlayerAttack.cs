@@ -18,6 +18,8 @@ public class PlayerAttack: MonoBehaviour
 
     bool inCombo = false;
     bool rageMode = false;
+    bool leftMouseDown = false;
+    bool rightMouseDown = false;
 
     float comboCount = 0;
     float comboTimer = 5.0f;
@@ -99,13 +101,21 @@ public class PlayerAttack: MonoBehaviour
             }
         }
 
+        if (Input.GetAxisRaw("Fire1") == 0) {
+            leftMouseDown = false;
+        }
+        if (Input.GetAxisRaw("Fire2") == 0) {
+            rightMouseDown = false;
+        }
+
         if ((Input.GetAxisRaw("Fire1") > 0 || Input.GetAxisRaw("Fire2") > 0) && canAttack && pMove.inAir && currentWeapon == 0) {
             isAttacking = true;
             canAttack = false;
             ActivateScytheCollider();
             anim.SetBool("AttackInAir", true);
             anim.SetBool("AirAttackFinished", false);
-        } else if (Input.GetAxisRaw("Fire1") > 0 && canAttack) {  // Basic Attack            
+        } else if (Input.GetAxisRaw("Fire1") > 0 && canAttack && !leftMouseDown) {  // Basic Attack        
+            leftMouseDown = true;
             if (currentWeapon == 0) {
                 PrepareNextAttack();
                 PerformScytheAttack(-1);
@@ -117,7 +127,8 @@ public class PlayerAttack: MonoBehaviour
                     anim.SetTrigger("BasicMagic");
                 }                
             }
-        } else if (Input.GetAxisRaw("Fire2") > 0 && canAttack) { // Strong Attack
+        } else if (Input.GetAxisRaw("Fire2") > 0 && canAttack && !rightMouseDown) { // Strong Attack
+            rightMouseDown = true;
             if (currentWeapon == 0) {
                 PrepareNextAttack();
                 PerformScytheAttack(1);
@@ -240,7 +251,7 @@ public class PlayerAttack: MonoBehaviour
      * */
     IEnumerator StartComboCoolDown()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.35f);
         BackToPlayerIdle();
     }
 
