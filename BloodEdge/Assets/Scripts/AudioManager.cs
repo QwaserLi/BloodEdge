@@ -76,10 +76,10 @@ public class AudioManager : MonoBehaviour
     IEnumerator FadeVolumeDown(Sound s)
     {
         while (s.source.volume > 0) {
-            s.source.volume -= 0.09f;
+            s.source.volume -= 0.05f;
             yield return new WaitForSeconds(0.5f);
         }
-        //s.source.Stop();
+        s.source.Stop();
     }
 
     IEnumerator FadeVolumeUp(Sound s)

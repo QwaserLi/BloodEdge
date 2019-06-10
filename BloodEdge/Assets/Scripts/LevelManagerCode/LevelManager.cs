@@ -5,21 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    //public Animator animator;
+    public Animator animator;
     private int levelToLoad;
 
     private void Start()
-    {        
-        if (SceneManager.GetActiveScene().buildIndex == 0) {
-            GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>().Play("Menu");
-        } else if (SceneManager.GetActiveScene().buildIndex == 1) {
-            GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>().Play("Level1Ambient");
-        }
+    {
+        GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>().Play("Menu");
     }
 
     public void FadeToLevel(int lIndex)
     {        
-        //animator.SetTrigger("LevelFadeOut");
+        animator.SetTrigger("LevelFadeOut");
         levelToLoad = lIndex;
     }
 
@@ -36,7 +32,7 @@ public class LevelManager : MonoBehaviour
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>().Play("Level1Ambient");
+        GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>().Play("Level1Ambient");
     }
 
     public void LoadMenu()

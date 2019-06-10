@@ -15,8 +15,7 @@ public class BloodBall : MonoBehaviour
         paRef = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
         shakeSource = GetComponent<CinemachineImpulseSource>();
         shakeSource.GenerateImpulse();
-        StartCoroutine(DestroyBloodBall());
-        GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>().Play("BloodBall");
+        StartCoroutine(DestroyBloodBall());                
     }
 
     private void OnTriggerEnter(Collider other)

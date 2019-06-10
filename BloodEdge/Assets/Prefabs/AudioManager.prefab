@@ -55,7 +55,7 @@ MonoBehaviour:
   - name: Level1Ambient
     clip: {fileID: 8300000, guid: b1c9d8a514373054aa4c6a955a582f07, type: 3}
     volume: 0.5
-    maxVolume: 0.1
+    maxVolume: 0.15
     pitch: 1
     loop: 1
     fade: 1
@@ -63,7 +63,7 @@ MonoBehaviour:
   - name: FogWall
     clip: {fileID: 8300000, guid: 347e128680e83914b83853b4d487784d, type: 3}
     volume: 0.5
-    maxVolume: 0.4
+    maxVolume: 0.5
     pitch: 1
     loop: 1
     fade: 1
@@ -104,22 +104,6 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: a007e78fc9cbfcc40a7eaad6fc4d38ab, type: 3}
     volume: 1
     maxVolume: 1
-    pitch: 1
-    loop: 0
-    fade: 0
-    source: {fileID: 0}
-  - name: BloodBall
-    clip: {fileID: 8300000, guid: f9b352a9b3f2a3c49b6dc077656b7572, type: 3}
-    volume: 0.75
-    maxVolume: 0.75
-    pitch: 1
-    loop: 0
-    fade: 0
-    source: {fileID: 0}
-  - name: Spikes
-    clip: {fileID: 8300000, guid: 20c3ee8f6af56014e87f0e15d90a4fda, type: 3}
-    volume: 0.75
-    maxVolume: 0.75
     pitch: 1
     loop: 0
     fade: 0

@@ -19,7 +19,7 @@ public class Spikes : MonoBehaviour
         shakeSource = GetComponent<CinemachineImpulseSource>();
         shakeSource.GenerateImpulse();
         parent = gameObject.transform.parent.gameObject;
-        GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>().Play("Spikes");
+        //gameObject.transform.Rotate(-90,0,0);
         StartCoroutine(DestroySpikes());
     }
     
