@@ -108,3 +108,19 @@ MonoBehaviour:
     loop: 0
     fade: 0
     source: {fileID: 0}
+  - name: BloodBall
+    clip: {fileID: 8300000, guid: f9b352a9b3f2a3c49b6dc077656b7572, type: 3}
+    volume: 0.75
+    maxVolume: 0.75
+    pitch: 1
+    loop: 0
+    fade: 0
+    source: {fileID: 0}
+  - name: Spikes
+    clip: {fileID: 8300000, guid: 20c3ee8f6af56014e87f0e15d90a4fda, type: 3}
+    volume: 0.75
+    maxVolume: 0.75
+    pitch: 1
+    loop: 0
+    fade: 0
+    source: {fileID: 0}
