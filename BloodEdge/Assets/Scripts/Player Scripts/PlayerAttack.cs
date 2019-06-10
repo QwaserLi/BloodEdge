@@ -31,7 +31,6 @@ public class PlayerAttack: MonoBehaviour
     public GameObject Scythe;
     public GameObject HandEffect;
     public GameObject Spikes;
-    public GameObject BloodBeam;
     BoxCollider sbc;
     Scythe scytheScript;
 
@@ -79,19 +78,6 @@ public class PlayerAttack: MonoBehaviour
             UpdateComboMeter.UpdateComboTimer(comboTimer);
         }
 
-        // Change Weapons
-        if (Input.GetAxis("Mouse ScrollWheel") != 0 && weaponChangeTimer > 0.25f && !isAttacking) {
-            if (currentWeapon == 0) {
-                currentWeapon = 1;
-                Scythe.SetActive(false);
-                HandEffect.SetActive(true);
-            } else {
-                Scythe.SetActive(true);
-                HandEffect.SetActive(false);
-                currentWeapon = 0;
-            }
-            weaponChangeTimer = 0;
-        }
         // Rage Mode
         if (Input.GetButtonDown("Special") && specialScytheAttackCharge >= 100) {
             if (specialScytheAttackCharge >= 100) {
@@ -101,6 +87,7 @@ public class PlayerAttack: MonoBehaviour
             }
         }
 
+        // Check if user has raised mouse
         if (Input.GetAxisRaw("Fire1") == 0) {
             leftMouseDown = false;
         }
@@ -108,6 +95,7 @@ public class PlayerAttack: MonoBehaviour
             rightMouseDown = false;
         }
 
+        // Player attacks
         if ((Input.GetAxisRaw("Fire1") > 0 || Input.GetAxisRaw("Fire2") > 0) && canAttack && pMove.inAir && currentWeapon == 0) {
             isAttacking = true;
             canAttack = false;
@@ -116,30 +104,26 @@ public class PlayerAttack: MonoBehaviour
             anim.SetBool("AirAttackFinished", false);
         } else if (Input.GetAxisRaw("Fire1") > 0 && canAttack && !leftMouseDown) {  // Basic Attack        
             leftMouseDown = true;
-            if (currentWeapon == 0) {
-                PrepareNextAttack();
-                PerformScytheAttack(-1);
-            } else {
-                if (specialMagicAttackCharge >= 35) {
-                    PrepareNextAttack();
-                    specialMagicAttackCharge -= 35;
-                    isAttacking = true;
-                    anim.SetTrigger("BasicMagic");
-                }                
-            }
+            PrepareNextAttack();
+            PerformScytheAttack(-1);
         } else if (Input.GetAxisRaw("Fire2") > 0 && canAttack && !rightMouseDown) { // Strong Attack
             rightMouseDown = true;
-            if (currentWeapon == 0) {
-                PrepareNextAttack();
-                PerformScytheAttack(1);
-            } else {
-                if (specialMagicAttackCharge >= 35) {
-                    PrepareNextAttack();
-                    specialMagicAttackCharge -= 35;
-                    isAttacking = true;
-                    anim.SetTrigger("StrongMagic");
-                }                   
+            PrepareNextAttack();
+            PerformScytheAttack(1);            
+        }else if (Input.GetAxisRaw("Magic Weak") > 0 && specialMagicAttackCharge >= 25 && canAttack && !pMove.inAir) { // Weak Magic
+            PrepareNextAttack();
+            if (!rageMode) {
+                specialMagicAttackCharge -= 25;
+            }            
+            isAttacking = true;
+            anim.SetTrigger("BasicMagic");
+        }else if (Input.GetAxisRaw("Magic Strong") > 0 && specialMagicAttackCharge >= 45 && canAttack && !pMove.inAir) { // Strong Magic
+            PrepareNextAttack();
+            if (!rageMode) {
+                specialMagicAttackCharge -= 45;
             }
+            isAttacking = true;
+            anim.SetTrigger("StrongMagic");
         }
     }
 
@@ -303,7 +287,8 @@ public class PlayerAttack: MonoBehaviour
      * during the animation
      * */
     void BasicMagicAttack()
-    {        
+    {
+        
         Instantiate(BloodBall, transform.position + (transform.up*1.5f) + (transform.forward * 4.0f), transform.localRotation);
     }    
 
@@ -315,13 +300,11 @@ public class PlayerAttack: MonoBehaviour
         Instantiate(Spikes, transform.position + (transform.forward * 4.5f), transform.localRotation);
     }
 
-    /**
-     * Plays Scythe Special animation
-     * */
-    void SpecialScytheAttack()
+    IEnumerator HandEffectLoop()
     {
-        anim.SetTrigger("ScytheSpecial");
-        StartCoroutine(ChangeBoxSize());
+        HandEffect.SetActive(true);
+        yield return new WaitForSeconds(2.0f);
+        HandEffect.SetActive(false);
     }
 
     /**
@@ -344,25 +327,6 @@ public class PlayerAttack: MonoBehaviour
     void MakeScytheBoxSmaller()
     {
         Scythe.GetComponent<BoxCollider>().size = Scythe.GetComponent<BoxCollider>().size /= 3;
-    }
-
-    /*
-     * Starts magics special attack
-     * */
-    void SpecialMagicAttack()
-    {
-        StartCoroutine(DoMagicSpecial());        
-    }
-
-    /**
-     *  Activates the "Bloodbeam" for a couple seconds, then deactivates it and allows the player to attack aggain
-     **/
-    IEnumerator DoMagicSpecial()
-    {
-        BloodBeam.SetActive(true);
-        yield return new WaitForSeconds(2.5f);
-        BloodBeam.SetActive(false);
-        ResetAttack();
     }
 
     /*
