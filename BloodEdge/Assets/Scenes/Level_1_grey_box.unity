@@ -20872,10 +20872,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 905fb6f1e295a484398df0a8902f85ac, type: 3}
       propertyPath: m_LocalRotation.y
+<<<<<<< HEAD
       value: 0.15778668
+=======
+      value: -0.0000000353367
+>>>>>>> parent of f9db23f... Added sound effects to magic attacks
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 905fb6f1e295a484398df0a8902f85ac, type: 3}
       propertyPath: m_LocalRotation.z
+<<<<<<< HEAD
       value: 0.07873932
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 905fb6f1e295a484398df0a8902f85ac, type: 3}
@@ -20885,6 +20890,19 @@ PrefabInstance:
     - target: {fileID: 400006, guid: 905fb6f1e295a484398df0a8902f85ac, type: 3}
       propertyPath: m_LocalPosition.z
       value: 5.77955
+=======
+      value: 0.0000000031919334
+      objectReference: {fileID: 0}
+    - target: {fileID: 647632019710417305, guid: 53d1fab82e7682c498cd68b0e8ca3e41,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.10806336
+      objectReference: {fileID: 0}
+    - target: {fileID: 647632019710417305, guid: 53d1fab82e7682c498cd68b0e8ca3e41,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0002641887
+>>>>>>> parent of f9db23f... Added sound effects to magic attacks
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 905fb6f1e295a484398df0a8902f85ac, type: 3}
       propertyPath: m_LocalPosition.y
@@ -20896,7 +20914,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 905fb6f1e295a484398df0a8902f85ac, type: 3}
       propertyPath: m_LocalRotation.z
+<<<<<<< HEAD
       value: 0.031185603
+=======
+      value: -0.0024305882
+>>>>>>> parent of f9db23f... Added sound effects to magic attacks
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 905fb6f1e295a484398df0a8902f85ac, type: 3}
       propertyPath: m_LocalRotation.w
@@ -20912,11 +20934,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 905fb6f1e295a484398df0a8902f85ac, type: 3}
       propertyPath: m_LocalRotation.y
+<<<<<<< HEAD
       value: -0.12160134
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 905fb6f1e295a484398df0a8902f85ac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -31.239002
+=======
+      value: -0.000098386816
+      objectReference: {fileID: 0}
+    - target: {fileID: 647632021315793722, guid: 53d1fab82e7682c498cd68b0e8ca3e41,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0010890096
+>>>>>>> parent of f9db23f... Added sound effects to magic attacks
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 905fb6f1e295a484398df0a8902f85ac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -20934,6 +20965,7 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -2.647
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 400010, guid: 905fb6f1e295a484398df0a8902f85ac, type: 3}
       propertyPath: m_LocalPosition.z
       value: 5.39
@@ -20973,10 +21005,20 @@ PrefabInstance:
     - target: {fileID: 400014, guid: 905fb6f1e295a484398df0a8902f85ac, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0.12070962
+=======
+    - target: {fileID: 647632019886562387, guid: 53d1fab82e7682c498cd68b0e8ca3e41,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0000058126225
+>>>>>>> parent of f9db23f... Added sound effects to magic attacks
       objectReference: {fileID: 0}
     - target: {fileID: 400014, guid: 905fb6f1e295a484398df0a8902f85ac, type: 3}
       propertyPath: m_LocalRotation.z
+<<<<<<< HEAD
       value: -0.35540324
+=======
+      value: -0.00008041208
+>>>>>>> parent of f9db23f... Added sound effects to magic attacks
       objectReference: {fileID: 0}
     - target: {fileID: 400014, guid: 905fb6f1e295a484398df0a8902f85ac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
