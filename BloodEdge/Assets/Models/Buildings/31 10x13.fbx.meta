@@ -61,6 +61,14 @@ ModelImporter:
     100110: polySurface69
     100112: polySurface70
     100114: polySurface71
+    100116: polySurface125
+    100118: polySurface126
+    100120: polySurface129
+    100122: polySurface130
+    100124: polySurface131
+    100126: polySurface132
+    100128: polySurface133
+    100130: pCube1
     400000: //RootNode
     400002: floor
     400004: floor3
@@ -119,6 +127,14 @@ ModelImporter:
     400110: polySurface69
     400112: polySurface70
     400114: polySurface71
+    400116: polySurface125
+    400118: polySurface126
+    400120: polySurface129
+    400122: polySurface130
+    400124: polySurface131
+    400126: polySurface132
+    400128: polySurface133
+    400130: pCube1
     2100000: lambert1
     2300000: floor
     2300002: floor3
@@ -175,6 +191,14 @@ ModelImporter:
     2300104: polySurface69
     2300106: polySurface70
     2300108: polySurface71
+    2300110: polySurface125
+    2300112: polySurface126
+    2300114: polySurface129
+    2300116: polySurface130
+    2300118: polySurface131
+    2300120: polySurface132
+    2300122: polySurface133
+    2300124: pCube1
     3300000: floor
     3300002: floor3
     3300004: floor4
@@ -230,6 +254,14 @@ ModelImporter:
     3300104: polySurface69
     3300106: polySurface70
     3300108: polySurface71
+    3300110: polySurface125
+    3300112: polySurface126
+    3300114: polySurface129
+    3300116: polySurface130
+    3300118: polySurface131
+    3300120: polySurface132
+    3300122: polySurface133
+    3300124: pCube1
     4300000: floor
     4300002: floor3
     4300004: floor4
@@ -285,6 +317,14 @@ ModelImporter:
     4300104: pCube28_polySurface64
     4300106: polySurface71
     4300108: pCube28_polySurface65
+    4300110: polySurface125
+    4300112: polySurface126
+    4300114: polySurface129
+    4300116: polySurface130
+    4300118: polySurface131
+    4300120: polySurface132
+    4300122: polySurface133
+    4300124: pCube1
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
