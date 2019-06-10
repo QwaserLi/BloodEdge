@@ -15,10 +15,12 @@ public class LockedZone : MonoBehaviour
     Vector3 startPosition;
     Vector3[] startingPositions;
     EncounterScript encounter;
+    AudioManager audio;
 
     private void Start()
     {
         encounter = GetComponentInChildren<EncounterScript>();
+        audio = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -42,6 +44,8 @@ public class LockedZone : MonoBehaviour
         //Need to ask Mat there's a way to tell if enemies have been destroyed
         if (encounter.IsCleared())
         {
+            audio.Play("Level1Ambient");
+            audio.Stop("FogWall");
             Destroy(gameObject);
         }
 
@@ -52,6 +56,8 @@ public class LockedZone : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             StartCoroutine(RiseObjects());
+            audio.Stop("Level1Ambient");
+            audio.Play("FogWall");
         }
     }
 
