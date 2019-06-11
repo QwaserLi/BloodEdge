@@ -1,0 +1,213 @@
+fileFormatVersion: 2
+guid: bca5c8ae01ae2194e8ac4d4d81ed1c00
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: back_wall3
+    100004: first_floor
+    100006: front_wall1
+    100008: ground_floor
+    100010: left_wall10
+    100012: left_wall11
+    100014: outlet_thing1
+    100016: outlet_thing10
+    100018: outlet_thing12
+    100020: outlet_thing13
+    100022: outlet_thing14
+    100024: outlet_thing3
+    100026: outlet_thing5
+    100028: outlet_thing6
+    100030: pCube12
+    100032: pCube24
+    100034: pCube25
+    100036: pCube26
+    100038: pCube27
+    100040: pCube28
+    100042: pCube29
+    100044: pCube34
+    100046: pCube35
+    100048: pCube39
+    100050: second_floor2
+    100052: transform7
+    100054: transform8
+    400000: //RootNode
+    400002: back_wall3
+    400004: first_floor
+    400006: front_wall1
+    400008: ground_floor
+    400010: left_wall10
+    400012: left_wall11
+    400014: outlet_thing1
+    400016: outlet_thing10
+    400018: outlet_thing12
+    400020: outlet_thing13
+    400022: outlet_thing14
+    400024: outlet_thing3
+    400026: outlet_thing5
+    400028: outlet_thing6
+    400030: pCube12
+    400032: pCube24
+    400034: pCube25
+    400036: pCube26
+    400038: pCube27
+    400040: pCube28
+    400042: pCube29
+    400044: pCube34
+    400046: pCube35
+    400048: pCube39
+    400050: second_floor2
+    400052: transform7
+    400054: transform8
+    2100000: aiStandardSurface1
+    2100002: lambert1
+    2300000: back_wall3
+    2300002: first_floor
+    2300004: front_wall1
+    2300006: ground_floor
+    2300008: left_wall10
+    2300010: left_wall11
+    2300012: outlet_thing1
+    2300014: outlet_thing10
+    2300016: outlet_thing12
+    2300018: outlet_thing13
+    2300020: outlet_thing14
+    2300022: outlet_thing3
+    2300024: outlet_thing5
+    2300026: outlet_thing6
+    2300028: pCube24
+    2300030: pCube28
+    2300032: pCube29
+    2300034: pCube34
+    2300036: pCube35
+    2300038: pCube39
+    2300040: second_floor2
+    3300000: back_wall3
+    3300002: first_floor
+    3300004: front_wall1
+    3300006: ground_floor
+    3300008: left_wall10
+    3300010: left_wall11
+    3300012: outlet_thing1
+    3300014: outlet_thing10
+    3300016: outlet_thing12
+    3300018: outlet_thing13
+    3300020: outlet_thing14
+    3300022: outlet_thing3
+    3300024: outlet_thing5
+    3300026: outlet_thing6
+    3300028: pCube24
+    3300030: pCube28
+    3300032: pCube29
+    3300034: pCube34
+    3300036: pCube35
+    3300038: pCube39
+    3300040: second_floor2
+    4300000: ground_floor
+    4300002: first_floor
+    4300004: pCube24
+    4300006: outlet_thing1
+    4300008: outlet_thing3
+    4300010: pCube28
+    4300012: pCube29
+    4300014: second_floor2
+    4300016: outlet_thing5
+    4300018: outlet_thing6
+    4300020: outlet_thing10
+    4300022: outlet_thing12
+    4300024: outlet_thing13
+    4300026: outlet_thing14
+    4300028: pCube34
+    4300030: pCube35
+    4300032: left_wall10
+    4300034: front_wall1
+    4300036: pCube39
+    4300038: left_wall11
+    4300040: back_wall3
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
