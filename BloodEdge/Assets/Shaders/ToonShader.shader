@@ -21,6 +21,12 @@
 	{
 		Pass
 		{
+
+			Tags
+			{
+				"LightMode" = "ForwardBase"
+				"PassFlags" = "OnlyDirectional"
+			}
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
@@ -142,7 +148,7 @@
 
 
 				float4 sample = tex2D(_MainTex, TRANSFORM_TEX(i.uv, _MainTex));
-				float4 BM = float4(worldNormal, 1);
+				float4 BM = float4(saturate(worldNormal), 1);
 				return _Color * sample * (_AmbientColor + light + specular + rim + BM);
 			}
 			ENDCG

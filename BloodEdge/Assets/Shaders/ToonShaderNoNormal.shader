@@ -20,6 +20,12 @@
 		{
 			Pass
 			{
+				Tags
+				{
+					"LightMode" = "ForwardBase"
+					"PassFlags" = "OnlyDirectional"
+				}
+
 				CGPROGRAM
 				#pragma vertex vert
 				#pragma fragment frag
