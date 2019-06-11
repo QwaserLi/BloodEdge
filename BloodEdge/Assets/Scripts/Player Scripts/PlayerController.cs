@@ -131,8 +131,8 @@ public class PlayerController : MonoBehaviour
 
         if (desiredMoveDirection != Vector3.zero)
         {
-           // transform.forward = desiredMoveDirection;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection),0.5f);
+            //transform.forward = desiredMoveDirection;
+            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection),0.5f);
 
         }
         if (!PlayerAttack.isAttacking) {
