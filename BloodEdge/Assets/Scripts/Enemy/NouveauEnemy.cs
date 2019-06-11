@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Enemy {
@@ -8,7 +9,7 @@ namespace Enemy {
 		 *				Constants				*|
 		 *--------------------------------------*/
 		private const int CROWDING_RESOLUTION 	= 16;
-		private const float CROWDING_RANGE 		= 6f;
+		private const float CROWDING_RANGE 		= 8f; //was 6f. Now 8 to account for movement speed.
 		private const float CROWDING_CHECK_TIME = 1f;
 		//calculated helper variables
 		private const float CROWDING_INTERVAL_ANGLE = 360f / CROWDING_RESOLUTION;
@@ -19,20 +20,26 @@ namespace Enemy {
 		 *--------------------------------------*/
 	    //references to the enemy's relevant components
             private CapsuleCollider _capsuleCollider;
-            private MeshRenderer _meshRenderer;
+            //private MeshRenderer _meshRenderer;
+            private Animator _puppetAnimator;
+            private Rigidbody _rigidbody;
+            
         //references to the player GameObject and the relevant components
             private GameObject _pGameObject;
             private PlayerHealth _pHealth;
             private PlayerController _pController;
             private Transform _pTransform;
-        //settings exposed to the Unity Inspector
-        [Header("Gameplay Settings")]
+            
+	    //settings exposed to the Unity Inspector
+	    [Header("Gameplay Settings")]
 			[SerializeField, Range(0.1f, 5f)] private float movementSpeed = 1f;	//enemy movement in units per second
 			[SerializeField, Range(10f, 100f)] private float turningSpeed = 50f;
 			[Header("Behaviour Settings")]
 			[SerializeField, Range(0.85f, 0.95f)] private float turningAccuracy = 0.95f;
 			[SerializeField, Range(0.1f, 1f)] private float aggressiveness;
 			//[SerializeField, Range(0.05f, 2/3f)] private float crowdingThreshold;
+			
+			
 		//internal state variables
 			private Vector3 _startingPosition;
 			private bool _tryFacePlayer;		//whether the enemy should try to keep facing the player
@@ -40,17 +47,32 @@ namespace Enemy {
             private float[] _crowded;		//crowded directions, going clockwise. Lower is more crowded.
             private float _crowdedTotal;	//sum of all crowding directions
             //private bool _engaging;			//is the enemy currently engaging the player or just looking menacing?
+            private bool _attacking;
             private bool _idle;
             //below variables are only temporarily exposed for debug purposes
-            [SerializeField] private Directions movementState = Directions.idle;
-            [SerializeField] private Vector3 desiredVector; 
+            [SerializeField] private Directive directiveState = Directive.idle;
+            [SerializeField] private Vector3 desiredVector;
+            [SerializeField] private float baseAnimSpeedScalar = 0.5f;
 	    //internal timers
 			private float _crowdingUpdateTimer; //in seconds
 			private float _hitStunTimer;
+			private float _hitITimer;
+			
+			//maybe temporary? I hope so!
+			private float _strikeThePlayerTimer = -1f;
+			private float _forbiddenFromAttackingTimer;
 			
 			
 	    //possibly temporary:
 			private float hp = 100f;
+			
+		//debug settings
+		[Header("Debug Settings")]
+			[SerializeField] private GameObject debugHead;
+		
+
+		private static readonly int IsRunning = Animator.StringToHash("isRunning");
+
 
 		/*--------------------------------------*\
 		 *			Gameplay Methods			*|
@@ -62,12 +84,16 @@ namespace Enemy {
 	        _startingPosition = transform.position;
 	        
 	        _capsuleCollider = GetComponent<CapsuleCollider>();
-	        _meshRenderer = GetComponent<MeshRenderer>();
+	        //_meshRenderer = GetComponent<MeshRenderer>();
+	        _puppetAnimator = GetComponentInChildren<Animator>();
+	        _rigidbody = GetComponent<Rigidbody>();
 	        
 	        _pGameObject = GameObject.FindWithTag("Player");
 	        _pHealth = _pGameObject.GetComponent<PlayerHealth>();
 	        _pController = _pGameObject.GetComponent<PlayerController>();
 	        _pTransform = _pGameObject.transform;
+
+	        _puppetAnimator.speed = baseAnimSpeedScalar;
         }
 
 
@@ -76,9 +102,25 @@ namespace Enemy {
 	        if (UpdateTimer(ref _crowdingUpdateTimer, 1f)) {
 		        UpdateCrowding();
 	        }
-
-	        if (_hitStunTimer > 0f) { UpdateTimer(ref _hitStunTimer, 0f); return; }
 	        
+	        if (_hitITimer > 0f) {
+		        UpdateTimer(ref _hitITimer, 0f);
+	        }
+
+	        if (_hitStunTimer > 0f) {
+		        UpdateTimer(ref _hitStunTimer, 0f);
+		        _puppetAnimator.speed = _hitStunTimer > 0f ? 0.01f : baseAnimSpeedScalar;
+		        return;
+	        }
+
+	        if (_strikeThePlayerTimer > 0f) {
+		        UpdateTimer(ref _strikeThePlayerTimer, 0f);
+	        }
+
+	        if (_forbiddenFromAttackingTimer > 0f) {
+		        UpdateTimer(ref _forbiddenFromAttackingTimer, 0f);
+	        }
+
 	        desiredVector = Vector3.MoveTowards(
 			    desiredVector,
 			    AvoidCrowdingVector(),
@@ -86,13 +128,17 @@ namespace Enemy {
 
 		    var leash = _startingPosition - transform.position;
 		    leash.y = 0;
-		    desiredVector = Vector3.MoveTowards(desiredVector, leash, 0.5f * dT).normalized;
+		    desiredVector = Vector3.MoveTowards(desiredVector, leash, 0.75f * dT).normalized; //was 0.5
 		    
 		    float idleToggleChance = 0f;
 
 		    if (_awareOfPlayer) {
-			    _tryFacePlayer = CrowdingPercent() < 0.3f;
-				desiredVector = Vector3.MoveTowards(desiredVector, _pTransform.position - transform.position, 1f * dT).normalized;
+			    _tryFacePlayer = CrowdingPercent() < 0.3f || _attacking;
+				desiredVector = Vector3.MoveTowards(
+					desiredVector, 
+					_pTransform.position - transform.position, 
+					Mathf.Max(3f * dT, 3f * dT / Vector3.Distance(transform.position, _pTransform.position))
+				).normalized;
 	        }
 		    else {
 			    idleToggleChance = 0.005f/60f;
@@ -102,35 +148,77 @@ namespace Enemy {
 			    _idle = !_idle;
 		    }
 
+		    if (_attacking && _strikeThePlayerTimer > -1 && _strikeThePlayerTimer <= 0) {
+			    _strikeThePlayerTimer = -1;
+			    _attacking = false;
+
+			    if (Vector3.Distance(_pTransform.position, transform.position + transform.forward) < 1.25f) {
+				    _pHealth.Hit(5f, (_pTransform.position - transform.position).normalized);
+				    Debug.Log("Hit the player!");
+			    }
+		    }
+
 	        //todo: decide if we're facing the player or not (crowding check? Very crowded, break gaze and retreat from player?)
 	        
 	        
 	        //choose a movement direction based on what's going to get us going where we want to go
 	        desiredVector.y = 0;
-	        var bestMovementDirection = _idle ? Directions.idle : BestDirection();
-	        
-	        movementState = bestMovementDirection;
+
+	        if (!_attacking) {
+
+		        directiveState = _idle ? Directive.idle : ChooseDirective();
+
+		        var t = transform;
+		        var p = t.position;
+		        bool attemptingMovement = false;
 		        
-	        
-	        
-	        
-	        switch (movementState) {
-		        case Directions.forward: {
-			        AttemptMoveForwards(dT);
-			        break;
+		        switch (directiveState) {
+			        case Directive.forward: {
+				        transform.position = Vector3.MoveTowards(p, p + t.forward, movementSpeed * dT);
+				        attemptingMovement = true;
+				        break;
+			        }
+
+			        case Directive.backward: {
+				        transform.position = Vector3.MoveTowards(p, p + t.forward, -movementSpeed * dT * 0.5f);
+				        attemptingMovement = true;
+				        break;
+			        }
+
+			        case Directive.strafeLeft: {
+				        transform.position = Vector3.MoveTowards(p, p - t.right, movementSpeed * dT * 0.7f);
+				        attemptingMovement = true;
+				        break;
+			        }
+
+			        case Directive.strafeRight: {
+				        transform.position = Vector3.MoveTowards(p, p + t.right, movementSpeed * dT * 0.7f);
+				        attemptingMovement = true;
+				        break;
+			        }
+
+			        case Directive.attack: {
+				        _puppetAnimator.SetBool(IsRunning, false);
+
+				        _attacking = true;
+				        _forbiddenFromAttackingTimer = 3f;
+				        _strikeThePlayerTimer = 2f;
+				        
+				        //todo: an animation here except we can't use the player one because of callbacks.
+				        
+				        break;
+			        }
+
+			        default: {
+				        _puppetAnimator.SetBool(IsRunning, false);
+				        break;
+			        }
 		        }
-		        case Directions.backward: {
-			        AttemptMoveBackwards(dT);
-			        break;
-		        }
-		        case Directions.strafeLeft: {
-			        AttemptMoveLeft(dT);
-			        break;
-		        }
-		        case Directions.strafeRight: {
-			        AttemptMoveRight(dT);
-			        break;
-		        }
+
+		        _puppetAnimator.SetBool(IsRunning, attemptingMovement);
+//		        if (attemptingMovement) { //todo: this won't work for strafing, but we don't have strafes yet.
+//			        _puppetAnimator.SetBool(IsRunning, _rigidbody.velocity.magnitude > 0.3f);
+//		        }
 	        }
         }
 
@@ -148,9 +236,23 @@ namespace Enemy {
         }
         
         public bool Hit(float damage, Vector3 force) {
-	        hp -= damage;
-	        GetComponent<Rigidbody>().AddForce(force);
-	        _hitStunTimer = 2f;
+	        if (_hitITimer <= 0) {
+		        hp -= damage * (_hitStunTimer > 0 ? 0.33f : 0.75f);
+		        //GetComponent<Rigidbody>().AddForce(force);
+		        GetComponent<Rigidbody>().AddForce(Vector3.up * 100f);
+		        GetComponent<Rigidbody>().AddForce(
+			        //(transform.position-_pTransform.position).normalized * (_hitStunTimer > 0f ? 500f : 1000f)
+			        (_pTransform.forward + (transform.position - _pTransform.position).normalized)
+			        * (_hitStunTimer > 0f ? 10f : 70f)
+		        );
+		        
+		        _hitStunTimer = (_hitStunTimer + 1.5f)/2f;
+		        _hitITimer = _hitStunTimer; //we've currently got an enormous hitbox, so set this to stun time for now. // * 0.75f;
+
+		        _attacking = false;
+		        _strikeThePlayerTimer = -1f;
+	        }
+
 	        return true;
         }
 
@@ -159,6 +261,7 @@ namespace Enemy {
 		 *--------------------------------------*/
         private bool FacingPlayer() {
 	        return Vector3.SignedAngle(transform.forward, (_pTransform.position - transform.position).normalized, Vector3.up) <= 20f;
+	        //todo: replace with the simpler vector check and put in the place of the old one.
         }
         
         private void AttemptFacePlayer(float dT) {
@@ -174,27 +277,7 @@ namespace Enemy {
 		        transform.Rotate(0, rot, 0);
 	        }
         }
-
-        private void AttemptMoveForwards(float dT) {
-	        var t = transform;
-	        var p = t.position;
-	        transform.position = Vector3.MoveTowards(p, p+t.forward, movementSpeed*dT);
-        }
-        private void AttemptMoveBackwards(float dT) {
-	        var t = transform;
-	        var p = t.position;
-	        transform.position = Vector3.MoveTowards(p, p+t.forward, -movementSpeed*dT*0.5f);
-        }
-        private void AttemptMoveLeft(float dT) {
-	        var t = transform;
-	        var p = t.position;
-	        transform.position = Vector3.MoveTowards(p, p-t.right, movementSpeed*dT*0.5f);
-        }
-        private void AttemptMoveRight(float dT) {
-	        var t = transform;
-	        var p = t.position;
-	        transform.position = Vector3.MoveTowards(p, p+t.right, movementSpeed*dT*0.5f);
-        }
+        
         
         private void UpdateCrowding() {
 	        var checkVector = Vector3.forward;
@@ -204,7 +287,7 @@ namespace Enemy {
 	        for (int i = 0; i < CROWDING_RESOLUTION; i++) {
 		        _crowded[i] = 
 			        Physics.Raycast(
-				        transform.position,
+				        transform.position - Vector3.up*0.5f,
 				        checkVector,
 				        out hit,
 				        maxDistance: CROWDING_RANGE,
@@ -236,39 +319,46 @@ namespace Enemy {
 	        return Quaternion.Euler(0, CROWDING_INTERVAL_ANGLE * mostCrowdedIndex, 0) * -Vector3.forward;
         }
 
-        private Directions BestDirection() {
-	        Directions bestDirection = Directions.idle;
+        private Directive ChooseDirective() {
+	        Directive bestDirective = Directive.idle;
 	        float bestRange = 10f;
 	        float checkRange;
 	        
+	        if (_forbiddenFromAttackingTimer <= 0 &&
+					Vector3.Distance(transform.position + transform.forward, _pTransform.position) < 1.25f) {
+		        //Debug.Log("Attempting attack");
+		        return Directive.attack;
+	        }
+
 	        if ((checkRange = Vector3.Distance(transform.right, desiredVector)) < bestRange) {
 		        bestRange = checkRange;
-		        bestDirection = Directions.strafeRight;
+		        bestDirective = Directive.strafeRight;
 	        }
 	        if ((checkRange = Vector3.Distance(-transform.right, desiredVector)) < bestRange) {
 		        bestRange = checkRange;
-		        bestDirection = Directions.strafeLeft;
+		        bestDirective = Directive.strafeLeft;
 	        }
 	        if ((checkRange = Vector3.Distance(transform.forward, desiredVector)) < bestRange) {
 		        bestRange = checkRange;
-		        bestDirection = Directions.forward;
+		        bestDirective = Directive.forward;
 	        }
 	        if (Vector3.Distance(-transform.forward, desiredVector) < bestRange) {
-		        bestDirection = Directions.backward;
+		        bestDirective = Directive.backward;
 	        }
-	        return bestDirection;
+	        return bestDirective;
         }
 
         private float CrowdingPercent() {
 	        return 1f - _crowdedTotal / CROWDING_EMPTY_TOTAL;
         }
         
-        private enum Directions {
+        private enum Directive {
 	        forward,
 	        backward,
 	        strafeLeft,
 	        strafeRight,
-	        idle
+	        idle,
+	        attack
         }
 
         private bool UpdateTimer(ref float timer, float resetSeconds) {
@@ -302,21 +392,22 @@ namespace Enemy {
         private void OnDrawGizmos() {
 	        float eyeSize = 0.15f;
 	        var t = transform;
+	        var headT = debugHead.transform;
+	        var headPos = headT.position;
 	        var pos = t.position;
-	        var facing = t.forward;
+	        var facing = headT.forward;
 	        var sc = t.localScale;
 
-	        Vector3 facePos = pos + facing * sc.z/2f; 	//'z', apparently, is forward.
-	        Vector3 eyesPos = facePos + t.up * sc.y/3f;
-	        Vector3 eyesOff = t.right * 0.3f;
+	        Vector3 facePos = headPos + facing * sc.z/2f; 	//'z', apparently, is forward.
+	        Vector3 eyesPos = debugHead.transform.position + headT.forward * 0.125f; //facePos + t.up * sc.y/3f;
+	        Vector3 eyesOff = headT.right * 0.275f;
 	        Vector3 rEyePos = eyesPos + eyesOff/2f;
 
-	        Gizmos.color = !_awareOfPlayer ? Color.white : _hitStunTimer > 0f ? Color.yellow : new Color(1f, 0.75f, 0.75f);
-	        //todo: put an ape escape cap on these dreadful children instead.
+	        Gizmos.color = !_awareOfPlayer ? Color.white : _hitStunTimer > 0f ? Color.yellow : new Color(1f, 0.8f, 0.8f);
 	        for (int i = 0; i < 2; i++) {
 		        Gizmos.DrawSphere(rEyePos + -eyesOff * i, eyeSize);
 	        }
-	        Gizmos.color = Color.black;
+	        Gizmos.color = _awareOfPlayer ? new Color(0.64f, 0f, 0f) : new Color(0.41f, 0.12f, 0.24f);//Color.black;
 	        for (int i = 0; i < 2; i++) {
 		        Gizmos.DrawSphere(rEyePos + -eyesOff * i, eyeSize / 3f);
 	        }
@@ -327,14 +418,24 @@ namespace Enemy {
 	        var crowdingLine = Vector3.forward;
 	        for (int i = 0; i < CROWDING_RESOLUTION; i++) {
 		        float crowdRatio = _crowded[i] / CROWDING_RANGE;
-		        Gizmos.color = new Color(1f-crowdRatio, crowdRatio, 0, 1f-crowdRatio*0.97f+0.03f);
+		        Gizmos.color = new Color(1f-crowdRatio, crowdRatio, 0, 1f-crowdRatio*0.97f);
 
-		        Gizmos.DrawLine(pos, pos+crowdRatio * CROWDING_RANGE * crowdingLine);
+		        Gizmos.DrawLine(pos - Vector3.up*0.5f, pos+crowdRatio * CROWDING_RANGE * crowdingLine - Vector3.up*0.5f);
 		        crowdingLine = Quaternion.Euler(0, CROWDING_INTERVAL_ANGLE, 0) * crowdingLine;
 	        }
+
+	        Gizmos.color = Color.red;
+	        if (_attacking) {
+		        Gizmos.DrawWireSphere(pos + t.forward, 1.25f);
+		        
+	        }
+
+	        if (_strikeThePlayerTimer > -0.9f) {
+		        Gizmos.DrawSphere(pos + t.forward, 1.25f - 0.625f * _strikeThePlayerTimer);
+	        }
 	        
-////	        Gizmos.color = Color.red;
-////	        Gizmos.DrawLine(pos, pos+desiredVector*5f);
+	        
+	        //Gizmos.DrawLine(pos, pos+desiredVector*5f);
 ////	        Gizmos.color = Color.green;
 ////	        Gizmos.DrawLine(pos, pos+AvoidCrowdingVector()*2f);
 //	        
