@@ -1,0 +1,359 @@
+fileFormatVersion: 2
+guid: 1d2eb9e448d7eec49a7e72db6ead7147
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: across10
+    100004: across11
+    100006: across6
+    100008: across7
+    100010: gloor
+    100012: gloor1
+    100014: gloor2
+    100016: gloor3
+    100018: gloor4
+    100020: gloor5
+    100022: gloor6
+    100024: pCube10
+    100026: pCube11
+    100028: pCube3
+    100030: pCube4
+    100032: pCube5
+    100034: pCube6
+    100036: pCube7
+    100038: pCube8
+    100040: pCube9
+    100042: polySurface10
+    100044: polySurface10 1
+    100046: polySurface11
+    100048: polySurface11 1
+    100050: polySurface12
+    100052: polySurface12 1
+    100054: polySurface13
+    100056: polySurface13 1
+    100058: polySurface14
+    100060: polySurface14 1
+    100062: polySurface15
+    100064: polySurface15 1
+    100066: polySurface16
+    100068: polySurface16 1
+    100070: polySurface17
+    100072: polySurface17 1
+    100074: polySurface7
+    100076: polySurface7 1
+    100078: polySurface8
+    100080: polySurface8 1
+    100082: polySurface9
+    100084: polySurface9 1
+    100086: wall4
+    100088: wall5
+    100090: wall6
+    100092: wall7
+    100094: across12
+    100096: across14
+    100098: gloor7
+    100100: gloor8
+    100102: pCube14
+    100104: pCube15
+    100106: wall8
+    100108: wall9
+    400000: //RootNode
+    400002: across10
+    400004: across11
+    400006: across6
+    400008: across7
+    400010: gloor
+    400012: gloor1
+    400014: gloor2
+    400016: gloor3
+    400018: gloor4
+    400020: gloor5
+    400022: gloor6
+    400024: pCube10
+    400026: pCube11
+    400028: pCube3
+    400030: pCube4
+    400032: pCube5
+    400034: pCube6
+    400036: pCube7
+    400038: pCube8
+    400040: pCube9
+    400042: polySurface10
+    400044: polySurface10 1
+    400046: polySurface11
+    400048: polySurface11 1
+    400050: polySurface12
+    400052: polySurface12 1
+    400054: polySurface13
+    400056: polySurface13 1
+    400058: polySurface14
+    400060: polySurface14 1
+    400062: polySurface15
+    400064: polySurface15 1
+    400066: polySurface16
+    400068: polySurface16 1
+    400070: polySurface17
+    400072: polySurface17 1
+    400074: polySurface7
+    400076: polySurface7 1
+    400078: polySurface8
+    400080: polySurface8 1
+    400082: polySurface9
+    400084: polySurface9 1
+    400086: wall4
+    400088: wall5
+    400090: wall6
+    400092: wall7
+    400094: across12
+    400096: across14
+    400098: gloor7
+    400100: gloor8
+    400102: pCube14
+    400104: pCube15
+    400106: wall8
+    400108: wall9
+    2100000: lambert1
+    2300000: across10
+    2300002: across11
+    2300004: gloor
+    2300006: gloor1
+    2300008: gloor2
+    2300010: gloor3
+    2300012: gloor4
+    2300014: gloor5
+    2300016: gloor6
+    2300018: pCube10
+    2300020: pCube11
+    2300022: pCube3
+    2300024: pCube4
+    2300026: pCube5
+    2300028: pCube6
+    2300030: pCube7
+    2300032: pCube8
+    2300034: pCube9
+    2300036: polySurface10
+    2300038: polySurface10 1
+    2300040: polySurface11
+    2300042: polySurface11 1
+    2300044: polySurface12
+    2300046: polySurface12 1
+    2300048: polySurface13
+    2300050: polySurface13 1
+    2300052: polySurface14
+    2300054: polySurface14 1
+    2300056: polySurface15
+    2300058: polySurface15 1
+    2300060: polySurface16
+    2300062: polySurface16 1
+    2300064: polySurface17
+    2300066: polySurface17 1
+    2300068: polySurface7
+    2300070: polySurface7 1
+    2300072: polySurface8
+    2300074: polySurface8 1
+    2300076: polySurface9
+    2300078: polySurface9 1
+    2300080: wall4
+    2300082: wall5
+    2300084: wall6
+    2300086: wall7
+    2300088: across12
+    2300090: across14
+    2300092: gloor7
+    2300094: gloor8
+    2300096: pCube14
+    2300098: pCube15
+    2300100: wall8
+    2300102: wall9
+    3300000: across10
+    3300002: across11
+    3300004: gloor
+    3300006: gloor1
+    3300008: gloor2
+    3300010: gloor3
+    3300012: gloor4
+    3300014: gloor5
+    3300016: gloor6
+    3300018: pCube10
+    3300020: pCube11
+    3300022: pCube3
+    3300024: pCube4
+    3300026: pCube5
+    3300028: pCube6
+    3300030: pCube7
+    3300032: pCube8
+    3300034: pCube9
+    3300036: polySurface10
+    3300038: polySurface10 1
+    3300040: polySurface11
+    3300042: polySurface11 1
+    3300044: polySurface12
+    3300046: polySurface12 1
+    3300048: polySurface13
+    3300050: polySurface13 1
+    3300052: polySurface14
+    3300054: polySurface14 1
+    3300056: polySurface15
+    3300058: polySurface15 1
+    3300060: polySurface16
+    3300062: polySurface16 1
+    3300064: polySurface17
+    3300066: polySurface17 1
+    3300068: polySurface7
+    3300070: polySurface7 1
+    3300072: polySurface8
+    3300074: polySurface8 1
+    3300076: polySurface9
+    3300078: polySurface9 1
+    3300080: wall4
+    3300082: wall5
+    3300084: wall6
+    3300086: wall7
+    3300088: across12
+    3300090: across14
+    3300092: gloor7
+    3300094: gloor8
+    3300096: pCube14
+    3300098: pCube15
+    3300100: wall8
+    3300102: wall9
+    4300000: gloor
+    4300002: gloor1
+    4300004: pCube3
+    4300006: pCube4
+    4300008: pCube5
+    4300010: pCube6
+    4300012: pCube7
+    4300014: pCube8
+    4300016: pCube9
+    4300018: pCube10
+    4300020: polySurface7
+    4300022: polySurface8
+    4300024: polySurface9
+    4300026: polySurface10
+    4300028: polySurface11
+    4300030: polySurface12
+    4300032: polySurface13
+    4300034: polySurface14
+    4300036: polySurface15
+    4300038: polySurface16
+    4300040: polySurface17
+    4300042: polySurface7
+    4300044: polySurface8
+    4300046: polySurface9
+    4300048: polySurface10
+    4300050: polySurface11
+    4300052: polySurface12
+    4300054: polySurface13
+    4300056: polySurface14
+    4300058: polySurface15
+    4300060: polySurface16
+    4300062: polySurface17
+    4300064: wall4
+    4300066: wall5
+    4300068: across10
+    4300070: across11
+    4300072: wall6
+    4300074: wall7
+    4300076: gloor2
+    4300078: gloor3
+    4300080: gloor4
+    4300082: gloor5
+    4300084: gloor6
+    4300086: pCube11
+    4300088: across12
+    4300090: wall8
+    4300092: pCube14
+    4300094: wall9
+    4300096: across14
+    4300098: gloor7
+    4300100: gloor8
+    4300102: pCube15
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

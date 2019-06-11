@@ -70,6 +70,8 @@ ModelImporter:
     100128: outlet_thing5
     100130: outlet_thing6
     100132: outlet_thing7
+    100134: left_wall8
+    100136: left_wall9
     400000: //RootNode
     400002: floor
     400004: floor1
@@ -137,6 +139,8 @@ ModelImporter:
     400128: outlet_thing5
     400130: outlet_thing6
     400132: outlet_thing7
+    400134: left_wall8
+    400136: left_wall9
     2100000: lambert1
     2100002: aiStandardSurface1
     2300000: //RootNode
@@ -191,6 +195,9 @@ ModelImporter:
     2300098: outlet_thing5
     2300100: outlet_thing6
     2300102: outlet_thing7
+    2300104: back_wall2
+    2300106: left_wall8
+    2300108: left_wall9
     3300000: //RootNode
     3300002: floor
     3300004: floor1
@@ -243,6 +250,9 @@ ModelImporter:
     3300098: outlet_thing5
     3300100: outlet_thing6
     3300102: outlet_thing7
+    3300104: back_wall2
+    3300106: left_wall8
+    3300108: left_wall9
     4300000: pCube1
     4300002: floor
     4300004: pCube2
@@ -294,6 +304,9 @@ ModelImporter:
     4300096: outlet_thing13
     4300098: outlet_thing14
     4300100: outlet_thing15
+    4300102: left_wall8
+    4300104: left_wall9
+    4300106: back_wall2
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:

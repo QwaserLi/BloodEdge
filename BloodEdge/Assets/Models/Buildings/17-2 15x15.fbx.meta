@@ -70,6 +70,18 @@ ModelImporter:
     100128: polySurface9
     100130: transform1
     100132: transform2
+    100134: wall10
+    100136: wall9
+    100138: frame21
+    100140: frame22
+    100142: frame23
+    100144: frame24
+    100146: frame25
+    100148: frame26
+    100150: frame27
+    100152: frame28
+    100154: pCube13
+    100156: polySurface17
     400000: //RootNode
     400002: flooor
     400004: flooor1
@@ -137,8 +149,21 @@ ModelImporter:
     400128: polySurface9
     400130: transform1
     400132: transform2
+    400134: wall10
+    400136: wall9
+    400138: frame21
+    400140: frame22
+    400142: frame23
+    400144: frame24
+    400146: frame25
+    400148: frame26
+    400150: frame27
+    400152: frame28
+    400154: pCube13
+    400156: polySurface17
     2100000: lambert1
     2100002: aiStandardSurface1
+    2100004: Default_Material
     2300000: flooor
     2300002: flooor1
     2300004: flooor2
@@ -201,6 +226,17 @@ ModelImporter:
     2300118: polySurface7
     2300120: polySurface8
     2300122: polySurface9
+    2300124: wall10
+    2300126: wall9
+    2300128: frame21
+    2300130: frame22
+    2300132: frame23
+    2300134: frame24
+    2300136: frame25
+    2300138: frame26
+    2300140: frame27
+    2300142: frame28
+    2300144: polySurface17
     3300000: flooor
     3300002: flooor1
     3300004: flooor2
@@ -263,6 +299,17 @@ ModelImporter:
     3300118: polySurface7
     3300120: polySurface8
     3300122: polySurface9
+    3300124: wall10
+    3300126: wall9
+    3300128: frame21
+    3300130: frame22
+    3300132: frame23
+    3300134: frame24
+    3300136: frame25
+    3300138: frame26
+    3300140: frame27
+    3300142: frame28
+    3300144: polySurface17
     4300000: flooor
     4300002: flooor1
     4300004: flooor2
@@ -325,6 +372,17 @@ ModelImporter:
     4300118: polySurface7
     4300120: polySurface8
     4300122: pillar11
+    4300124: wall9
+    4300126: wall10
+    4300128: frame21
+    4300130: frame22
+    4300132: frame23
+    4300134: frame24
+    4300136: frame25
+    4300138: frame26
+    4300140: frame27
+    4300142: frame28
+    4300144: polySurface17
   externalObjects: {}
   materials:
     importMaterials: 1
