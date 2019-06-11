@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     private Animator anim;
     private Camera cam;
+    private LockOn lockOn;
     private float gravity;
     private Vector3 velocity;
     private Vector3 previousVelocity;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         gravity = Physics.gravity.y * 100;
         soundManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+        lockOn = GetComponentInChildren<LockOn>();
     }
 
     // Update is called once per frame
@@ -132,7 +134,14 @@ public class PlayerController : MonoBehaviour
         if (desiredMoveDirection != Vector3.zero)
         {
             //transform.forward = desiredMoveDirection;
-            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection),0.5f);
+            if (LockOn.LockedOn) {
+                print("djhgfduhbfdhjf");
+                //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lockOn.getEnemyPosition()), 0.5f);
+                transform.LookAt(lockOn.getEnemyPosition());
+            }
+            else {
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), 0.5f);
+            }
 
         }
         if (!PlayerAttack.isAttacking) {

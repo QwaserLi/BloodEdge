@@ -23,6 +23,7 @@ public class LockOn : MonoBehaviour
     void Update()
     {
         // Lock On to closest enemy rather than random enemy
+        // Toggle between enemies
     }
 
     private void lockOn(GameObject enemy)
@@ -30,6 +31,8 @@ public class LockOn : MonoBehaviour
         CTG.m_Targets[1].target = enemy.transform;
         lockedOnEnemy = enemy;
         LockedOn = true;
+        LockOnCamera.SetActive(true);
+        ThirdPersonCam.SetActive(false);
     }
 
     private void lockOff()
@@ -37,6 +40,8 @@ public class LockOn : MonoBehaviour
         CTG.m_Targets[1].target = null;
         lockedOnEnemy = null;
         LockedOn = false;
+        LockOnCamera.SetActive(false);
+        ThirdPersonCam.SetActive(true);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -45,8 +50,6 @@ public class LockOn : MonoBehaviour
         GameObject enemy = other.gameObject;
         if (enemy.tag == "Attackable")
         {
-            print("HI");
-
             if (Input.GetKeyDown(KeyCode.Z))
             {
                 if (GameObject.ReferenceEquals(enemy, lockedOnEnemy))
@@ -68,7 +71,7 @@ public class LockOn : MonoBehaviour
         if (enemy.tag == "Attackable")
         {
 
-            if (Input.GetKeyDown(KeyCode.Z))
+            if (Input.GetKey(KeyCode.Z))
             {
                 if (GameObject.ReferenceEquals(enemy, lockedOnEnemy))
                 {
@@ -93,5 +96,9 @@ public class LockOn : MonoBehaviour
                     lockOff();
                 }
         }
+    }
+
+    public Vector3 getEnemyPosition() {
+        return lockedOnEnemy.transform.position;
     }
 }
