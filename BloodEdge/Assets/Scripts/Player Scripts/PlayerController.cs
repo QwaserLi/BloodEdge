@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
         //Movement
         Movement();
-        if (desiredMoveDirection != Vector3.zero && !wasInAir)
+        if (desiredMoveDirection != Vector3.zero && !wasInAir && !PlayerAttack.isAttacking)
         {
             isRunning = true;
             if (!soundManager.IsPlaying("Running"))

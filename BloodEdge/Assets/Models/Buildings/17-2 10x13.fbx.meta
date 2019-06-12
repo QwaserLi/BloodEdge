@@ -113,6 +113,7 @@ ModelImporter:
     2300064: pCube28_polySurface72
     2300066: polySurface73
     2300068: pCube27_polySurface66
+    2300070: //RootNode
     3300000: floor
     3300002: floor10
     3300004: floor11
@@ -148,6 +149,7 @@ ModelImporter:
     3300064: pCube28_polySurface72
     3300066: polySurface73
     3300068: pCube27_polySurface66
+    3300070: //RootNode
     4300000: floor
     4300002: floor10
     4300004: floor11
@@ -183,6 +185,8 @@ ModelImporter:
     4300064: floor21
     4300066: pCube27_polySurface65
     4300068: pCube27_polySurface66
+    4300070: pCube28_polySurface73
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
