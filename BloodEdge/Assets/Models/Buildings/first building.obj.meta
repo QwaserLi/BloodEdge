@@ -5,12 +5,18 @@ ModelImporter:
   fileIDToRecycleName:
     100000: //RootNode
     100002: roof4
+    100004: outlet_thing16
     400000: //RootNode
     400002: roof4
+    400004: outlet_thing16
     2100000: roof4Mat
+    2100002: outlet_thing16Mat
     2300000: roof4
+    2300002: outlet_thing16
     3300000: roof4
+    3300002: outlet_thing16
     4300000: roof4
+    4300002: outlet_thing16
   externalObjects: {}
   materials:
     importMaterials: 1
