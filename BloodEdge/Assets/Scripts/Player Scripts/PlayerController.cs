@@ -20,9 +20,12 @@ public class PlayerController : MonoBehaviour
     private Vector3 velocity;
     private Vector3 previousVelocity;
     private Vector3 desiredMoveDirection;
+    private Vector3 desiredRollDirection;
 
     AudioManager soundManager;
 
+    bool isRolling;
+    bool airDash;
     // Animation variables
     bool isRunning = false;
     bool wasInAir = false;
@@ -33,11 +36,13 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		//Move somewhere else
-		Cursor.visible = false;
-		Cursor.lockState = CursorLockMode.Locked;
+        //Move somewhere else
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
 
-		anim = GetComponent<Animator>();
+        desiredRollDirection = transform.forward;
+
+        anim = GetComponent<Animator>();
         cam = Camera.main;
         controller = GetComponent<CharacterController>();
         gravity = Physics.gravity.y * 100;
@@ -49,7 +54,8 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
 
-		if (PlayerHealth.isDead) {
+        if (PlayerHealth.isDead)
+        {
             return;
         }
 
@@ -58,9 +64,10 @@ public class PlayerController : MonoBehaviour
         if (desiredMoveDirection != Vector3.zero && !wasInAir)
         {
             isRunning = true;
-            if (!soundManager.IsPlaying("Running")) {
+            if (!soundManager.IsPlaying("Running"))
+            {
                 soundManager.Play("Running");
-            }            
+            }
         }
         else
         {
@@ -83,11 +90,12 @@ public class PlayerController : MonoBehaviour
 
         if (wasInAir == true && inAir == false)
         { // No longer in the air          
-            if (PlayerAttack.isAttacking) {
+            if (PlayerAttack.isAttacking)
+            {
                 anim.SetBool("AttackInAir", false);
                 soundManager.Play("AirAttackHit");
             }
-            soundManager.Play("Landing");            
+            soundManager.Play("Landing");
             anim.SetBool("InAir", false);
             wasInAir = false;
         }
@@ -103,23 +111,43 @@ public class PlayerController : MonoBehaviour
 
             Jump();
         }
+
+        if (isRolling && airDash && controller.isGrounded) {
+            airDash = false;
+            isRolling = false;
+        }
+
+        if (!(velocity.x > 0.7 || velocity.x < -0.7 || velocity.z > 0.7 || velocity.z < -0.7))
+        {
+            isRolling = false;
+            velocity.x = 0;
+            velocity.z = 0;
+        }
+
         //Rolling
-        if (Input.GetButtonDown("Roll"))
+        if (Input.GetButtonDown("Roll") && !PlayerAttack.isAttacking)
         {
 
             if (!(velocity.x > 0.7 || velocity.x < -0.7 || velocity.z > 0.7 || velocity.z < -0.7))
-            { 
-                    anim.SetTrigger("Roll");
+            {
+                anim.SetTrigger("Roll");
             }
 
             Roll();
         }
+    
+        print(velocity.y);
         //Drag Force
         ApplyDrag();
     }
 
     void Movement()
     {
+        if (isRolling) {
+            controller.Move(desiredRollDirection.normalized * Time.deltaTime * speed);
+            return;
+        }
+
         float xMovement = Input.GetAxis("Horizontal");
         float zMovement = Input.GetAxis("Vertical");
         Vector3 forward = cam.transform.forward;
@@ -131,26 +159,35 @@ public class PlayerController : MonoBehaviour
 
         desiredMoveDirection = forward * zMovement + right * xMovement;
 
-        if (desiredMoveDirection != Vector3.zero)
+        if (desiredMoveDirection != Vector3.zero) {
+            desiredRollDirection = desiredMoveDirection.normalized;
+        }
+
+        if (desiredMoveDirection != Vector3.zero && !isRolling)
         {
-            //transform.forward = desiredMoveDirection;
-            if (LockOn.LockedOn) {
-                print("djhgfduhbfdhjf");
+            if (LockOn.LockedOn)
+            {
                 //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lockOn.getEnemyPosition()), 0.5f);
                 transform.LookAt(lockOn.getEnemyPosition());
             }
-            else {
+            else
+            {
+                //transform.forward = desiredMoveDirection;
+
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), 0.5f);
             }
 
         }
-        if (!PlayerAttack.isAttacking) {
+        if (!PlayerAttack.isAttacking)
+        {
             controller.Move(desiredMoveDirection.normalized * Time.deltaTime * speed);
             //velocity += desiredMoveDirection.normalized * Time.deltaTime * speed;
-        }else {
-            controller.Move(desiredMoveDirection * Time.deltaTime * (speed*0.5f));
-            //velocity += desiredMoveDirection.normalized * Time.deltaTime * speed*5;
         }
+        //else
+        //{
+        //    controller.Move(desiredMoveDirection * Time.deltaTime * (speed * 0.5f));
+        //    //velocity += desiredMoveDirection.normalized * Time.deltaTime * speed*5;
+        //}
     }
 
     void ApplyGravity()
@@ -169,7 +206,6 @@ public class PlayerController : MonoBehaviour
         {
             gravity = -60f;
         }
-
         else
         {
             gravity = -20f;
@@ -193,25 +229,30 @@ public class PlayerController : MonoBehaviour
 
     void Roll()
     {
-        if ((velocity.x > 0.7 || velocity.x < -0.7 || velocity.z > 0.7 || velocity.z < -0.7)) {
+        if ((velocity.x > 0.7 || velocity.x < -0.7 || velocity.z > 0.7 || velocity.z < -0.7))
+        {
+            isRolling = true;
             return;
         }
 
-            Vector3 rollDirection;
-            if (desiredMoveDirection == Vector3.zero)
-            {
-                rollDirection = transform.forward;
-            }
-            else
-            {
-                rollDirection = desiredMoveDirection;
-            }
+        Vector3 rollDirection;
+        if (desiredMoveDirection == Vector3.zero)
+        {
+            rollDirection = transform.forward;
+        }
+        else
+        {
+            rollDirection = desiredMoveDirection;
+        }
 
-            velocity += Vector3.Scale(rollDirection.normalized,
-                                       rollDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * Drag.x + 1)) / -Time.deltaTime),
-                                                                  0,
-                                                                  (Mathf.Log(1f / (Time.deltaTime * Drag.z + 1)) / -Time.deltaTime)));
-        
+        velocity += Vector3.Scale(rollDirection.normalized,
+                                   rollDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * Drag.x + 1)) / -Time.deltaTime),
+                                                              0,
+                                                              (Mathf.Log(1f / (Time.deltaTime * Drag.z + 1)) / -Time.deltaTime)));
+        isRolling = true;
+        if (!controller.isGrounded) {
+            airDash = true;
+        }
     }
 
     void ApplyDrag()
@@ -228,12 +269,27 @@ public class PlayerController : MonoBehaviour
     {
         wasInAir = true;
         inAir = true;
-        if (!PlayerAttack.isAttacking) {            
-            anim.SetBool("InAir", true);                      
-        } else {
+        if (!PlayerAttack.isAttacking)
+        {
+            anim.SetBool("InAir", true);
+        }
+        else
+        {
             anim.SetBool("InAir", false);
         }
     }
 
+    public bool isPlayerRolling() {
+        return isRolling;
+    }
+
+    public bool canAirAttack()
+    {
+        if (!controller.isGrounded && inAir)
+        {
+            return true;
+        }
+        return false;
+    }
 
 }

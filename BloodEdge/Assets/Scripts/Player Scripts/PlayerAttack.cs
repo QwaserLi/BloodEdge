@@ -94,36 +94,37 @@ public class PlayerAttack: MonoBehaviour
         if (Input.GetAxisRaw("Fire2") == 0) {
             rightMouseDown = false;
         }
-
-        // Player attacks
-        if ((Input.GetAxisRaw("Fire1") > 0 || Input.GetAxisRaw("Fire2") > 0) && canAttack && pMove.inAir && currentWeapon == 0) {
-            isAttacking = true;
-            canAttack = false;
-            ActivateScytheCollider();
-            anim.SetBool("AttackInAir", true);
-            anim.SetBool("AirAttackFinished", false);
-        } else if (Input.GetAxisRaw("Fire1") > 0 && canAttack && !leftMouseDown) {  // Basic Attack        
-            leftMouseDown = true;
-            PrepareNextAttack();
-            PerformScytheAttack(-1);
-        } else if (Input.GetAxisRaw("Fire2") > 0 && canAttack && !rightMouseDown) { // Strong Attack
-            rightMouseDown = true;
-            PrepareNextAttack();
-            PerformScytheAttack(1);            
-        }else if (Input.GetAxisRaw("Magic Weak") > 0 && specialMagicAttackCharge >= 25 && canAttack && !pMove.inAir) { // Weak Magic
-            PrepareNextAttack();
-            if (!rageMode) {
-                specialMagicAttackCharge -= 25;
-            }            
-            isAttacking = true;
-            anim.SetTrigger("BasicMagic");
-        }else if (Input.GetAxisRaw("Magic Strong") > 0 && specialMagicAttackCharge >= 45 && canAttack && !pMove.inAir) { // Strong Magic
-            PrepareNextAttack();
-            if (!rageMode) {
-                specialMagicAttackCharge -= 45;
+        if (!pMove.isPlayerRolling() && !Input.GetButtonDown("Roll")) {
+            // Player attacks
+            if ((Input.GetAxisRaw("Fire1") > 0 || Input.GetAxisRaw("Fire2") > 0) && canAttack && pMove.canAirAttack() && currentWeapon == 0) {
+                isAttacking = true;
+                canAttack = false;
+                ActivateScytheCollider();
+                anim.SetBool("AttackInAir", true);
+                anim.SetBool("AirAttackFinished", false);
+            } else if (Input.GetAxisRaw("Fire1") > 0 && canAttack && !leftMouseDown) {  // Basic Attack        
+                leftMouseDown = true;
+                PrepareNextAttack();
+                PerformScytheAttack(-1);
+            } else if (Input.GetAxisRaw("Fire2") > 0 && canAttack && !rightMouseDown) { // Strong Attack
+                rightMouseDown = true;
+                PrepareNextAttack();
+                PerformScytheAttack(1);
+            } else if (Input.GetAxisRaw("Magic Weak") > 0 && specialMagicAttackCharge >= 25 && canAttack && !pMove.inAir) { // Weak Magic
+                PrepareNextAttack();
+                if (!rageMode) {
+                    specialMagicAttackCharge -= 25;
+                }
+                isAttacking = true;
+                anim.SetTrigger("BasicMagic");
+            } else if (Input.GetAxisRaw("Magic Strong") > 0 && specialMagicAttackCharge >= 45 && canAttack && !pMove.inAir) { // Strong Magic
+                PrepareNextAttack();
+                if (!rageMode) {
+                    specialMagicAttackCharge -= 45;
+                }
+                isAttacking = true;
+                anim.SetTrigger("StrongMagic");
             }
-            isAttacking = true;
-            anim.SetTrigger("StrongMagic");
         }
     }
 
