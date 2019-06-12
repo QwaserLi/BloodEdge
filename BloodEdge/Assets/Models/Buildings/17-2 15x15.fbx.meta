@@ -82,6 +82,75 @@ ModelImporter:
     100152: frame28
     100154: pCube13
     100156: polySurface17
+    100158: x115:flooor
+    100160: x115:flooor1
+    100162: x115:flooor2
+    100164: x115:flooor3
+    100166: x115:flooor4
+    100168: x115:frame21
+    100170: x115:frame22
+    100172: x115:frame23
+    100174: x115:frame24
+    100176: x115:frame25
+    100178: x115:frame26
+    100180: x115:frame27
+    100182: x115:frame28
+    100184: x115:frame29
+    100186: x115:pCube13
+    100188: x115:pCylinder1
+    100190: x115:pCylinder2
+    100192: x115:pCylinder3
+    100194: x115:pCylinder4
+    100196: x115:pCylinder5
+    100198: x115:pCylinder6
+    100200: x115:pCylinder7
+    100202: x115:pillar10
+    100204: x115:pillar11
+    100206: x115:pillar2
+    100208: x115:pillar3
+    100210: x115:pillar7
+    100212: x115:pillar9
+    100214: x115:polySurface15
+    100216: x115:polySurface16
+    100218: x115:polySurface17
+    100220: x115:transform1
+    100222: x115:transform10
+    100224: x115:transform11
+    100226: x115:transform12
+    100228: x115:transform13
+    100230: x115:transform14
+    100232: x115:transform15
+    100234: x115:transform16
+    100236: x115:transform17
+    100238: x115:transform18
+    100240: x115:transform19
+    100242: x115:transform2
+    100244: x115:transform20
+    100246: x115:transform21
+    100248: x115:transform22
+    100250: x115:transform23
+    100252: x115:transform24
+    100254: x115:transform25
+    100256: x115:transform26
+    100258: x115:transform27
+    100260: x115:transform28
+    100262: x115:transform29
+    100264: x115:transform3
+    100266: x115:transform30
+    100268: x115:transform31
+    100270: x115:transform32
+    100272: x115:transform33
+    100274: x115:transform34
+    100276: x115:transform4
+    100278: x115:transform5
+    100280: x115:transform6
+    100282: x115:transform7
+    100284: x115:transform8
+    100286: x115:transform9
+    100288: x115:wall
+    100290: x115:wall10
+    100292: x115:wall7
+    100294: x115:wall9
     400000: //RootNode
     400002: flooor
     400004: flooor1
@@ -161,9 +230,79 @@ ModelImporter:
     400152: frame28
     400154: pCube13
     400156: polySurface17
+    400158: x115:flooor
+    400160: x115:flooor1
+    400162: x115:flooor2
+    400164: x115:flooor3
+    400166: x115:flooor4
+    400168: x115:frame21
+    400170: x115:frame22
+    400172: x115:frame23
+    400174: x115:frame24
+    400176: x115:frame25
+    400178: x115:frame26
+    400180: x115:frame27
+    400182: x115:frame28
+    400184: x115:frame29
+    400186: x115:pCube13
+    400188: x115:pCylinder1
+    400190: x115:pCylinder2
+    400192: x115:pCylinder3
+    400194: x115:pCylinder4
+    400196: x115:pCylinder5
+    400198: x115:pCylinder6
+    400200: x115:pCylinder7
+    400202: x115:pillar10
+    400204: x115:pillar11
+    400206: x115:pillar2
+    400208: x115:pillar3
+    400210: x115:pillar7
+    400212: x115:pillar9
+    400214: x115:polySurface15
+    400216: x115:polySurface16
+    400218: x115:polySurface17
+    400220: x115:transform1
+    400222: x115:transform10
+    400224: x115:transform11
+    400226: x115:transform12
+    400228: x115:transform13
+    400230: x115:transform14
+    400232: x115:transform15
+    400234: x115:transform16
+    400236: x115:transform17
+    400238: x115:transform18
+    400240: x115:transform19
+    400242: x115:transform2
+    400244: x115:transform20
+    400246: x115:transform21
+    400248: x115:transform22
+    400250: x115:transform23
+    400252: x115:transform24
+    400254: x115:transform25
+    400256: x115:transform26
+    400258: x115:transform27
+    400260: x115:transform28
+    400262: x115:transform29
+    400264: x115:transform3
+    400266: x115:transform30
+    400268: x115:transform31
+    400270: x115:transform32
+    400272: x115:transform33
+    400274: x115:transform34
+    400276: x115:transform4
+    400278: x115:transform5
+    400280: x115:transform6
+    400282: x115:transform7
+    400284: x115:transform8
+    400286: x115:transform9
+    400288: x115:wall
+    400290: x115:wall10
+    400292: x115:wall7
+    400294: x115:wall9
     2100000: lambert1
     2100002: aiStandardSurface1
     2100004: Default_Material
+    2100006: lambert2
     2300000: flooor
     2300002: flooor1
     2300004: flooor2
@@ -237,6 +376,7 @@ ModelImporter:
     2300140: frame27
     2300142: frame28
     2300144: polySurface17
+    2300146: x115:pCylinder7
     3300000: flooor
     3300002: flooor1
     3300004: flooor2
@@ -310,6 +450,7 @@ ModelImporter:
     3300140: frame27
     3300142: frame28
     3300144: polySurface17
+    3300146: x115:pCylinder7
     4300000: flooor
     4300002: flooor1
     4300004: flooor2
@@ -383,6 +524,7 @@ ModelImporter:
     4300140: frame27
     4300142: frame28
     4300144: polySurface17
+    4300146: x115:pCylinder7
   externalObjects: {}
   materials:
     importMaterials: 1
