@@ -7,6 +7,7 @@ TagManager:
   - Attackable
   - PlayerAndCam
   - AudioManager
+  - Walkable
   layers:
   - Default
   - TransparentFX
