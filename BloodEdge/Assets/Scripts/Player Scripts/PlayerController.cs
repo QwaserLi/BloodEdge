@@ -168,7 +168,10 @@ public class PlayerController : MonoBehaviour
             if (LockOn.LockedOn)
             {
                 //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lockOn.getEnemyPosition()), 0.5f);
-                transform.LookAt(lockOn.getEnemyPosition());
+                Vector3 lookDir = lockOn.getEnemyPosition();
+                lookDir.y = transform.position.y;
+                transform.LookAt(lookDir);
+              
             }
             else
             {
