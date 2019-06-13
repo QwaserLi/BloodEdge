@@ -50,16 +50,16 @@ public class LockOn : MonoBehaviour
         GameObject enemy = other.gameObject;
         if (enemy.tag == "Attackable")
         {
-            if (Input.GetKeyDown(KeyCode.Z))
+            if (Input.GetKey(KeyCode.Z))
             {
                 if (GameObject.ReferenceEquals(enemy, lockedOnEnemy))
                 {
                     lockOff();
                 }
-                else
-                {
-                    lockOn(enemy);
-                }
+            }
+            else if (Input.GetKey(KeyCode.X))
+            {
+                lockOn(enemy);
             }
         }
     }
@@ -77,10 +77,10 @@ public class LockOn : MonoBehaviour
                 {
                     lockOff();
                 }
-                else
-                {
-                    lockOn(enemy);
-                }
+            }
+            else if(Input.GetKey(KeyCode.X))
+            {
+                lockOn(enemy);
             }
         }
     }
