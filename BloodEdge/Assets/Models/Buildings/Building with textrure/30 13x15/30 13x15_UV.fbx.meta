@@ -1,0 +1,371 @@
+fileFormatVersion: 2
+guid: a268cc7e48cf5cf4a985004b1796b758
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: floor
+    100004: floor1
+    100006: floor2
+    100008: floor3
+    100010: floor4
+    100012: floor6
+    100014: floor7
+    100016: floor8
+    100018: frame2
+    100020: frame3
+    100022: frame4
+    100024: frame5
+    100026: frame_type
+    100028: frame_type 1
+    100030: frame_type 2
+    100032: frame_type 3
+    100034: frame_type1
+    100036: frame_type1 1
+    100038: frame_type1 2
+    100040: frame_type1 3
+    100042: frame_type2
+    100044: frame_type2 1
+    100046: frame_type2 2
+    100048: frame_type2 3
+    100050: frame_type3
+    100052: frame_type3 1
+    100054: frame_type3 2
+    100056: frame_type4
+    100058: frame_type4 1
+    100060: frame_type4 2
+    100062: frame_type5
+    100064: frame_type5 1
+    100066: frame_type5 2
+    100068: frame_type5 3
+    100070: inner_pillar
+    100072: inner_pillar 1
+    100074: inner_pillar 2
+    100076: inner_pillar 3
+    100078: inner_pillar1
+    100080: inner_pillar1 1
+    100082: inner_pillar1 2
+    100084: inner_pillar2
+    100086: inner_pillar2 1
+    100088: inner_pillar2 2
+    100090: inner_pillar2 3
+    100092: inner_pillar3
+    100094: inner_pillar3_inner_pillar1
+    100096: inner_pillar3_inner_pillar2
+    100098: inner_pillar4
+    100100: inner_pillar5
+    100102: inner_pillar6
+    100104: pCube4
+    100106: pCube5
+    100108: pCube6
+    100110: pCube7
+    100112: pillar
+    100114: pillar1
+    100116: pillar2
+    100118: pillar4
+    100120: pillar5
+    100122: roof
+    100124: smaller_frame
+    100126: smaller_frame1
+    100128: smaller_frame2
+    100130: smaller_frame3
+    100132: smaller_frame3_frame_type4
+    100134: smaller_frame_frame_type3
+    100136: smaller_frame_frame_type4
+    100138: transform1
+    100140: transform10
+    100142: transform11
+    100144: transform12
+    100146: transform13
+    100148: transform14
+    100150: transform15
+    100152: transform16
+    100154: transform17
+    100156: transform18
+    100158: transform19
+    100160: transform2
+    100162: transform20
+    100164: transform21
+    100166: transform22
+    100168: transform23
+    100170: transform24
+    100172: transform25
+    100174: transform26
+    100176: transform27
+    100178: transform28
+    100180: transform29
+    100182: transform3
+    100184: transform30
+    100186: transform31
+    100188: transform32
+    100190: transform33
+    100192: transform34
+    100194: transform35
+    100196: transform36
+    100198: transform37
+    100200: transform38
+    100202: transform39
+    100204: transform4
+    100206: transform40
+    100208: transform41
+    100210: transform42
+    100212: transform43
+    100214: transform44
+    100216: transform45
+    100218: transform46
+    100220: transform47
+    100222: transform48
+    100224: transform49
+    100226: transform5
+    100228: transform50
+    100230: transform51
+    100232: transform52
+    100234: transform53
+    100236: transform54
+    100238: transform55
+    100240: transform56
+    100242: transform57
+    100244: transform58
+    100246: transform59
+    100248: transform6
+    100250: transform60
+    100252: transform61
+    100254: transform62
+    100256: transform63
+    100258: transform64
+    100260: transform7
+    100262: transform8
+    100264: transform9
+    100266: wall5
+    100268: wall6
+    100270: wall7
+    100272: wall8
+    100274: wall9
+    400000: //RootNode
+    400002: floor
+    400004: floor1
+    400006: floor2
+    400008: floor3
+    400010: floor4
+    400012: floor6
+    400014: floor7
+    400016: floor8
+    400018: frame2
+    400020: frame3
+    400022: frame4
+    400024: frame5
+    400026: frame_type
+    400028: frame_type 1
+    400030: frame_type 2
+    400032: frame_type 3
+    400034: frame_type1
+    400036: frame_type1 1
+    400038: frame_type1 2
+    400040: frame_type1 3
+    400042: frame_type2
+    400044: frame_type2 1
+    400046: frame_type2 2
+    400048: frame_type2 3
+    400050: frame_type3
+    400052: frame_type3 1
+    400054: frame_type3 2
+    400056: frame_type4
+    400058: frame_type4 1
+    400060: frame_type4 2
+    400062: frame_type5
+    400064: frame_type5 1
+    400066: frame_type5 2
+    400068: frame_type5 3
+    400070: inner_pillar
+    400072: inner_pillar 1
+    400074: inner_pillar 2
+    400076: inner_pillar 3
+    400078: inner_pillar1
+    400080: inner_pillar1 1
+    400082: inner_pillar1 2
+    400084: inner_pillar2
+    400086: inner_pillar2 1
+    400088: inner_pillar2 2
+    400090: inner_pillar2 3
+    400092: inner_pillar3
+    400094: inner_pillar3_inner_pillar1
+    400096: inner_pillar3_inner_pillar2
+    400098: inner_pillar4
+    400100: inner_pillar5
+    400102: inner_pillar6
+    400104: pCube4
+    400106: pCube5
+    400108: pCube6
+    400110: pCube7
+    400112: pillar
+    400114: pillar1
+    400116: pillar2
+    400118: pillar4
+    400120: pillar5
+    400122: roof
+    400124: smaller_frame
+    400126: smaller_frame1
+    400128: smaller_frame2
+    400130: smaller_frame3
+    400132: smaller_frame3_frame_type4
+    400134: smaller_frame_frame_type3
+    400136: smaller_frame_frame_type4
+    400138: transform1
+    400140: transform10
+    400142: transform11
+    400144: transform12
+    400146: transform13
+    400148: transform14
+    400150: transform15
+    400152: transform16
+    400154: transform17
+    400156: transform18
+    400158: transform19
+    400160: transform2
+    400162: transform20
+    400164: transform21
+    400166: transform22
+    400168: transform23
+    400170: transform24
+    400172: transform25
+    400174: transform26
+    400176: transform27
+    400178: transform28
+    400180: transform29
+    400182: transform3
+    400184: transform30
+    400186: transform31
+    400188: transform32
+    400190: transform33
+    400192: transform34
+    400194: transform35
+    400196: transform36
+    400198: transform37
+    400200: transform38
+    400202: transform39
+    400204: transform4
+    400206: transform40
+    400208: transform41
+    400210: transform42
+    400212: transform43
+    400214: transform44
+    400216: transform45
+    400218: transform46
+    400220: transform47
+    400222: transform48
+    400224: transform49
+    400226: transform5
+    400228: transform50
+    400230: transform51
+    400232: transform52
+    400234: transform53
+    400236: transform54
+    400238: transform55
+    400240: transform56
+    400242: transform57
+    400244: transform58
+    400246: transform59
+    400248: transform6
+    400250: transform60
+    400252: transform61
+    400254: transform62
+    400256: transform63
+    400258: transform64
+    400260: transform7
+    400262: transform8
+    400264: transform9
+    400266: wall5
+    400268: wall6
+    400270: wall7
+    400272: wall8
+    400274: wall9
+    2100000: lambert1
+    2300000: pillar5
+    3300000: pillar5
+    4300000: pillar5
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
