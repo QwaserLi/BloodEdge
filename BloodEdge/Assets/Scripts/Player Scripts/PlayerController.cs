@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
 
         //Movement
         Movement();
+        Rotation();
         if (desiredMoveDirection != Vector3.zero && !wasInAir && !PlayerAttack.isAttacking)
         {
             isRunning = true;
@@ -135,9 +136,7 @@ public class PlayerController : MonoBehaviour
 
             Roll();
         }
-    
-        print(velocity.y);
-        //Drag Force
+            //Drag Force
         ApplyDrag();
     }
 
@@ -163,24 +162,6 @@ public class PlayerController : MonoBehaviour
             desiredRollDirection = desiredMoveDirection.normalized;
         }
 
-        if (desiredMoveDirection != Vector3.zero && !isRolling)
-        {
-            if (LockOn.LockedOn)
-            {
-                //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lockOn.getEnemyPosition()), 0.5f);
-                Vector3 lookDir = lockOn.getEnemyPosition();
-                lookDir.y = transform.position.y;
-                transform.LookAt(lookDir);
-              
-            }
-            else
-            {
-                //transform.forward = desiredMoveDirection;
-
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), 0.5f);
-            }
-
-        }
         if (!PlayerAttack.isAttacking)
         {
             controller.Move(desiredMoveDirection.normalized * Time.deltaTime * speed);
@@ -191,6 +172,38 @@ public class PlayerController : MonoBehaviour
         //    controller.Move(desiredMoveDirection * Time.deltaTime * (speed * 0.5f));
         //    //velocity += desiredMoveDirection.normalized * Time.deltaTime * speed*5;
         //}
+    }
+
+    void Rotation()
+    {
+        if (desiredMoveDirection != Vector3.zero && !isRolling)
+        {
+            if (LockOn.LockedOn)
+            {
+                //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lockOn.getEnemyPosition()), 0.5f);
+                Vector3 lookDir = lockOn.getEnemyPosition();
+                lookDir.y = transform.position.y;
+                transform.LookAt(lookDir);
+
+            }
+            else
+            {
+                //transform.forward = desiredMoveDirection;
+           
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), 0.5f);
+                
+            }
+
+        }
+        //Soft Lock
+        //if (!LockOn.LockedOn &&PlayerAttack.isAttacking && lockOn.enemiesInRange())
+        //{
+        //    Vector3 lookDir = lockOn.getSoftLockTarget();
+        //    lookDir.y = transform.position.y;
+        //    transform.LookAt(lookDir);
+        //}
+
+
     }
 
     void ApplyGravity()

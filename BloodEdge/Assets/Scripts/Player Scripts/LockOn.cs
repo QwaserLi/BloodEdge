@@ -1,29 +1,115 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Cinemachine;
-
+using Enemy;
 public class LockOn : MonoBehaviour
 {
     public CinemachineTargetGroup CTG;
     public GameObject ThirdPersonCam;
     public GameObject LockOnCamera;
+    public Transform playerPosition;
+
+    [Space]
+    public Image lockOnImage;
 
     public static bool LockedOn;
 
     private GameObject lockedOnEnemy;
-
+    private List<GameObject> lockableEnemies;
+    private int enemyIndex;
     // Start is called before the first frame update
     void Start()
     {
-
+        lockableEnemies = new List<GameObject>();
+        lockOnImage.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Lock On to closest enemy rather than random enemy
-        // Toggle between enemies
+
+        if (Input.GetButtonDown("Lock On"))
+        {
+            if (LockedOn)
+            {
+                lockOff();
+            }
+            else
+            {
+                // Lock On to closest enemy 
+                lockOnToClosestEnemy();
+            }
+        }
+        if (lockedOnEnemy != null)
+        {
+            // Enemy dying 
+
+            if (!lockedOnEnemy.activeInHierarchy)
+            {
+                lockableEnemies.Remove(lockedOnEnemy);
+                lockOff();
+                lockOnToClosestEnemy();
+            }
+        }
+        else {
+            foreach (GameObject e in lockableEnemies) {
+                if (!e.activeInHierarchy)
+                {
+                    lockableEnemies.Remove(lockedOnEnemy);
+                }
+            }
+        }
+
+        if (LockedOn)
+        {
+            // Toggle between enemies
+
+            if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
+            {
+                if (enemyIndex++ >= lockableEnemies.Count) enemyIndex = 0;
+                lockOnByIndex(enemyIndex);
+            }
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
+            {
+                if (enemyIndex-- < 0) enemyIndex = lockableEnemies.Count - 1;
+                lockOnByIndex(enemyIndex);
+            }
+            lockOnImage.transform.position = Camera.main.WorldToScreenPoint(lockedOnEnemy.transform.position);
+
+        }
+
+    }
+
+    private void lockOnByIndex(int index)
+    {
+        if (index < lockableEnemies.Count && index > -1)
+        {
+            lockOn(lockableEnemies[index]);
+        }
+
+    }
+
+    private void lockOnToClosestEnemy()
+    {
+        if (lockableEnemies.Count > 0 )
+        {
+            float closestDistance = Mathf.Infinity;
+            Vector3 pPos = playerPosition.position;
+            GameObject lockEn = lockableEnemies[0];
+            for (int i = 0; i < lockableEnemies.Count; i++)
+            {
+                float distance = Vector3.Distance(lockableEnemies[i].transform.position, pPos);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    lockEn = lockableEnemies[i];
+                    enemyIndex = i;
+                }
+            }
+            lockOn(lockEn);
+        }
     }
 
     private void lockOn(GameObject enemy)
@@ -33,6 +119,7 @@ public class LockOn : MonoBehaviour
         LockedOn = true;
         LockOnCamera.SetActive(true);
         ThirdPersonCam.SetActive(false);
+        lockOnImage.enabled = true;
     }
 
     private void lockOff()
@@ -42,46 +129,28 @@ public class LockOn : MonoBehaviour
         LockedOn = false;
         LockOnCamera.SetActive(false);
         ThirdPersonCam.SetActive(true);
+        lockOnImage.enabled = false;
+        enemyIndex = -1;
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //Press button to lock on 
         GameObject enemy = other.gameObject;
         if (enemy.tag == "Attackable")
         {
-            if (Input.GetKey(KeyCode.Z))
-            {
-                if (GameObject.ReferenceEquals(enemy, lockedOnEnemy))
-                {
-                    lockOff();
-                }
-            }
-            else if (Input.GetKey(KeyCode.X))
-            {
-                lockOn(enemy);
-            }
+            if (!lockableEnemies.Contains(enemy))
+                lockableEnemies.Add(enemy);
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        //Press button to lock on 
         GameObject enemy = other.gameObject;
         if (enemy.tag == "Attackable")
         {
-
-            if (Input.GetKey(KeyCode.Z))
-            {
-                if (GameObject.ReferenceEquals(enemy, lockedOnEnemy))
-                {
-                    lockOff();
-                }
-            }
-            else if(Input.GetKey(KeyCode.X))
-            {
-                lockOn(enemy);
-            }
+            if (!lockableEnemies.Contains(enemy))
+                lockableEnemies.Add(enemy);
         }
     }
 
@@ -91,14 +160,50 @@ public class LockOn : MonoBehaviour
         if (enemy.tag == "Attackable")
         {
             if (lockedOnEnemy != null)
+            {
                 if (GameObject.ReferenceEquals(enemy, lockedOnEnemy))
                 {
                     lockOff();
                 }
+            }
+            if (lockableEnemies.Contains(enemy))
+            {
+                lockableEnemies.Remove(enemy);
+            }
         }
     }
 
-    public Vector3 getEnemyPosition() {
+    public Vector3 getEnemyPosition()
+    {
         return lockedOnEnemy.transform.position;
+    }
+
+    public Vector3 getSoftLockTarget()
+    {
+
+      
+            float closestDistance = Mathf.Infinity;
+            GameObject lockEn = lockableEnemies[0];
+            Vector3 pPos = playerPosition.position;
+            for (int i = 0; i < lockableEnemies.Count; i++)
+            {
+                float distance = Vector3.Distance(lockableEnemies[i].transform.position, pPos);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    lockEn = lockableEnemies[i];
+                }
+            }
+            Vector3 tPos = lockEn.transform.position;
+            return tPos;
+        
+    }
+
+    public bool enemiesInRange() {
+        if (lockableEnemies.Count >0) {
+            print(lockableEnemies.Count);
+            return true;
+        }
+        return false;
     }
 }
