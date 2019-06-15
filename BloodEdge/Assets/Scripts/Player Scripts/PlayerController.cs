@@ -213,8 +213,9 @@ public class PlayerController : MonoBehaviour
             else
             {
                 //transform.forward = desiredMoveDirection;
-           
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), 0.5f);
+                if (!PlayerAttack.isAttacking) {
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), 0.5f);
+                }
                 
             }
 
