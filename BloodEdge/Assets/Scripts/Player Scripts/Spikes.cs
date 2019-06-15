@@ -8,7 +8,7 @@ public class Spikes : MonoBehaviour
 {
     PlayerAttack paRef;
     CinemachineImpulseSource shakeSource;
-    GameObject parent;
+    public GameObject spikes;
 
     float amtToIncrease = 2.2f;
 
@@ -18,7 +18,6 @@ public class Spikes : MonoBehaviour
         paRef = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
         shakeSource = GetComponent<CinemachineImpulseSource>();
         shakeSource.GenerateImpulse();
-        parent = gameObject.transform.parent.gameObject;
         GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>().Play("Spikes");
         StartCoroutine(DestroySpikes());
     }
@@ -35,12 +34,10 @@ public class Spikes : MonoBehaviour
 
     private IEnumerator DestroySpikes()
     {
-        while (parent.transform.localScale.y < 5.0f) {
-            parent.transform.localScale = new Vector3(parent.transform.localScale.x, parent.transform.localScale.y + amtToIncrease, parent.transform.localScale.z);
-            amtToIncrease *= 0.8f;
-            yield return new WaitForSeconds(0.05f);
-        }
+        yield return new WaitForSeconds(0.2f);
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
+        spikes.SetActive(true);
         yield return new WaitForSeconds(2.0f);
-        Destroy(parent);
+        Destroy(gameObject);
     }
 }

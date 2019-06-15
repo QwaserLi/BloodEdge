@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerAttack: MonoBehaviour
 {
@@ -42,10 +43,13 @@ public class PlayerAttack: MonoBehaviour
     AudioManager soundManager;
     PlayerController pMove;
 
+    PostProcessVolume postPro;
+
     /*
      *  Sort out references
      */
     void Start() {
+        postPro = GameObject.FindGameObjectWithTag("ScreenPostPro").GetComponent<PostProcessVolume>();
         anim = GetComponent<Animator>();
         sbc = Scythe.GetComponent<BoxCollider>();
         soundManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
@@ -82,6 +86,16 @@ public class PlayerAttack: MonoBehaviour
         if (Input.GetButtonDown("Special") && specialScytheAttackCharge >= 100) {
             if (specialScytheAttackCharge >= 100) {
                 rageMode = true;
+                Vignette v;
+                LensDistortion l;
+                postPro.profile.TryGetSettings(out v);
+                postPro.profile.TryGetSettings(out l);
+                if (v != null) {
+                    v.active = true;
+                }
+                if (l != null) {
+                    l.active = true;
+                }
                 ActivateScytheCollider();
                 MakeScytheBoxBigger();
             }
@@ -301,7 +315,7 @@ public class PlayerAttack: MonoBehaviour
      * */
     void StrongMagicAttack()
     {        
-        Instantiate(Spikes, transform.position + (transform.forward * 4.5f), transform.localRotation);
+        Instantiate(Spikes, transform.position + (transform.forward * 4.5f) + (transform.up * 0.1f), transform.localRotation);
     }
 
     IEnumerator HandEffectLoop()
@@ -361,6 +375,16 @@ public class PlayerAttack: MonoBehaviour
                 specialScytheAttackCharge -= 2.5f;
             } else {
                 rageMode = false;
+                Vignette v;
+                LensDistortion l;
+                postPro.profile.TryGetSettings(out v);
+                postPro.profile.TryGetSettings(out l);
+                if (v != null) {
+                    v.active = false;
+                }
+                if (l != null) {
+                    l.active = false;
+                }
                 MakeScytheBoxSmaller();
             }
         }        
