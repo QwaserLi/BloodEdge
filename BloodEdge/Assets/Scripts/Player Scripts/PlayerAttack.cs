@@ -98,15 +98,15 @@ public class PlayerAttack: MonoBehaviour
             // Player attacks
             if ((Input.GetAxisRaw("Fire1") > 0 || Input.GetAxisRaw("Fire2") > 0) && canAttack && pMove.canAirAttack() && currentWeapon == 0) {
                 isAttacking = true;
-                canAttack = false;
+                PrepareNextAttack();
                 ActivateScytheCollider();
                 anim.SetBool("AttackInAir", true);
-                anim.SetBool("AirAttackFinished", false);
-            } else if (Input.GetAxisRaw("Fire1") > 0 && canAttack && !leftMouseDown) {  // Basic Attack        
+                //anim.SetBool("AirAttackFinished", false);
+            } else if (Input.GetAxisRaw("Fire1") > 0 && canAttack && !leftMouseDown && !pMove.inAir) {  // Basic Attack        
                 leftMouseDown = true;
                 PrepareNextAttack();
                 PerformScytheAttack(-1);
-            } else if (Input.GetAxisRaw("Fire2") > 0 && canAttack && !rightMouseDown) { // Strong Attack
+            } else if (Input.GetAxisRaw("Fire2") > 0 && canAttack && !rightMouseDown && !pMove.inAir) { // Strong Attack
                 rightMouseDown = true;
                 PrepareNextAttack();
                 PerformScytheAttack(1);
@@ -219,7 +219,10 @@ public class PlayerAttack: MonoBehaviour
     public void EndAirAttack()
     {
         sbc.enabled = false;
-        anim.SetBool("AirAttackFinished", true);
+        //anim.SetBool("AirAttackFinished", true);
+        anim.SetTrigger("AirAttackOver");
+
+        
     }
     
     // Allows the player to attack again

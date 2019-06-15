@@ -24,7 +24,7 @@ public class PlayerHealth: MonoBehaviour, IHittable
         isDead = false;
         anim = GetComponent<Animator>();
         pc = GetComponent<PlayerController>();
-        pc.controller.enabled = false;
+        //pc.controller.enabled = false;
         if (lastCheckpoint == null) {
             Checkpoint[] chp = FindObjectsOfType<Checkpoint>();
             foreach (Checkpoint c in chp) {
