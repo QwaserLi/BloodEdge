@@ -42,7 +42,7 @@ public class PlayerHealth: MonoBehaviour, IHittable
         healTimer = 0;
         panel.SetActive(false);
         Cursor.visible = true;
-        pc.controller.enabled = true;
+        //pc.controller.enabled = true;
     }
 
     //

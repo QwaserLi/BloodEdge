@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 desiredRollDirection;
 
     AudioManager soundManager;
+    PlayerAttack pAttack;
 
     bool isRolling;
     bool airDash;
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         cam = Camera.main;
         controller = GetComponent<CharacterController>();
+        pAttack = GetComponent<PlayerAttack>();
         gravity = Physics.gravity.y * 100;
         soundManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         lockOn = GetComponentInChildren<LockOn>();
@@ -73,7 +75,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            print("hello");
+            //print("hello");
             isRunning = false;
             soundManager.Stop("Running");
         }
@@ -92,26 +94,22 @@ public class PlayerController : MonoBehaviour
         }
 
         if (wasInAir == true && inAir == false)
-        { // No longer in the air          
+        { // No longer in the air      
+            anim.ResetTrigger("NIA");
+            anim.SetTrigger("NIA");
+            wasInAir = false;
             if (PlayerAttack.isAttacking)
             {
-                anim.SetBool("AttackInAir", false);
-                anim.SetBool("AirAttackFinished", false);
+                StartCoroutine(pAttack.EndAirAttack());
                 soundManager.Play("AirAttackHit");
+            } else {
+                soundManager.Play("Landing");
             }
-            soundManager.Play("Landing");
-            anim.SetBool("InAir", false);
-            wasInAir = false;
         }
-
         //Jumping
         if (Input.GetButtonDown("Jump"))
         {
-            if (controller.isGrounded)
-            {
-                anim.SetTrigger("Jump");
-                anim.ResetTrigger("Jump");
-            }
+            
 
             Jump();
         }
@@ -266,8 +264,9 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (controller.isGrounded)
+        if (controller.isGrounded && !PlayerAttack.isAttacking)
         {
+            //print(controller.isGrounded);           
             gravity = -20f;
             velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
             //velocity.y += Time.deltaTime * jumpHeight * -2f * gravity;
@@ -314,16 +313,14 @@ public class PlayerController : MonoBehaviour
      * */
     public void InAir()
     {
+        if (!wasInAir) {
+            anim.ResetTrigger("IA");
+            anim.SetTrigger("IA");
+            pAttack.BackToPlayerIdle();
+        }
         wasInAir = true;
         inAir = true;
-        if (!PlayerAttack.isAttacking)
-        {
-            anim.SetBool("InAir", true);
-        }
-        else
-        {
-            anim.SetBool("InAir", false);
-        }
+       
     }
 
     public bool isPlayerRolling() {

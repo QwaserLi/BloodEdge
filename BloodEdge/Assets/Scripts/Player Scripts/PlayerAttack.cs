@@ -6,7 +6,7 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerAttack: MonoBehaviour
 {
-    bool canAttack = true;
+    public bool canAttack = true;
     public static bool isAttacking = false;
     float specialMagicAttackCharge = 0;
     float specialScytheAttackCharge = 0;
@@ -14,7 +14,6 @@ public class PlayerAttack: MonoBehaviour
     float weaponChangeTimer = 0;
     float specialChargeTimer = 0;
     static Animator anim;
-    public int currentWeapon = 0; // 0 Scythe, 1 Magic
     public float attackTimer = 0;
 
     bool inCombo = false;
@@ -110,13 +109,13 @@ public class PlayerAttack: MonoBehaviour
         }
         if (!pMove.isPlayerRolling() && !Input.GetButtonDown("Roll")) {
             // Player attacks
-            if ((Input.GetAxisRaw("Fire1") > 0 || Input.GetAxisRaw("Fire2") > 0) && canAttack && pMove.canAirAttack() && currentWeapon == 0) {
+            /*if ((Input.GetAxisRaw("Fire1") > 0) && canAttack && pMove.canAirAttack() && (!leftMouseDown || !rightMouseDown)) {
                 isAttacking = true;
-                PrepareNextAttack();
+                canAttack = false;
                 ActivateScytheCollider();
-                anim.SetBool("AttackInAir", true);
-                //anim.SetBool("AirAttackFinished", false);
-            } else if (Input.GetAxisRaw("Fire1") > 0 && canAttack && !leftMouseDown && !pMove.inAir) {  // Basic Attack        
+                anim.ResetTrigger("InAirAttack");
+                anim.SetTrigger("InAirAttack");
+            } else */if (Input.GetAxisRaw("Fire1") > 0 && canAttack && !leftMouseDown && !pMove.inAir) {  // Basic Attack        
                 leftMouseDown = true;
                 PrepareNextAttack();
                 PerformScytheAttack(-1);
@@ -160,7 +159,6 @@ public class PlayerAttack: MonoBehaviour
     public void PerformScytheAttack(int type)
     {        
         if (currentComboNum == 3) { // Max combo sequence is 3
-            //print("Time For new Combo");
             comboValue = 0;
             comboString = "";
             currentComboNum = 0;
@@ -230,13 +228,15 @@ public class PlayerAttack: MonoBehaviour
         comboName.text = "";
     }
 
-    public void EndAirAttack()
+    public IEnumerator EndAirAttack()
     {
+        yield return new WaitForSeconds(0.75f);
         sbc.enabled = false;
-        //anim.SetBool("AirAttackFinished", true);
+        anim.ResetTrigger("AirAttackOver");
         anim.SetTrigger("AirAttackOver");
-
-        
+        canAttack = true;
+        isAttacking = false;
+        anim.SetBool("NotInAirAttack", true);
     }
     
     // Allows the player to attack again
