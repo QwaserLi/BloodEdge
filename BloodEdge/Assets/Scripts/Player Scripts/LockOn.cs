@@ -16,6 +16,8 @@ public class LockOn : MonoBehaviour
 
     public static bool LockedOn;
 
+    public float canSwitch;
+
     private GameObject lockedOnEnemy;
     private List<GameObject> lockableEnemies;
     private int enemyIndex;
@@ -61,20 +63,21 @@ public class LockOn : MonoBehaviour
                 }
             }
         }
-
+        canSwitch += Time.deltaTime;
         if (LockedOn)
         {
             // Toggle between enemies
-
-            if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
+            if (Input.GetAxis("Mouse ScrollWheel") > 0f && canSwitch >= 0.5f) // forward
             {
                 if (enemyIndex++ >= lockableEnemies.Count) enemyIndex = 0;
                 lockOnByIndex(enemyIndex);
+                canSwitch = 0.0f;
             }
-            else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0f && canSwitch >= 0.5f) // backwards
             {
                 if (enemyIndex-- < 0) enemyIndex = lockableEnemies.Count - 1;
                 lockOnByIndex(enemyIndex);
+                canSwitch = 0.0f;
             }
             lockOnImage.transform.position = Camera.main.WorldToScreenPoint(lockedOnEnemy.transform.position);
             lockOnImage.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
