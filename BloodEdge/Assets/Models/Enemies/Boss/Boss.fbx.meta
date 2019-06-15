@@ -57,6 +57,31 @@ ModelImporter:
     100102: TommyRig_Ctrl_Spine1
     100104: TommyRig_Ctrl_Spine2
     100106: underwear
+    100108: _Group14940
+    100110: _Group23186
+    100112: _Group23791
+    100114: _Group54678
+    100116: _Group60357
+    100118: polySurface10
+    100120: polySurface11
+    100122: polySurface12
+    100124: polySurface13
+    100126: polySurface2
+    100128: polySurface3
+    100130: polySurface4
+    100132: polySurface5
+    100134: polySurface6
+    100136: polySurface7
+    100138: polySurface8
+    100140: polySurface9
+    100142: transform1
+    100144: transform2
+    100146: transform3
+    100148: transform4
+    100150: transform5
+    100152: transform6
+    100154: transform7
+    100156: transform8
     400000: body
     400002: //RootNode
     400004: head
@@ -111,8 +136,38 @@ ModelImporter:
     400102: TommyRig_Ctrl_Spine1
     400104: TommyRig_Ctrl_Spine2
     400106: underwear
+    400108: _Group14940
+    400110: _Group23186
+    400112: _Group23791
+    400114: _Group54678
+    400116: _Group60357
+    400118: polySurface10
+    400120: polySurface11
+    400122: polySurface12
+    400124: polySurface13
+    400126: polySurface2
+    400128: polySurface3
+    400130: polySurface4
+    400132: polySurface5
+    400134: polySurface6
+    400136: polySurface7
+    400138: polySurface8
+    400140: polySurface9
+    400142: transform1
+    400144: transform2
+    400146: transform3
+    400148: transform4
+    400150: transform5
+    400152: transform6
+    400154: transform7
+    400156: transform8
     2100000: lambert1
     2100002: lambert4
+    2100004: _underware1
+    2100006: _shoulder1
+    2100008: _head1
+    2100010: _cuff1
+    2100012: _body1
     2300000: body
     2300002: head
     2300004: leftCuff
@@ -124,6 +179,15 @@ ModelImporter:
     2300016: rightHammerHead
     2300018: rightShoulder
     2300020: underwear
+    2300022: polySurface10
+    2300024: polySurface11
+    2300026: polySurface12
+    2300028: polySurface13
+    2300030: polySurface5
+    2300032: polySurface6
+    2300034: polySurface7
+    2300036: polySurface8
+    2300038: polySurface9
     3300000: body
     3300002: head
     3300004: leftCuff
@@ -135,6 +199,15 @@ ModelImporter:
     3300016: rightHammerHead
     3300018: rightShoulder
     3300020: underwear
+    3300022: polySurface10
+    3300024: polySurface11
+    3300026: polySurface12
+    3300028: polySurface13
+    3300030: polySurface5
+    3300032: polySurface6
+    3300034: polySurface7
+    3300036: polySurface8
+    3300038: polySurface9
     4300000: underwear
     4300002: head
     4300004: body
@@ -146,6 +219,15 @@ ModelImporter:
     4300016: leftHammerHandle
     4300018: leftShoulder
     4300020: rightShoulder
+    4300022: polySurface5
+    4300024: polySurface6
+    4300026: polySurface7
+    4300028: polySurface8
+    4300030: polySurface9
+    4300032: polySurface10
+    4300034: polySurface11
+    4300036: polySurface12
+    4300038: polySurface13
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -199,7 +281,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
+    previousCalculatedGlobalScale: 0.01
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
