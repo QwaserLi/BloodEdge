@@ -36,7 +36,7 @@ public class Scythe : MonoBehaviour
 
     public void OnTriggerEnter(Collider collider)
     {
-        trail.SetActive(true);
+        //trail.SetActive(true);
         if (collider.tag == "Attackable") {            
             shaker.GenerateImpulse();
             if(collider.GetComponent<IHittable>().Hit(currentDamageToDeal, new Vector3(1, 1, 1))) {
