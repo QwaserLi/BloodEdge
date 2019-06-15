@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public CharacterController controller;
 
+    public bool descending = false;
 
     private Animator anim;
     private Camera cam;
@@ -94,6 +95,7 @@ public class PlayerController : MonoBehaviour
             if (PlayerAttack.isAttacking)
             {
                 anim.SetBool("AttackInAir", false);
+                anim.SetBool("AirAttackFinished", false);
                 soundManager.Play("AirAttackHit");
             }
             soundManager.Play("Landing");
@@ -107,7 +109,7 @@ public class PlayerController : MonoBehaviour
             if (controller.isGrounded)
             {
                 anim.SetTrigger("Jump");
-
+                anim.ResetTrigger("Jump");
             }
 
             Jump();
@@ -231,6 +233,11 @@ public class PlayerController : MonoBehaviour
         {
             velocity.y = -5;
         }
+
+        if (velocity.y < 0) {
+            descending = true;
+        }
+        print(velocity.y);
     }
 
     void Jump()
@@ -300,8 +307,8 @@ public class PlayerController : MonoBehaviour
     }
 
     public bool canAirAttack()
-    {
-        if (!controller.isGrounded && inAir)
+    {        
+        if (!controller.isGrounded && inAir && descending)
         {
             return true;
         }
