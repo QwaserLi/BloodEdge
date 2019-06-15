@@ -14,49 +14,7 @@ ModelImporter:
     100016: rightHammerHandle
     100018: rightHammerHead
     100020: rightShoulder
-    100022: Tommy
-    100024: TommyRig_Ctrl_ChestEndEffector
-    100026: TommyRig_Ctrl_ChestOriginEffector
-    100028: TommyRig_Ctrl_Head
-    100030: TommyRig_Ctrl_HeadEffector
-    100032: TommyRig_Ctrl_Hips
-    100034: TommyRig_Ctrl_HipsEffector
-    100036: TommyRig_Ctrl_LeftAnkleEffector
-    100038: TommyRig_Ctrl_LeftArm
-    100040: TommyRig_Ctrl_LeftElbowEffector
-    100042: TommyRig_Ctrl_LeftFoot
-    100044: TommyRig_Ctrl_LeftFootEffector
-    100046: TommyRig_Ctrl_LeftForeArm
-    100048: TommyRig_Ctrl_LeftHand
-    100050: TommyRig_Ctrl_LeftHipEffector
-    100052: TommyRig_Ctrl_LeftKneeEffector
-    100054: TommyRig_Ctrl_LeftLeg
-    100056: TommyRig_Ctrl_LeftShoulder
-    100058: TommyRig_Ctrl_LeftShoulderEffector
-    100060: TommyRig_Ctrl_LeftToeBase
-    100062: TommyRig_Ctrl_LeftUpLeg
-    100064: TommyRig_Ctrl_LeftWristEffector
-    100066: TommyRig_Ctrl_Neck
-    100068: TommyRig_Ctrl_Reference
-    100070: TommyRig_Ctrl_RightAnkleEffector
-    100072: TommyRig_Ctrl_RightArm
-    100074: TommyRig_Ctrl_RightElbowEffector
-    100076: TommyRig_Ctrl_RightFoot
-    100078: TommyRig_Ctrl_RightFootEffector
-    100080: TommyRig_Ctrl_RightForeArm
-    100082: TommyRig_Ctrl_RightHand
-    100084: TommyRig_Ctrl_RightHipEffector
-    100086: TommyRig_Ctrl_RightKneeEffector
-    100088: TommyRig_Ctrl_RightLeg
-    100090: TommyRig_Ctrl_RightShoulder
-    100092: TommyRig_Ctrl_RightShoulderEffector
-    100094: TommyRig_Ctrl_RightToeBase
-    100096: TommyRig_Ctrl_RightUpLeg
-    100098: TommyRig_Ctrl_RightWristEffector
-    100100: TommyRig_Ctrl_Spine
-    100102: TommyRig_Ctrl_Spine1
-    100104: TommyRig_Ctrl_Spine2
-    100106: underwear
+    100022: underwear
     400000: body
     400002: //RootNode
     400004: head
@@ -68,49 +26,7 @@ ModelImporter:
     400016: rightHammerHandle
     400018: rightHammerHead
     400020: rightShoulder
-    400022: Tommy
-    400024: TommyRig_Ctrl_ChestEndEffector
-    400026: TommyRig_Ctrl_ChestOriginEffector
-    400028: TommyRig_Ctrl_Head
-    400030: TommyRig_Ctrl_HeadEffector
-    400032: TommyRig_Ctrl_Hips
-    400034: TommyRig_Ctrl_HipsEffector
-    400036: TommyRig_Ctrl_LeftAnkleEffector
-    400038: TommyRig_Ctrl_LeftArm
-    400040: TommyRig_Ctrl_LeftElbowEffector
-    400042: TommyRig_Ctrl_LeftFoot
-    400044: TommyRig_Ctrl_LeftFootEffector
-    400046: TommyRig_Ctrl_LeftForeArm
-    400048: TommyRig_Ctrl_LeftHand
-    400050: TommyRig_Ctrl_LeftHipEffector
-    400052: TommyRig_Ctrl_LeftKneeEffector
-    400054: TommyRig_Ctrl_LeftLeg
-    400056: TommyRig_Ctrl_LeftShoulder
-    400058: TommyRig_Ctrl_LeftShoulderEffector
-    400060: TommyRig_Ctrl_LeftToeBase
-    400062: TommyRig_Ctrl_LeftUpLeg
-    400064: TommyRig_Ctrl_LeftWristEffector
-    400066: TommyRig_Ctrl_Neck
-    400068: TommyRig_Ctrl_Reference
-    400070: TommyRig_Ctrl_RightAnkleEffector
-    400072: TommyRig_Ctrl_RightArm
-    400074: TommyRig_Ctrl_RightElbowEffector
-    400076: TommyRig_Ctrl_RightFoot
-    400078: TommyRig_Ctrl_RightFootEffector
-    400080: TommyRig_Ctrl_RightForeArm
-    400082: TommyRig_Ctrl_RightHand
-    400084: TommyRig_Ctrl_RightHipEffector
-    400086: TommyRig_Ctrl_RightKneeEffector
-    400088: TommyRig_Ctrl_RightLeg
-    400090: TommyRig_Ctrl_RightShoulder
-    400092: TommyRig_Ctrl_RightShoulderEffector
-    400094: TommyRig_Ctrl_RightToeBase
-    400096: TommyRig_Ctrl_RightUpLeg
-    400098: TommyRig_Ctrl_RightWristEffector
-    400100: TommyRig_Ctrl_Spine
-    400102: TommyRig_Ctrl_Spine1
-    400104: TommyRig_Ctrl_Spine2
-    400106: underwear
+    400022: underwear
     2100000: lambert1
     2100002: lambert4
     2300000: body
@@ -137,16 +53,15 @@ ModelImporter:
     3300020: underwear
     4300000: underwear
     4300002: head
-    4300004: body
-    4300006: rightCuff
-    4300008: leftCuff
-    4300010: rightHammerHead
-    4300012: rightHammerHandle
-    4300014: leftHammerHead
-    4300016: leftHammerHandle
-    4300018: leftShoulder
-    4300020: rightShoulder
-    9500000: //RootNode
+    4300004: rightHammerHead
+    4300006: rightHammerHandle
+    4300008: body
+    4300010: rightCuff
+    4300012: leftHammerHead
+    4300014: leftHammerHandle
+    4300016: leftCuff
+    4300018: rightShoulder
+    4300020: leftShoulder
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -200,7 +115,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -227,7 +142,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
