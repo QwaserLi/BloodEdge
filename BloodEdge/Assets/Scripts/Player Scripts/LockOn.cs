@@ -77,6 +77,7 @@ public class LockOn : MonoBehaviour
                 lockOnByIndex(enemyIndex);
             }
             lockOnImage.transform.position = Camera.main.WorldToScreenPoint(lockedOnEnemy.transform.position);
+            lockOnImage.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
 
         }
 
