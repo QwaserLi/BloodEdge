@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            print("hello");
             isRunning = false;
             soundManager.Stop("Running");
         }
@@ -154,11 +155,40 @@ public class PlayerController : MonoBehaviour
         Vector3 forward = cam.transform.forward;
         Vector3 right = cam.transform.right;
 
+        float movementSpeed = speed;
 
         forward.y = 0f;
         right.y = 0f;
-
         desiredMoveDirection = forward * zMovement + right * xMovement;
+        if (!LockOn.LockedOn)
+        {
+            if (desiredMoveDirection != Vector3.zero)
+            {
+                anim.SetFloat("RunningDirectionY", 1);
+
+            }
+        }
+        else {
+            if (zMovement < 0)
+            {
+                anim.SetFloat("RunningDirectionY", zMovement);
+                movementSpeed *= 0.7f;
+            }
+            else if (zMovement > 0)
+            {
+                anim.SetFloat("RunningDirectionY", zMovement);
+            }
+            else {
+                anim.SetFloat("RunningDirectionY", 0);
+
+            }
+
+            if (xMovement != 0) {
+                anim.SetFloat("RunningDirectionX", xMovement);
+    
+            }
+
+        }
 
         if (desiredMoveDirection != Vector3.zero) {
             desiredRollDirection = desiredMoveDirection.normalized;
@@ -166,14 +196,8 @@ public class PlayerController : MonoBehaviour
 
         if (!PlayerAttack.isAttacking)
         {
-            controller.Move(desiredMoveDirection.normalized * Time.deltaTime * speed);
-            //velocity += desiredMoveDirection.normalized * Time.deltaTime * speed;
+            controller.Move(desiredMoveDirection.normalized * Time.deltaTime * movementSpeed);
         }
-        //else
-        //{
-        //    controller.Move(desiredMoveDirection * Time.deltaTime * (speed * 0.5f));
-        //    //velocity += desiredMoveDirection.normalized * Time.deltaTime * speed*5;
-        //}
     }
 
     void Rotation()
@@ -237,7 +261,7 @@ public class PlayerController : MonoBehaviour
         if (velocity.y < 0) {
             descending = true;
         }
-        print(velocity.y);
+
     }
 
     void Jump()
