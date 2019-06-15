@@ -1,5 +1,7 @@
 # BloodEdge
 
+Edgy
+
 PS4 Controls:
 Move = Left Analog Stick
 Look = Right Analog Stick
