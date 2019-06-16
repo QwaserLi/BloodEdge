@@ -174,7 +174,7 @@ namespace Enemy {
 	        desiredVector = Vector3.MoveTowards(
 			    desiredVector,
 			    AvoidCrowdingVector(),
-			    dT * CrowdingPercent() * 4f * (_awareOfPlayer ? 2f : 1f)).normalized; //was *3f, now *4f.
+			    dT * CrowdingPercent() * 4f * (_awareOfPlayer ? 1.9f : 1f)).normalized; //was *3f, now *4f.
 
 		    var leash = _startingPosition - transform.position;
 		    leash.y = 0;
@@ -189,7 +189,7 @@ namespace Enemy {
 				desiredVector = Vector3.MoveTowards(
 					desiredVector, 
 					_pTransform.position - transform.position, 
-					Mathf.Max(3f * dT, 3f * dT / Vector3.Distance(transform.position, _pTransform.position))
+					Mathf.Max(1.5f * dT, 1.5f * dT / Vector3.Distance(transform.position, _pTransform.position))
 				).normalized;
 	        }
 		    else {
@@ -258,16 +258,10 @@ namespace Enemy {
 			        }
 
 			        case Directive.attack: {
-				        //_puppetAnimator.SetBool(IsRunning, false);
-				        //todo: replace animator functionality
-
 				        _attacking = true;
 				        _forbiddenFromAttackingTimer = 3f;
 				        _strikeThePlayerTimer = 1.5f;
 				        SetEyesActive(true);
-				        
-				        //todo: an animation here except we can't use the player one because of callbacks.
-				        
 				        break;
 			        }
 		        }
@@ -347,7 +341,6 @@ namespace Enemy {
 
 	    private void AddPuppetForce(Vector3 force) {
 		    _puppetVelocity += force;
-		    //todo: add a rotational component! This might be tricky!
 	    }
 
 	    private void LerpPuppetOffsetTo(Vector3 target, float scale) {
@@ -424,9 +417,9 @@ namespace Enemy {
         
         
         private void UpdateCrowding() {
-	        var checkVector = Vector3.forward;
+	        var checkVector = Vector3.forward + Vector3.up*0.05f;
 	        RaycastHit hit;
-	        const int allButWeaponMask = 0b0111111;
+	        const int mask = 0b111111111111;
 	        _crowdedTotal = 0;
 	        for (int i = 0; i < CROWDING_RESOLUTION; i++) {
 		        _crowded[i] = 
@@ -435,7 +428,7 @@ namespace Enemy {
 				        checkVector,
 				        out hit,
 				        maxDistance: CROWDING_RANGE,
-				        layerMask: allButWeaponMask
+				        layerMask: mask
 				    ) ? hit.distance : CROWDING_RANGE;
 		        _crowdedTotal += _crowded[i];
 		        checkVector = Quaternion.Euler(0, CROWDING_INTERVAL_ANGLE, 0) * checkVector;
