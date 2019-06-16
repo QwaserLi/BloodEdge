@@ -30,6 +30,7 @@ public class LockedZone : MonoBehaviour
         {
             for (int i = 0; i < startingPositions.Length; i++)
             {
+              risingObjects[i].SetActive(true);
                 if (t <= 1)
                 {
                     Vector3 pos = startingPositions[i];
@@ -74,7 +75,7 @@ public class LockedZone : MonoBehaviour
         }
         yield return new WaitForSeconds(zoneActivationTimer);
         move = true;
-   
+
     }
 
 
