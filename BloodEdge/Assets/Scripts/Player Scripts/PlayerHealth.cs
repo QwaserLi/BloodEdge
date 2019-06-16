@@ -58,7 +58,7 @@ public class PlayerHealth: MonoBehaviour, IHittable
 
         healTimer += Time.deltaTime;
         if (healTimer > 0.2f) {
-            Heal(increaseBy*=2);
+           //Heal(increaseBy*=2);
             healTimer = 0;
         }
         float healthPer = (currentHealth / maxHealth);
@@ -120,8 +120,9 @@ public class PlayerHealth: MonoBehaviour, IHittable
             anim.SetTrigger("Died");
             panel.SetActive(true);
             Cursor.visible = true;
-		}
-		else
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
 		{
             // Make player invincible to prevent being one shot
 			StartCoroutine(MakePlayerInvincible());
