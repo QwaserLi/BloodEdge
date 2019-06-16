@@ -210,10 +210,10 @@ public class PlayerAttack: MonoBehaviour
                     courComboNameRef = StartCoroutine(UpdateComboName("Vengeful Ripper"));
                     break;
                 case "Strong+Strong+Strong":
-                    courComboNameRef = StartCoroutine(UpdateComboName("Crimson Crusher"));
+                    courComboNameRef = StartCoroutine(UpdateComboName("Scarlet Butterfly"));
                     break;
                 case "Strong+Weak+Strong":
-                    courComboNameRef = StartCoroutine(UpdateComboName("Scarlet Butterfly"));
+                    courComboNameRef = StartCoroutine(UpdateComboName("Crimson Crusher"));
                     break;
             }
         } else {

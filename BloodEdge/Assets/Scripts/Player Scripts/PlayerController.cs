@@ -163,6 +163,7 @@ public class PlayerController : MonoBehaviour
             if (desiredMoveDirection != Vector3.zero)
             {
                 anim.SetFloat("RunningDirectionY", 1);
+                anim.SetFloat("RunningDirectionX", 0);
 
             }
         }
