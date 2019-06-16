@@ -4,15 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Enemy;
 
+/**
+ * Creates a set of spikes, which damages enemies and traps them 
+ **/
 public class Spikes : MonoBehaviour
 {
     PlayerAttack paRef;
     CinemachineImpulseSource shakeSource;
     public GameObject spikes;
 
-    float amtToIncrease = 2.2f;
-
-    // Start is called before the first frame update
+    /**
+     * On spawn, shake the camera, play sound effect, then start the countdown to destroy the object 
+     **/
     void Start()
     {
         paRef = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
@@ -22,16 +25,22 @@ public class Spikes : MonoBehaviour
         StartCoroutine(DestroySpikes());
     }
     
+    /**
+     *  Damage on hit  
+     **/
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Attackable") {
-            print("hit");
             if (other.GetComponent<IHittable>().Hit(20, new Vector3(1, 1, 1))) {
                 paRef.UpdateComboCount();
             }
         }
     }
 
+    /**
+     *  Destroy spikes after some time, enables mesh after a few seconds to hid
+     *  the animation starting
+     **/
     private IEnumerator DestroySpikes()
     {
         yield return new WaitForSeconds(0.2f);

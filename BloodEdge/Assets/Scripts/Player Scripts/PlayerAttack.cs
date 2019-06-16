@@ -6,27 +6,27 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerAttack: MonoBehaviour
 {
+    // General bools
     public bool canAttack = true;
     public static bool isAttacking = false;
-    float specialMagicAttackCharge = 0;
-    float specialScytheAttackCharge = 0;
+    bool rageMode = false;
+    bool leftMouseDown = false;
+    bool rightMouseDown = false;
 
+    // Weapon 
     float weaponChangeTimer = 0;
     float specialChargeTimer = 0;
     static Animator anim;
     public float attackTimer = 0;
 
+    // Combo Vars
     bool inCombo = false;
-    bool rageMode = false;
-    bool leftMouseDown = false;
-    bool rightMouseDown = false;
-
     float comboCount = 0;
     float comboTimer = 5.0f;
     Coroutine courComboRef;
     Coroutine courComboNameRef;
 
-    // Weapons
+    // Weapon objects
     public GameObject BloodBall;
     public GameObject Scythe;
     public GameObject HandEffect;
@@ -34,14 +34,17 @@ public class PlayerAttack: MonoBehaviour
     BoxCollider sbc;
     Scythe scytheScript;
 
+    // UI
     public TextMeshProUGUI comboName;
     string comboString = "";
     int comboValue = 0;
     int currentComboNum;
+    float specialMagicAttackCharge = 0;
+    float specialScytheAttackCharge = 0;
 
+    // Other components
     AudioManager soundManager;
     PlayerController pMove;
-
     PostProcessVolume postPro;
 
     /*
@@ -78,13 +81,14 @@ public class PlayerAttack: MonoBehaviour
         if (comboTimer >= 5.0f) {
             NoLongerInCombo();
         } else {
-            UpdateComboMeter.UpdateComboTimer(comboTimer);
+            UpdateComboMeter.currentComboTimer = comboTimer;
         }
 
         // Rage Mode
         if (Input.GetButtonDown("Special") && specialScytheAttackCharge >= 100) {
             if (specialScytheAttackCharge >= 100) {
                 rageMode = true;
+                // Activate Post process effects
                 Vignette v;
                 LensDistortion l;
                 postPro.profile.TryGetSettings(out v);
@@ -107,15 +111,20 @@ public class PlayerAttack: MonoBehaviour
         if (Input.GetAxisRaw("Fire2") == 0) {
             rightMouseDown = false;
         }
+
+        // Don't attack in a roll
         if (!pMove.isPlayerRolling() && !Input.GetButtonDown("Roll")) {
-            // Player attacks
-            /*if ((Input.GetAxisRaw("Fire1") > 0) && canAttack && pMove.canAirAttack() && (!leftMouseDown || !rightMouseDown)) {
+            /* 
+            // Air attack
+            if ((Input.GetAxisRaw("Fire1") > 0) && canAttack && pMove.canAirAttack() && (!leftMouseDown || !rightMouseDown)) {
                 isAttacking = true;
                 canAttack = false;
                 ActivateScytheCollider();
                 anim.ResetTrigger("InAirAttack");
                 anim.SetTrigger("InAirAttack");
-            } else */if (Input.GetAxisRaw("Fire1") > 0 && canAttack && !leftMouseDown && !pMove.inAir) {  // Basic Attack        
+            } else */
+            // Different Player attacks
+            if (Input.GetAxisRaw("Fire1") > 0 && canAttack && !leftMouseDown && !pMove.inAir) {  // Basic Attack        
                 leftMouseDown = true;
                 PrepareNextAttack();
                 PerformScytheAttack(-1);
@@ -157,7 +166,8 @@ public class PlayerAttack: MonoBehaviour
      * Performs an attack with the scythe. The type of attack, weak or strong, is passed through
      * */
     public void PerformScytheAttack(int type)
-    {        
+    {
+        // Prepare the attack animations
         if (currentComboNum == 3) { // Max combo sequence is 3
             comboValue = 0;
             comboString = "";
@@ -170,12 +180,13 @@ public class PlayerAttack: MonoBehaviour
                 currentComboNum = 0;
                 anim.SetBool("NewComboStart", true);
             }            
-        }       
+        }        
         isAttacking = true;
         ActivateScytheCollider();
         if (soundManager != null) {
             soundManager.Play("ScytheMiss");
         }
+        // Check if at end of combo, and if so increase the players damage
         comboValue += type;
         if (currentComboNum + 1 == 3) {
             Scythe.GetComponent<Scythe>().UpdateDamage(35*3);
@@ -194,7 +205,7 @@ public class PlayerAttack: MonoBehaviour
             comboString += "Strong";
         }
         currentComboNum++;
-        // Update Combo Text
+        // Update Combo Text based on the combo being performed
         if (courComboNameRef != null) {
             StopCoroutine(courComboNameRef);
         }
@@ -221,6 +232,9 @@ public class PlayerAttack: MonoBehaviour
         }
     }
 
+    /*
+     *  Update Combo Text based on the combo being performed
+     **/
     IEnumerator UpdateComboName(string name)
     {
         comboName.text = name;
@@ -280,8 +294,8 @@ public class PlayerAttack: MonoBehaviour
         inCombo = false;
         comboCount = 0;
         //currentComboNum = 0;
-        UpdateComboMeter.UpdateComboTimer(5.0f);
-        UpdateComboMeter.UpdateComboNumber(comboCount);
+        UpdateComboMeter.currentComboTimer = 5.0f;
+        UpdateComboMeter.currentComboNumber = comboCount;
     }
 
     /**
@@ -305,8 +319,7 @@ public class PlayerAttack: MonoBehaviour
      * during the animation
      * */
     void BasicMagicAttack()
-    {
-        
+    {        
         Instantiate(BloodBall, transform.position + (transform.up*1.5f) + (transform.forward * 4.0f), transform.localRotation);
     }    
 
@@ -325,18 +338,7 @@ public class PlayerAttack: MonoBehaviour
         HandEffect.SetActive(false);
     }
 
-    /**
-     * Changes the scythes colliders to be way bigger for the special animation, then resets after a few seconds
-     * */
-    IEnumerator ChangeBoxSize()
-    {
-        ActivateScytheCollider();
-        Scythe.GetComponent<BoxCollider>().size = Scythe.GetComponent<BoxCollider>().size *= 3;
-        yield return new WaitForSeconds(3.0f);
-        Scythe.GetComponent<BoxCollider>().size = Scythe.GetComponent<BoxCollider>().size /= 3;
-        ResetAttack();
-    }
-
+    // Change the scythe collider to be bigger
     void MakeScytheBoxBigger()
     {
         Scythe.GetComponent<BoxCollider>().size = Scythe.GetComponent<BoxCollider>().size *= 3;
@@ -355,8 +357,8 @@ public class PlayerAttack: MonoBehaviour
         inCombo = true;
         comboCount++;
         comboTimer = 0;
-        UpdateComboMeter.UpdateComboTimer(comboTimer);
-        UpdateComboMeter.UpdateComboNumber(comboCount);
+        UpdateComboMeter.currentComboTimer = comboTimer;
+        UpdateComboMeter.currentComboNumber = comboCount;
     }
 
     /*

@@ -19,12 +19,13 @@ public class PlayerHealth: MonoBehaviour, IHittable
     public Image healthBar;
     public GameObject lastCheckpoint;
 
+    // Create game object and setup stats
     public void Start()
     {
         isDead = false;
         anim = GetComponent<Animator>();
         pc = GetComponent<PlayerController>();
-        //pc.controller.enabled = false;
+        pc.controller.enabled = false;
         if (lastCheckpoint == null) {
             Checkpoint[] chp = FindObjectsOfType<Checkpoint>();
             foreach (Checkpoint c in chp) {
@@ -42,10 +43,10 @@ public class PlayerHealth: MonoBehaviour, IHittable
         healTimer = 0;
         panel.SetActive(false);
         Cursor.visible = true;
-        //pc.controller.enabled = true;
+        pc.controller.enabled = true;
     }
 
-    //
+    // Main loop
     public void Update()
     {
         if (isDead) {
@@ -64,6 +65,9 @@ public class PlayerHealth: MonoBehaviour, IHittable
         healthBar.fillAmount = healthPer;
     }
 
+    /**
+     *  Respawn the character with full health at the last checkpoint 
+     **/
     public void Respawn()
     {
         pc.controller.enabled = false;
@@ -79,6 +83,9 @@ public class PlayerHealth: MonoBehaviour, IHittable
         pc.controller.enabled = true;
     }
 
+    /**
+     *  Set the new check point 
+     **/
     public void SetCheckpoint(GameObject checkPoint)
     {
         lastCheckpoint = checkPoint;
@@ -103,9 +110,11 @@ public class PlayerHealth: MonoBehaviour, IHittable
         if (invincible) { // Prevents the player from being 1 shot
             return false;
         }
+        // Update health 
         healTimer = -3.0f;
         currentHealth -= (damage / maxHealth)*100;
 		UpdateHealth.currentHealth = currentHealth;		
+        // Check if dead
         if (currentHealth <= 0) {
             isDead = true;
             anim.SetTrigger("Died");
@@ -114,12 +123,13 @@ public class PlayerHealth: MonoBehaviour, IHittable
 		}
 		else
 		{
+            // Make player invincible to prevent being one shot
 			StartCoroutine(MakePlayerInvincible());
 		}
-
         return true;
     }
 
+    // Make player invincible
     IEnumerator MakePlayerInvincible()
     {
         invincible = true;

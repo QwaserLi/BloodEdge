@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+ * Updates Health Bar UI
+ * */
 public class UpdateHealth : MonoBehaviour
 {
-
     public Image bar;
     public static float currentHealth = 100;
 
-    // Update is called once per frame
     void Update()
     {
-        UpdateHealthUI(currentHealth);
+        UpdateHealthUI();
     }
 
-    public void UpdateHealthUI(float h)
+    /**
+     * Updates current health
+     **/
+    public void UpdateHealthUI()
     {
-        float ra = (h / 100.0f);
+        float ra = (currentHealth / 100.0f);
         bar.fillAmount = ra;
     }
 }

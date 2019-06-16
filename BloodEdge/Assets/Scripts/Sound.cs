@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
+/**
+ * Class that holds a sound clip, and all the values that are to be associated with it during runtime
+ * Based off Brackeys https://www.youtube.com/watch?v=6OT43pvUyfY&t=614s 
+ */
 [System.Serializable]
 public class Sound
 {

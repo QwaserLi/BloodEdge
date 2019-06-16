@@ -5,6 +5,9 @@ using Enemy;
 using Cinemachine;
 using UnityEngine.Rendering.PostProcessing;
 
+/**
+ *  The class on the players scythe 
+ **/
 public class Scythe : MonoBehaviour
 {
     PlayerAttack paRef;
@@ -14,6 +17,9 @@ public class Scythe : MonoBehaviour
     float currentDamageToDeal = 35;
     PostProcessVolume postPro;
 
+    /**
+     *  Set up refs 
+     **/
     private void Start()
     {
         postPro = GameObject.FindGameObjectWithTag("ScreenPostPro").GetComponent<PostProcessVolume>();
@@ -27,20 +33,14 @@ public class Scythe : MonoBehaviour
         currentDamageToDeal = amt;
     }
 
-    public void PlayHitSound()
-    {
-        soundManager.Play("ScytheHit");
-    }
-
-    public void PlaySwingSound()
-    {
-        soundManager.Play("ScytheMiss");
-    }
-
+    /**
+     *  Damage on collision, update counter if hit was successful 
+     **/
     public void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag == "Attackable") {          
-            if(collider.GetComponent<IHittable>().Hit(currentDamageToDeal, new Vector3(1, 1, 1))) {
+        if (collider.tag == "Attackable") {
+            // Check if uwas successful 
+            if (collider.GetComponent<IHittable>().Hit(currentDamageToDeal, new Vector3(1, 1, 1))) {
                 shaker.GenerateImpulse();
                 int ran = Random.Range(0, 100);
                 if (currentDamageToDeal > 35 && ran <= 15) { // Combo finisher
@@ -51,7 +51,9 @@ public class Scythe : MonoBehaviour
         }
     }
 
-
+    /**
+     *  Used to simulate a final blow, slow down effect. Should be called if the last enemy is killed
+     **/
     public IEnumerator SlowTime()
     {
         Time.timeScale = 0.3f;

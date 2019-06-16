@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/**
+ * Updates Combo Bar UI
+ * */
 public class UpdateComboMeter : MonoBehaviour
 {
     public Image bar;
@@ -14,23 +17,13 @@ public class UpdateComboMeter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateComboUI(currentComboTimer);
+        UpdateComboUI();
     }
 
-    public void UpdateComboUI(float h)
+    public void UpdateComboUI()
     {
-        float ra = 1.0f - (h / 5.0f);
+        float ra = 1.0f - (currentComboTimer / 5.0f);
         bar.fillAmount = ra;
         comboNum.text = "   Hits: " + currentComboNumber;
-    }
-
-    public static void UpdateComboTimer(float nt)
-    {
-        currentComboTimer = nt;
-    }
-
-    public static void UpdateComboNumber(float comboCount)
-    {
-        currentComboNumber = comboCount;
     }
 }

@@ -1561,7 +1561,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Retry
+  m_text: Live Again
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5129,7 +5129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4669976cb473ed489c0a6f120d5be59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon: 0
+  canAttack: 1
   attackTimer: 0
   BloodBall: {fileID: 6143379624804945327, guid: 0d1458b723554a543a3675dfecbd9764,
     type: 3}
@@ -7367,6 +7367,7 @@ MonoBehaviour:
   LockOnCamera: {fileID: 4556168634739218524}
   playerPosition: {fileID: 1705181121}
   lockOnImage: {fileID: 6671825882808359014}
+  canSwitch: 0
 --- !u!1 &3060312176705261075
 GameObject:
   m_ObjectHideFlags: 0
