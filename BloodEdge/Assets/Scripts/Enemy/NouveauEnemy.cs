@@ -1,5 +1,7 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Experimental.UIElements;
+using UnityEngine.Playables;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
@@ -21,14 +23,34 @@ namespace Enemy {
 	    //references to the enemy's relevant components
             private CapsuleCollider _capsuleCollider;
             //private MeshRenderer _meshRenderer;
-            private Animator _puppetAnimator;
             private Rigidbody _rigidbody;
             
-        //references to the player GameObject and the relevant components
+            [Header("Config References")]
+	    //references to the enemy's child model object and its relevant components as well as puppet animation vars
+			[SerializeField] private GameObject puppetObject;
+			private Transform _puppetTransform;
+			private Vector3 _initPuppetOffset;
+			private Vector3 _puppetVelocity = new Vector3(0, 0, 0);
+			private float _puppetWalkTimer;
+			
+			private bool _animateWalking;
+			private bool _animateRunning;
+
+			[SerializeField] private AudioClip[] hurtSounds;
+			[SerializeField] private AudioClip[] attackSounds;
+			private AudioSource _audioSource;
+			//private Animator _puppetAnimator;
+
+			[SerializeField] private ParticleSystem gusher;
+			[SerializeField] private ParticleSystem deathBurster;
+			
+		//references to the player GameObject and the relevant components
             private GameObject _pGameObject;
             private PlayerHealth _pHealth;
             private PlayerController _pController;
             private Transform _pTransform;
+            private GameObject _pScytheObject;
+            private static bool _scytheFixed = false;
             
 	    //settings exposed to the Unity Inspector
 	    [Header("Gameplay Settings")]
@@ -58,20 +80,22 @@ namespace Enemy {
 			private float _hitStunTimer;
 			private float _hitITimer;
 			
-			//maybe temporary? I hope so!
 			private float _strikeThePlayerTimer = -1f;
 			private float _forbiddenFromAttackingTimer;
 			
+			private float _hitStopTimer;
+
+			private bool _dying;
+
+			private bool _eyesActive = true;
 			
-	    //possibly temporary:
+			
+	    //hit points!
 			private float hp = 100f;
 			
 		//debug settings
 		[Header("Debug Settings")]
 			[SerializeField] private GameObject debugHead;
-		
-
-		private static readonly int IsRunning = Animator.StringToHash("isRunning");
 
 
 		/*--------------------------------------*\
@@ -84,32 +108,58 @@ namespace Enemy {
 	        _startingPosition = transform.position;
 	        
 	        _capsuleCollider = GetComponent<CapsuleCollider>();
-	        //_meshRenderer = GetComponent<MeshRenderer>();
-	        _puppetAnimator = GetComponentInChildren<Animator>();
 	        _rigidbody = GetComponent<Rigidbody>();
 	        
+	        _puppetTransform = puppetObject.transform;
+	        _initPuppetOffset = _puppetTransform.localPosition;
+
+	        _audioSource = GetComponent<AudioSource>();
+
 	        _pGameObject = GameObject.FindWithTag("Player");
 	        _pHealth = _pGameObject.GetComponent<PlayerHealth>();
 	        _pController = _pGameObject.GetComponent<PlayerController>();
 	        _pTransform = _pGameObject.transform;
-
-	        _puppetAnimator.speed = baseAnimSpeedScalar;
+	        _pScytheObject = _pGameObject.GetComponentInChildren<Scythe>().gameObject;
+	        
+	        if (!_scytheFixed) {
+		        var scytheBox = _pScytheObject.GetComponent<BoxCollider>();
+		        scytheBox.center = new Vector3(-0.66f, -0.2831f, 1.77f);
+		        scytheBox.size = new Vector3(1.74f, 1.21f, 4.93f);
+		        _scytheFixed = true;
+	        }
         }
 
 
         void Update() {
 	        var dT = Time.deltaTime;
+
+	        if (_hitStopTimer > 0f) {
+		        UpdateTimer(ref _hitStopTimer, 0f);
+		        if (_hitStopTimer <= 0f) {
+			        Time.timeScale = 1f;
+		        }
+	        }
+	        
 	        if (UpdateTimer(ref _crowdingUpdateTimer, 1f)) {
 		        UpdateCrowding();
+		        //we're tying the eye trail update into this as well,
+		        //because we set the timer manually after an attack.
+		        if (!_attacking) { SetEyesActive(false); }
 	        }
 	        
 	        if (_hitITimer > 0f) {
 		        UpdateTimer(ref _hitITimer, 0f);
 	        }
 
+	        if (_dying) {
+		        Die();
+		        return;
+	        }
+
 	        if (_hitStunTimer > 0f) {
 		        UpdateTimer(ref _hitStunTimer, 0f);
-		        _puppetAnimator.speed = _hitStunTimer > 0f ? 0.01f : baseAnimSpeedScalar;
+		        //_puppetAnimator.speed = _hitStunTimer > 0f ? 0.01f : baseAnimSpeedScalar;
+		        //todo: replace animator functionality
 		        return;
 	        }
 
@@ -124,12 +174,14 @@ namespace Enemy {
 	        desiredVector = Vector3.MoveTowards(
 			    desiredVector,
 			    AvoidCrowdingVector(),
-			    dT * CrowdingPercent() * 3f * (_awareOfPlayer ? 2f : 1f)).normalized;
+			    dT * CrowdingPercent() * 4f * (_awareOfPlayer ? 2f : 1f)).normalized; //was *3f, now *4f.
 
 		    var leash = _startingPosition - transform.position;
 		    leash.y = 0;
+		    leash.x += Random.Range(-0.1f, 0.1f);
+		    leash.z += Random.Range(-0.1f, 0.1f);
 		    desiredVector = Vector3.MoveTowards(desiredVector, leash, 0.75f * dT).normalized; //was 0.5
-		    
+
 		    float idleToggleChance = 0f;
 
 		    if (_awareOfPlayer) {
@@ -141,7 +193,7 @@ namespace Enemy {
 				).normalized;
 	        }
 		    else {
-			    idleToggleChance = 0.005f/60f;
+			    idleToggleChance = 0.005f/(1/dT);
 		    }
 
 		    if (Random.Range(0f, dT) < idleToggleChance) {
@@ -151,16 +203,21 @@ namespace Enemy {
 		    if (_attacking && _strikeThePlayerTimer > -1 && _strikeThePlayerTimer <= 0) {
 			    _strikeThePlayerTimer = -1;
 			    _attacking = false;
+			    AddPuppetForce(transform.forward*0.5f);
+			    
+			    _audioSource.clip = attackSounds[Random.Range(0, hurtSounds.Length)];
+			    _audioSource.pitch = Random.Range(0.75f, 1.75f);
+			    _audioSource.Play();
+
+			    _crowdingUpdateTimer = 0.5f;
 
 			    if (Vector3.Distance(_pTransform.position, transform.position + transform.forward) < 1.25f) {
-				    _pHealth.Hit(5f, (_pTransform.position - transform.position).normalized);
-				    Debug.Log("Hit the player!");
+				    _pHealth.Hit(10f, (_pTransform.position - transform.position).normalized);
+				    //Debug.Log("Hit the player!");
 			    }
 		    }
 
-	        //todo: decide if we're facing the player or not (crowding check? Very crowded, break gaze and retreat from player?)
-	        
-	        
+
 	        //choose a movement direction based on what's going to get us going where we want to go
 	        desiredVector.y = 0;
 
@@ -170,55 +227,54 @@ namespace Enemy {
 
 		        var t = transform;
 		        var p = t.position;
-		        bool attemptingMovement = false;
+		        _animateRunning = false;
+		        _animateWalking = false;
 		        
 		        switch (directiveState) {
 			        case Directive.forward: {
-				        transform.position = Vector3.MoveTowards(p, p + t.forward, movementSpeed * dT);
-				        attemptingMovement = true;
+				        transform.position = Vector3.MoveTowards(p, p + t.forward, movementSpeed * dT * 
+				                                                                   (_awareOfPlayer ? 1f : 0.6f));
+				        _animateWalking = true;
+				        _animateRunning = true;
 				        break;
 			        }
 
 			        case Directive.backward: {
-				        transform.position = Vector3.MoveTowards(p, p + t.forward, -movementSpeed * dT * 0.5f);
-				        attemptingMovement = true;
+				        transform.position = Vector3.MoveTowards(p, p - t.forward, movementSpeed * dT * 0.5f);
+				        _animateWalking = true;
 				        break;
 			        }
 
 			        case Directive.strafeLeft: {
 				        transform.position = Vector3.MoveTowards(p, p - t.right, movementSpeed * dT * 0.7f);
-				        attemptingMovement = true;
+				        _animateWalking = true;
 				        break;
 			        }
 
 			        case Directive.strafeRight: {
 				        transform.position = Vector3.MoveTowards(p, p + t.right, movementSpeed * dT * 0.7f);
-				        attemptingMovement = true;
+				        _animateWalking = true;
 				        break;
 			        }
 
 			        case Directive.attack: {
-				        _puppetAnimator.SetBool(IsRunning, false);
+				        //_puppetAnimator.SetBool(IsRunning, false);
+				        //todo: replace animator functionality
 
 				        _attacking = true;
 				        _forbiddenFromAttackingTimer = 3f;
-				        _strikeThePlayerTimer = 2f;
+				        _strikeThePlayerTimer = 1.5f;
+				        SetEyesActive(true);
 				        
 				        //todo: an animation here except we can't use the player one because of callbacks.
 				        
 				        break;
 			        }
-
-			        default: {
-				        _puppetAnimator.SetBool(IsRunning, false);
-				        break;
-			        }
 		        }
+	        }
 
-		        _puppetAnimator.SetBool(IsRunning, attemptingMovement);
-//		        if (attemptingMovement) { //todo: this won't work for strafing, but we don't have strafes yet.
-//			        _puppetAnimator.SetBool(IsRunning, _rigidbody.velocity.magnitude > 0.3f);
-//		        }
+	        if (_animateWalking) {
+		        AnimateWalk(_animateRunning && _awareOfPlayer ? 1.1f : 0.9f);
 	        }
         }
 
@@ -230,39 +286,127 @@ namespace Enemy {
 		        AttemptFacePosition(transform.position + desiredVector, Time.deltaTime);
 	        }
 
-	        if (hp <= 0) {
-		        gameObject.SetActive(false);
+	        if (hp <= 0 && !_dying) {
+		        KillEnemy();
 	        }
+	        UpdatePuppetForces();
         }
         
         public bool Hit(float damage, Vector3 force) {
 	        if (_hitITimer <= 0) {
 		        hp -= damage * (_hitStunTimer > 0 ? 0.33f : 0.75f);
-		        //GetComponent<Rigidbody>().AddForce(force);
-		        GetComponent<Rigidbody>().AddForce(Vector3.up * 100f);
-		        GetComponent<Rigidbody>().AddForce(
-			        //(transform.position-_pTransform.position).normalized * (_hitStunTimer > 0f ? 500f : 1000f)
-			        (_pTransform.forward + (transform.position - _pTransform.position).normalized)
+		        _rigidbody.AddForce(Vector3.up * 100f);
+		        var repelForce = (transform.position - _pTransform.position).normalized;
+		        _rigidbody.AddForce(
+			        repelForce
 			        * (_hitStunTimer > 0f ? 10f : 70f)
 		        );
+		        repelForce.y = 0;
+		        AddPuppetForce(repelForce*0.4f); //*0.3f
 		        
 		        _hitStunTimer = (_hitStunTimer + 1.5f)/2f;
-		        _hitITimer = _hitStunTimer; //we've currently got an enormous hitbox, so set this to stun time for now. // * 0.75f;
+		        _hitITimer = _hitStunTimer*0.5f;
 
 		        _attacking = false;
 		        _strikeThePlayerTimer = -1f;
-	        }
 
-	        return true;
+//		        HitStop();
+		        _audioSource.clip = hurtSounds[Random.Range(0, hurtSounds.Length)];
+		        _audioSource.pitch = Random.Range(0.75f, 1.75f);
+		        _audioSource.Play();
+		        gusher.Play();
+		        return true;
+	        }
+	        return false;
         }
 
+//        void HitStop() {
+//	        Time.timeScale = 0.1f;
+//	        _hitStopTimer = 0.1f;
+//        }
+	    /*--------------------------------------*\
+		 *		Puppet Animation Methods			*|
+		 *--------------------------------------*/
+	    private void UpdatePuppetForces() {
+		    //_puppetTransform.position = Vector3.Lerp(_puppetTransform.position, _initPuppetOffset, 0.3f);
+		    _puppetTransform.position += _puppetVelocity;
+		    _puppetVelocity *= 0.8f;
+		    AddPuppetSpringForce();
+		    
+		    if (_strikeThePlayerTimer > 0f) {
+			    LerpPuppetOffsetTo((1 - _strikeThePlayerTimer / 1.5f) * 1.5f * -transform.forward + Vector3.up*0.1f,  0.05f);
+			    if (Random.Range(0f, Time.deltaTime) < 0.01f) {
+				    AddPuppetForce(
+					    (new Vector3(
+						    Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)
+					    ) + Vector3.up * 0.5f).normalized*0.02f
+				    );
+			    }
+		    }
+	    }
+
+	    private void AddPuppetForce(Vector3 force) {
+		    _puppetVelocity += force;
+		    //todo: add a rotational component! This might be tricky!
+	    }
+
+	    private void LerpPuppetOffsetTo(Vector3 target, float scale) {
+		    _puppetVelocity *= 0.9f;
+		    _puppetTransform.position = Vector3.Lerp(_puppetTransform.position, transform.position + target, scale);
+	    }
+	    
+	    private void AddPuppetSpringForce() {
+		    AddPuppetForce((transform.position + _initPuppetOffset - _puppetTransform.position) * 0.035f);
+	    }
+
+	    private void AnimateWalk(float speedScalar) {
+		    if (UpdateTimer(ref _puppetWalkTimer, 0.3f * 1 / speedScalar)) {
+			    AddPuppetForce(new Vector3(0, 0.08f * speedScalar, 0)); //was 0.06f
+		    }
+	    }
+
+	    private void KillEnemy() {
+		    deathBurster.Play();
+		    _dying = true;
+		    SetEyesActive(true);
+	    }
+
+	    private void Die() {
+		    float size = _puppetTransform.localScale.magnitude;
+		    if (deathBurster.isPlaying && _puppetTransform.localScale.magnitude > 0.3f ) {
+			    if (Random.Range(0f, Time.deltaTime) < 0.01f) {
+				    AddPuppetForce(
+					    new Vector3(
+						    Random.Range(-1f, 1f), Random.Range(-1f, 2f), Random.Range(-1f, 1f)
+							).normalized*0.12f
+					    );
+			    }
+
+			    if (size < 0.7 && _eyesActive) {
+					SetEyesActive(false);
+				    _eyesActive = false;
+			    }
+			    _puppetTransform.localScale *= 0.9775f;
+			    return;
+		    }
+		    gameObject.SetActive(false);
+	    }
+
+	    private void SetEyesActive(bool newState) {
+		    var eyeTrails = GetComponentsInChildren<TrailRenderer>();
+		    for (int i = 0; i < eyeTrails.Length; i++) {
+			    eyeTrails[i].emitting = newState;
+		    }
+		    _eyesActive = newState;
+	    }
+	    
+	    
         /*--------------------------------------*\
 		 *				AI Methods				*|
 		 *--------------------------------------*/
-        private bool FacingPlayer() {
-	        return Vector3.SignedAngle(transform.forward, (_pTransform.position - transform.position).normalized, Vector3.up) <= 20f;
-	        //todo: replace with the simpler vector check and put in the place of the old one.
-        }
+//        private bool FacingPlayer() { //never got used
+//	        return Vector3.SignedAngle(transform.forward, (_pTransform.position - transform.position).normalized, Vector3.up) <= 20f;
+//        }
         
         private void AttemptFacePlayer(float dT) {
 			AttemptFacePosition(_pTransform.position, dT);
@@ -299,23 +443,14 @@ namespace Enemy {
         }
 
         private Vector3 AvoidCrowdingVector() {
-//	        int openSpaceIndex = 0;
-//	        float mostAvailableSpace = 0f;
 	        int mostCrowdedIndex = 0;
 	        float mostCrowdedVal = CROWDING_RANGE;
 	        for (int i = 0; i < CROWDING_RESOLUTION; i++) {
-		        //Debug.Log(i+": "+_crowded[i]);
-//		        if (_crowded[i] > mostAvailableSpace) {
-//			        mostAvailableSpace = _crowded[i];
-//			        openSpaceIndex = i;
-//		        }
 		        if (_crowded[i] < mostCrowdedVal) { //lower is closer!
-			        //Debug.Log(i+": "+_crowded[i]);
 			        mostCrowdedVal = _crowded[i];
 			        mostCrowdedIndex = i;
 		        }
 	        }
-	        //Debug.Log(mostCrowdedIndex+": "+mostCrowdedVal);
 	        return Quaternion.Euler(0, CROWDING_INTERVAL_ANGLE * mostCrowdedIndex, 0) * -Vector3.forward;
         }
 
@@ -360,7 +495,10 @@ namespace Enemy {
 	        idle,
 	        attack
         }
-
+		/// <summary>
+		/// Decrements the provided timer by Unity delta time and resets it to resetSeconds if the timer reaches zero.
+		/// </summary>
+		/// <returns>If the timer reached zero or below this frame</returns>
         private bool UpdateTimer(ref float timer, float resetSeconds) {
 	        timer -= Time.deltaTime;
 	        if (timer < 0f) {
@@ -377,7 +515,7 @@ namespace Enemy {
         public void SetAwareness(bool newAwareness) {
 	        _awareOfPlayer = newAwareness;
 	        if (newAwareness) {
-		        _idle = false; //hacky, temporary.
+		        _idle = false;
 	        }
         }
 
@@ -403,14 +541,14 @@ namespace Enemy {
 	        Vector3 eyesOff = headT.right * 0.275f;
 	        Vector3 rEyePos = eyesPos + eyesOff/2f;
 
-	        Gizmos.color = !_awareOfPlayer ? Color.white : _hitStunTimer > 0f ? Color.yellow : new Color(1f, 0.8f, 0.8f);
-	        for (int i = 0; i < 2; i++) {
-		        Gizmos.DrawSphere(rEyePos + -eyesOff * i, eyeSize);
-	        }
-	        Gizmos.color = _awareOfPlayer ? new Color(0.64f, 0f, 0f) : new Color(0.41f, 0.12f, 0.24f);//Color.black;
-	        for (int i = 0; i < 2; i++) {
-		        Gizmos.DrawSphere(rEyePos + -eyesOff * i, eyeSize / 3f);
-	        }
+//	        Gizmos.color = !_awareOfPlayer ? Color.white : _hitStunTimer > 0f ? Color.yellow : new Color(1f, 0.8f, 0.8f);
+//	        for (int i = 0; i < 2; i++) {
+//		        Gizmos.DrawSphere(rEyePos + -eyesOff * i, eyeSize);
+//	        }
+//	        Gizmos.color = _awareOfPlayer ? new Color(0.64f, 0f, 0f) : new Color(0.41f, 0.12f, 0.24f);//Color.black;
+//	        for (int i = 0; i < 2; i++) {
+//		        Gizmos.DrawSphere(rEyePos + -eyesOff * i, eyeSize / 3f);
+//	        }
 
 	        if (!Application.isEditor || !Application.isPlaying) { return; }
 	        var playerPos = _pTransform.position;
@@ -435,7 +573,7 @@ namespace Enemy {
 	        }
 	        
 	        
-	        //Gizmos.DrawLine(pos, pos+desiredVector*5f);
+	        Gizmos.DrawLine(pos, pos+desiredVector*5f);
 ////	        Gizmos.color = Color.green;
 ////	        Gizmos.DrawLine(pos, pos+AvoidCrowdingVector()*2f);
 //	        
@@ -456,7 +594,8 @@ namespace Enemy {
 //				        eyesPos + 0.05f * i * targetFacing);
 //		        }
 //	        }
-	        
+	        Gizmos.color = Color.cyan;
+	        Gizmos.DrawLine(pos, pos + (transform.position - _pTransform.position).normalized);
         }
 
 
